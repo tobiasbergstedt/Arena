@@ -1,0 +1,21 @@
+@import 'styles/utils/__utils';
+
+.wrapper {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  border: solid 1px var(--color-white);
+
+  // background-color: var(--color-white);
+  border-radius: 50%;
+}
+
+.icon {
+  width: 24px;
+  overflow: visible;
+}

@@ -1,0 +1,219 @@
+@import 'styles/utils/__utils';
+
+.button {
+  position: relative;
+  display: flex;
+
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: rem(335);
+  height: rem(44);
+  margin: 0 auto;
+  padding: 0 em(20, 18);
+
+  background-color: var(--color-button-primary-background);
+  border-radius: em(27, 18);
+
+  color: var(--color-button-primary);
+  font-weight: 600;
+  font-size: rem(18);
+  font-family: var(--font-family-body);
+  line-height: 2;
+  letter-spacing: 0;
+  text-align: center;
+  text-decoration: none;
+
+  outline: 0 none;
+
+  pointer-events: auto;
+
+  transition: background-color 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+
+  .bankID {
+    height: 26px;
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: var(--color-button-primary-hover-background);
+
+    color: var(--color-button-primary-hover);
+  }
+
+  &:active {
+    background-color: var(--color-button-primary-pressed-background);
+
+    color: var(--color-button-primary-pressed);
+  }
+
+  &.isDisabled {
+    background-color: var(--color-button-primary-disabled-background);
+
+    color: var(--color-button-primary-disabled);
+
+    cursor: not-allowed;
+
+    pointer-events: none;
+  }
+
+  &.isSecondary {
+    background-color: var(--color-button-secondary-background);
+
+    color: var(--color-button-secondary);
+
+    outline: 2px solid var(--color-button-secondary);
+    outline-offset: -2px;
+
+    &:hover {
+      background-color: var(--color-button-secondary-hover-background);
+
+      color: var(--color-button-secondary-hover);
+    }
+
+    &:active {
+      background-color: var(--color-button-secondary-pressed-background);
+
+      color: var(--color-button-secondary-pressed);
+
+      outline: none;
+
+      transition: background-color 0.25s, color 0.25s;
+    }
+
+    &.isDisabled {
+      background-color: var(--color-button-secondary-disabled-background);
+
+      color: var(--color-button-secondary-disabled);
+
+      outline-color: var(--color-button-secondary-disabled);
+    }
+  }
+
+  &.isWhiteButton {
+    background-color: var(--color-button-white-background);
+
+    color: var(--color-button-white);
+  }
+
+  &.isBlueButton {
+    background-color: var(--color-dark-blue);
+
+    color: var(--color-white);
+
+    &:hover {
+      background-color: #043f46;
+    }
+
+    &:active {
+      background-color: #043137;
+
+      color: var(--color-blue-light);
+    }
+  }
+
+  &.isSecondaryBlueButton {
+    background-color: var(--color-button-secondary-background);
+
+    color: var(--color-dark-blue);
+
+    outline: 2px solid var(--color-dark-blue);
+    outline-offset: -2px;
+
+    &:hover {
+      background-color: var(--color-blue-light);
+    }
+
+    &:active {
+      background-color: var(--color-dark-blue);
+
+      color: var(--color-blue-light);
+
+      outline: none;
+
+      transition: background-color 0.25s, color 0.25s;
+    }
+
+    &.isDisabled {
+      background-color: var(--color-button-secondary-disabled-background);
+
+      color: var(--color-blue-light);
+
+      outline-color: var(--color-blue-light);
+    }
+  }
+
+  &.isLoginPage {
+    width: 257px;
+  }
+
+  &.isGhost {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-blue);
+
+    color: var(--color-blue);
+
+    filter: none;
+  }
+
+  &.isTransparent {
+    background-color: transparent;
+    border: 2px solid var(--color-white);
+
+    color: var(--color-white);
+
+    filter: none;
+  }
+
+  &.isText {
+    @include h5;
+
+    display: inline-flex;
+
+    width: auto;
+    max-width: none;
+    height: auto;
+    margin-bottom: 0;
+    padding: 0;
+
+    background-color: transparent;
+    border-radius: 0;
+
+    color: var(--color-button-primary);
+
+    filter: none;
+    text-decoration-line: underline;
+
+    &.isRedText {
+      color: var(--color-red);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--color-dark-red);
+      }
+    }
+
+    &:hover {
+      text-decoration-line: none;
+    }
+  }
+
+  &.isLoading {
+    pointer-events: none;
+  }
+
+  &.hasShadow {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 26%);
+  }
+
+  > span {
+    position: relative;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+}

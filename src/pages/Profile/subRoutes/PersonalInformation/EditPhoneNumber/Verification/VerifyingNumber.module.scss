@@ -1,0 +1,9 @@
+@import 'styles/utils/__utils';
+
+.loadingWrapper {
+  background-color: var(--color-white);
+}
+
+.spinnerGlobe {
+  margin-top: calc(0.2 * var(--inner-height));
+}

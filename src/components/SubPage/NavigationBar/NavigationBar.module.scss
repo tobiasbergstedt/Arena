@@ -1,0 +1,40 @@
+@import 'styles/utils/__utils';
+
+.wrapper {
+  z-index: 1;
+  position: absolute;
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: var(--navigation-bar-height);
+
+  background-color: white;
+
+  @include is-desktop {
+    height: var(--navigation-bar-height-desktop);
+    padding-top: 34px;
+  }
+}
+
+h4 {
+  font-size: 18px;
+}
+
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+
+  width: 14px;
+  height: 14px;
+  margin-top: 0;
+
+  @include is-desktop {
+    top: 60px;
+    left: 62px;
+  }
+}

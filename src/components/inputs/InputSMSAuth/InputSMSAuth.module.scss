@@ -1,0 +1,58 @@
+@import 'styles/utils/__utils';
+
+.inputWrapper {
+  margin: 12px 0 20px;
+}
+
+.authInput {
+  width: 78px;
+  height: 60px;
+  margin-right: 8px;
+  padding: 0;
+
+  background: var(--color-grey-6);
+  background-clip: border-box;
+  background-clip: padding-box;
+  border: 0 solid var(--color-blue);
+  border-radius: 8px;
+
+  color: var(--color-grey-1);
+  font-size: em(24);
+  text-align: center;
+
+  outline: none;
+  caret-color: var(--color-blue);
+
+  transition: border 0.1s;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:focus {
+    border: 2px solid var(--color-blue);
+
+    &::placeholder {
+      color: var(--color-blue);
+
+      opacity: 1;
+    }
+  }
+
+  &.hasError {
+    border: 2px solid var(--color-validation-red);
+
+    color: var(--color-validation-red);
+
+    caret-color: var(--color-validation-red);
+
+    &::placeholder {
+      color: var(--color-validation-red);
+    }
+  }
+}
+
+.errorMessage {
+  color: var(--color-validation-red);
+  display: block;
+}

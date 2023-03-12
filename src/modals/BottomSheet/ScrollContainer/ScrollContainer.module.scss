@@ -1,0 +1,10 @@
+@import 'styles/utils/__utils';
+
+.wrapper {
+  height: auto;
+  min-height: calc(100% - 58px);
+
+  background-color: #fff;
+
+  pointer-events: auto;
+}

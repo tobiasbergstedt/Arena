@@ -1,0 +1,15 @@
+@import 'styles/utils/__utils';
+
+.wrapper {
+  width: 100%;
+  padding-bottom: rem(10);
+}
+
+.heading {
+  margin: 0;
+  padding: rem(39) 0 rem(10) 0;
+
+  color: var(--color-blue);
+  font-size: rem(18);
+  line-height: rem(24);
+}

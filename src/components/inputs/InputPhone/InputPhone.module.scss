@@ -1,0 +1,77 @@
+@import 'styles/utils/__utils';
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+
+  flex-direction: column;
+
+  width: 335px;
+  margin: 16px;
+
+  background-color: transparent;
+
+  color: var(--color-grey-3);
+}
+
+.inputLabelText {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-evenly;
+
+  width: 119px;
+  height: 60px;
+
+  border-right: 2px solid var(--color-white);
+
+  user-select: none;
+}
+
+.flagIcon {
+  width: 26px;
+}
+
+.inputLabelText,
+.inputHasValue {
+  padding: 5px 14px;
+
+  font-size: em(18);
+}
+
+.inputLabelText,
+.input:focus + .inputLabelText,
+.input:active + .inputLabelText,
+.inputHasValue {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.clearButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+
+  border-radius: 50%;
+
+  outline: 2px solid var(--color-grey-1);
+  outline-offset: -0.5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.errorMessage {
+  color: var(--color-validation-red);
+}
+
+.phoneInput {
+  padding-top: 0 !important;
+  padding-left: 135px !important;
+}

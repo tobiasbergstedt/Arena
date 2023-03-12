@@ -1,0 +1,96 @@
+@import 'styles/utils/__utils';
+
+.wrapper {
+  @include flex-centered(true);
+
+  position: relative;
+
+  width: calc(100% - 40px);
+  height: 335px;
+  margin: 0 auto;
+
+  background-color: var(--color-blue);
+  border-radius: 12px;
+
+  box-shadow: rgba(0, 175, 194, 70%) 0 20px 15px -20px;
+
+  > button {
+    width: fit-content;
+  }
+
+  &.editMode {
+    justify-content: space-between;
+
+    padding: 20px 0;
+  }
+
+  @include is-desktop {
+    width: calc(100% - 120px);
+  }
+}
+
+.imageContainer {
+  @include flex-centered;
+
+  position: relative;
+
+  width: 172px;
+  height: 172px;
+
+  border: 7px solid var(--color-white);
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.globeIcon {
+  width: 95%;
+}
+
+.buttonWrapper {
+  @include flex-centered;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  > button {
+    width: fit-content;
+    margin: 0 10px;
+  }
+}
+
+.information {
+  @include paragraph-small;
+
+  z-index: 1;
+
+  margin: rem(16) 0;
+
+  color: var(--color-white);
+}
+
+.uploadButton {
+  @include flex-centered;
+
+  height: rem(44);
+  margin: rem(32) auto 0;
+  padding: 0 em(20, 18);
+
+  background-color: transparent;
+  border: 2px solid var(--color-white);
+  border-radius: em(27, 18);
+
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: rem(18);
+  line-height: 2;
+  letter-spacing: 0;
+
+  > input {
+    display: none;
+  }
+}
+
+// .cropArea {
+//   top: 40% !important;
+// }

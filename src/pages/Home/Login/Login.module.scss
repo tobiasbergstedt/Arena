@@ -1,0 +1,60 @@
+@import 'styles/utils/__utils';
+
+.loginWrapper {
+  z-index: var(--index-modal);
+  position: fixed;
+
+  width: 100%;
+  height: var(--content-height);
+
+  background-color: var(--color-blue);
+
+  text-align: center;
+}
+
+.bankID {
+  height: 76px;
+  margin-top: 77px;
+  margin-bottom: 55px;
+}
+
+.textWrapper {
+  padding-right: 20px;
+  padding-left: 20px;
+
+  color: var(--color-white);
+}
+
+.buttonsWrapper {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+
+  flex-direction: column;
+  gap: 15px;
+
+  width: 100%;
+}
+
+.bankIDLogoWrapper {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 72px;
+  height: 72px;
+  margin-bottom: 23px;
+
+  background-color: var(--color-white);
+  border-radius: 19px;
+}
+
+.logoIcon {
+  width: 35px;
+}
+
+.loading {
+  @include flex-centered;
+  height: var(--inner-height);
+}

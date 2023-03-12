@@ -1,0 +1,35 @@
+@import 'styles/utils/__utils';
+
+.gameTopBar {
+  @include flex-centered;
+
+  justify-content: flex-end;
+
+  width: 100%;
+  padding: rem(5) 0 rem(5) rem(5);
+
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-grey-5);
+}
+
+.button {
+  @include flex-centered;
+  @include paragraph-tiny;
+
+  height: rem(22);
+  margin-right: rem(5);
+  padding: rem(2) rem(5) rem(2) rem(4);
+
+  border: 0.5px solid var(--color-grey-border);
+  border-radius: 2px;
+
+  color: var(--color-grey-1);
+  text-decoration: none;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: rem(5);
+  overflow: visible;
+}

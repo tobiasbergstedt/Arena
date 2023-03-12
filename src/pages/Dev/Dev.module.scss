@@ -1,0 +1,23 @@
+/* stylelint-disable selector-id-pattern */
+@import 'styles/utils/__utils';
+
+.wrapper {
+  display: relative;
+}
+
+.subPage {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: lightcoral;
+}
+
+.outlet {
+  width: 100%;
+  height: 100%;
+
+  background-color: aqua;
+  border: solid 1px red;
+}

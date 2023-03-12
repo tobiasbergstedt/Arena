@@ -1,0 +1,47 @@
+@import 'styles/utils/__utils';
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+
+  width: 1.5em;
+  height: 1.5em;
+
+  transform: translate(-50%, -50%);
+
+  &::after {
+    content: '';
+
+    display: block;
+
+    width: 1.5em;
+    height: 1.5em;
+
+    border: 2px solid var(--color-blue);
+    border-top-color: var(--color-blue-light);
+    border-radius: 50%;
+
+    will-change: transform;
+    animation: spinner 0.6s linear infinite;
+  }
+}
+
+.isSmall {
+  font-size: 8px;
+}
+
+.isMedium {
+  font-size: 16px;
+}
+
+.isLarge {
+  font-size: 24px;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

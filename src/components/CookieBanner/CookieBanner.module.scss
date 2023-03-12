@@ -1,0 +1,102 @@
+@import 'styles/utils/__utils';
+
+.cookieContainer {
+  position: absolute;
+  right: 0;
+  left: 0;
+  display: flex;
+
+  z-index: var(--index-modal);
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 300px;
+  margin-right: auto;
+  margin-bottom: 10rem;
+  margin-left: auto;
+  padding: 1.4rem 2.2rem;
+
+  background-color: #003087;
+  border-radius: 10px;
+
+  color: white;
+
+  box-shadow: 0 0.5rem 0.75rem rgba($color: #000, $alpha: 60%);
+
+  @include is-desktop {
+    flex-direction: row;
+
+    max-width: 900px;
+  }
+}
+
+.cookieContent {
+  display: flex;
+
+  flex-direction: column;
+
+  text-align: center;
+
+  & :first-child {
+    margin-bottom: 0.5rem;
+
+    font-size: 1.6rem;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+
+  margin-top: 1.4rem;
+
+  & :first-child {
+    margin-right: 0.8rem;
+  }
+
+  @include is-desktop {
+    flex-direction: column;
+
+    margin-top: 0;
+    margin-left: 2.2rem;
+
+    & :first-child {
+      margin-bottom: 0.8rem;
+    }
+  }
+}
+
+.declineButtonClasses {
+  background-color: red;
+
+  &:hover {
+    background-color: darkred;
+
+    color: white;
+  }
+}
+
+.buttonClasses {
+  background-color: #f09;
+
+  &:hover {
+    background-color: rgb(196, 0, 118);
+
+    color: white;
+  }
+}
+
+.declineButtonClasses,
+.buttonClasses {
+  min-width: 130px;
+  padding: 0.7rem 1.4rem;
+
+  border-radius: 0.4rem;
+
+  font-size: 1.1rem;
+
+  @include is-desktop {
+    width: 100%;
+  }
+}

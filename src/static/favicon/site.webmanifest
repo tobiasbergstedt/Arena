@@ -1,0 +1,7 @@
+{
+  "name": "Pangeo",
+  "short_name": "Pangeo",
+  "theme_color": "#003087",
+  "background_color": "#5cbffb",
+  "display": "standalone"
+}

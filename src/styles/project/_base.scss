@@ -1,0 +1,69 @@
+body {
+  min-height: var(--inner-height);
+  margin: 0;
+  padding: 0;
+
+  background-color: var(--color-dark-blue);
+
+  color: var(--color-font-base);
+  font-size: 16px;
+  font-family: var(--font-family-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+h1 {
+  @include h1;
+}
+
+h2 {
+  @include h2;
+}
+
+h3 {
+  @include h3;
+}
+
+h4 {
+  @include h4;
+}
+
+h5 {
+  @include h5;
+}
+
+p {
+  @include paragraph;
+}
+
+a {
+  color: currentcolor;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+button {
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
+  background-color: transparent;
+  border: 0 none;
+
+  outline: 0 none;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+
+  width: auto;
+  max-width: 100%;
+}

@@ -1,0 +1,70 @@
+@import 'styles/utils/__utils';
+
+.wrapper {
+  z-index: var(--index-modal);
+  position: fixed;
+  top: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba($color: #000, $alpha: 50%);
+}
+
+.innerWrapper {
+  position: absolute;
+  left: 0;
+
+  width: 100%;
+  max-width: var(--menu-and-modal-max-width);
+
+  background-color: var(--color-white);
+  border-radius: 12px 12px 0 0;
+
+  text-align: center;
+
+  @media (min-width: 450px) {
+    left: calc(50% - calc(var(--menu-and-modal-max-width) / 2));
+  }
+}
+
+.alertIcon {
+  width: 77px;
+  margin-top: 16px;
+}
+
+.textWrapper {
+  padding: 0 20px;
+}
+
+.redText {
+  margin-top: 6px;
+
+  color: var(--color-validation-red);
+}
+
+.heading {
+  margin: 48px 0 16px;
+}
+
+.headingHasAlertIcon {
+  margin-top: 16px;
+}
+
+p {
+  font-size: 15px;
+}
+
+.buttonWrapper {
+  display: flex;
+
+  gap: 15px;
+  justify-content: center;
+
+  padding: 40px 0;
+}
+
+.button {
+  width: 160px;
+  margin: 0;
+}

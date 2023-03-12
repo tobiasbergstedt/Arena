@@ -1,0 +1,71 @@
+@import 'styles/utils/__utils';
+
+.wrapper {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding-bottom: 16px;
+
+  pointer-events: none;
+}
+
+.box {
+  display: flex;
+
+  align-items: center;
+
+  width: 335px;
+  height: 56px;
+  padding: 10px;
+
+  background: rgba(0, 0, 0, 34%);
+  border-radius: 12px;
+
+  box-shadow: 0 0 36px rgba(255, 255, 255, 12%);
+}
+
+.textContainer {
+  position: relative;
+
+  width: 80%;
+  height: 20px;
+  margin-top: 4px;
+  margin-left: 10px;
+
+  overflow: hidden;
+}
+
+.labelWrapper {
+  position: absolute;
+}
+
+.label {
+  position: relative;
+
+  color: var(--color-white);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.button {
+  height: 40px;
+  padding: 10px 12px;
+
+  background: var(--color-blue-light);
+  border-radius: 7px;
+
+  color: var(--color-grey-medium-dark);
+  font-size: 15px;
+
+  pointer-events: auto;
+}
+
+.infoIcon {
+  width: 32px;
+  height: 28px;
+  margin-left: 4px;
+}

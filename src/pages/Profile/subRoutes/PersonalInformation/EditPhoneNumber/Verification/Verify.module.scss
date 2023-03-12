@@ -1,0 +1,20 @@
+@import 'styles/utils/__utils';
+
+.paragraph,
+.secondParagraph {
+  @include paragraph-small;
+
+  max-width: 335px;
+}
+
+.paragraph {
+  white-space: pre-wrap;
+}
+
+.secondParagraph {
+  margin-bottom: 24px;
+}
+
+.input {
+  margin: 20px 0;
+}
