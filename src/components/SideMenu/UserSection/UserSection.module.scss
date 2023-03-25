@@ -1,0 +1,96 @@
+@import 'styles/utils/__utils';
+
+.userWrapper {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 64px;
+  margin: 24px 0;
+}
+
+.teamWrapper {
+  display: flex;
+
+  align-items: center;
+}
+
+.teamLogo {
+  width: 64px;
+  min-width: 64px;
+  height: 64px;
+  min-height: 64px;
+  margin-right: 16px;
+  padding: 2px;
+
+  background-image: var(--theme-gradient-color-hover);
+  border-radius: 10px;
+}
+
+.teamLogoInnerWrapper {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  padding: 6px;
+
+  background-color: var(--theme-color-primary);
+  border-radius: 9px;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.teamInfo {
+  h4 {
+    font-size: 16px;
+  }
+
+  p {
+    margin: 0;
+
+    font-size: 14px;
+  }
+}
+
+.golden {
+  background: var(--theme-gradient-color-hover);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.signOutIcon {
+  position: relative;
+
+  width: 34px;
+  height: 34px;
+
+  background-image: var(--theme-gradient-color);
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-image: var(--theme-gradient-color-hover);
+
+    opacity: 0;
+    transition: opacity var(--standard-transition-quick);
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}

@@ -1,6 +1,7 @@
 @import 'styles/utils/__utils';
 
 .button {
+  z-index: 1;
   position: relative;
   display: flex;
 
@@ -9,16 +10,15 @@
   justify-content: center;
 
   width: 100%;
-  max-width: rem(335);
-  height: rem(44);
+  max-width: 350px;
+  height: 50px;
   margin: 0 auto;
-  padding: 0 em(20, 18);
 
-  background-color: var(--color-button-primary-background);
-  border-radius: em(27, 18);
+  background-image: var(--color-button-primary-background);
+  border-radius: var(--button-border-radius);
 
   color: var(--color-button-primary);
-  font-weight: 600;
+  font-weight: 400;
   font-size: rem(18);
   font-family: var(--font-family-body);
   line-height: 2;
@@ -30,28 +30,32 @@
 
   pointer-events: auto;
 
-  transition: background-color 0.15s, color 0.15s;
+  // transition: background-color 0.15s, color 0.15s;
   -webkit-tap-highlight-color: transparent;
 
-  .bankID {
-    height: 26px;
-    margin-right: 10px;
+  &::before {
+    content: '';
+
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-image: var(--color-button-primary-hover-background);
+    border-radius: var(--button-border-radius);
+
+    opacity: 0;
+    transition: opacity 0.15s linear;
   }
 
-  &:hover {
-    background-color: var(--color-button-primary-hover-background);
-
-    color: var(--color-button-primary-hover);
-  }
-
-  &:active {
-    background-color: var(--color-button-primary-pressed-background);
-
-    color: var(--color-button-primary-pressed);
+  &:hover::before {
+    opacity: 1;
   }
 
   &.isDisabled {
-    background-color: var(--color-button-primary-disabled-background);
+    background: var(--color-button-primary-disabled-background);
 
     color: var(--color-button-primary-disabled);
 
@@ -61,7 +65,7 @@
   }
 
   &.isSecondary {
-    background-color: var(--color-button-secondary-background);
+    background: var(--color-button-secondary-background);
 
     color: var(--color-button-secondary);
 
@@ -69,13 +73,13 @@
     outline-offset: -2px;
 
     &:hover {
-      background-color: var(--color-button-secondary-hover-background);
+      background: var(--color-button-secondary-hover-background);
 
       color: var(--color-button-secondary-hover);
     }
 
     &:active {
-      background-color: var(--color-button-secondary-pressed-background);
+      background: var(--color-button-secondary-pressed-background);
 
       color: var(--color-button-secondary-pressed);
 
@@ -85,87 +89,12 @@
     }
 
     &.isDisabled {
-      background-color: var(--color-button-secondary-disabled-background);
+      background: var(--color-button-secondary-disabled-background);
 
       color: var(--color-button-secondary-disabled);
 
       outline-color: var(--color-button-secondary-disabled);
     }
-  }
-
-  &.isWhiteButton {
-    background-color: var(--color-button-white-background);
-
-    color: var(--color-button-white);
-  }
-
-  &.isBlueButton {
-    background-color: var(--color-dark-blue);
-
-    color: var(--color-white);
-
-    &:hover {
-      background-color: #043f46;
-    }
-
-    &:active {
-      background-color: #043137;
-
-      color: var(--color-blue-light);
-    }
-  }
-
-  &.isSecondaryBlueButton {
-    background-color: var(--color-button-secondary-background);
-
-    color: var(--color-dark-blue);
-
-    outline: 2px solid var(--color-dark-blue);
-    outline-offset: -2px;
-
-    &:hover {
-      background-color: var(--color-blue-light);
-    }
-
-    &:active {
-      background-color: var(--color-dark-blue);
-
-      color: var(--color-blue-light);
-
-      outline: none;
-
-      transition: background-color 0.25s, color 0.25s;
-    }
-
-    &.isDisabled {
-      background-color: var(--color-button-secondary-disabled-background);
-
-      color: var(--color-blue-light);
-
-      outline-color: var(--color-blue-light);
-    }
-  }
-
-  &.isLoginPage {
-    width: 257px;
-  }
-
-  &.isGhost {
-    background-color: var(--color-white);
-    border: 2px solid var(--color-blue);
-
-    color: var(--color-blue);
-
-    filter: none;
-  }
-
-  &.isTransparent {
-    background-color: transparent;
-    border: 2px solid var(--color-white);
-
-    color: var(--color-white);
-
-    filter: none;
   }
 
   &.isText {
@@ -179,7 +108,7 @@
     margin-bottom: 0;
     padding: 0;
 
-    background-color: transparent;
+    background: transparent;
     border-radius: 0;
 
     color: var(--color-button-primary);
@@ -187,26 +116,45 @@
     filter: none;
     text-decoration-line: underline;
 
-    &.isRedText {
-      color: var(--color-red);
-      text-decoration: none;
-
-      &:hover {
-        color: var(--color-dark-red);
-      }
-    }
-
     &:hover {
       text-decoration-line: none;
     }
   }
 
-  &.isLoading {
-    pointer-events: none;
+  &.isRegister {
+    background-image: none;
+    border: 2px solid white;
+
+    color: var(--color-white);
+
+    &::before {
+      background-image: none;
+    }
+
+    span::after {
+      content: '';
+
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      display: block;
+
+      width: 100%;
+      height: 1px;
+
+      background-color: var(--color-gold);
+
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover span::after {
+      transform: scaleX(1);
+    }
   }
 
-  &.hasShadow {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 26%);
+  &.isLoading {
+    pointer-events: none;
   }
 
   > span {

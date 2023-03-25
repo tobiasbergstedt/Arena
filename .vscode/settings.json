@@ -5,7 +5,7 @@
   },
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": true
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -38,20 +38,15 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": true
   },
-  "stylelint.validate": [
-    "css",
-    "scss"
-  ],
+  "stylelint.validate": ["css", "scss"],
   "cSpell.words": [
     "deff",
     "Geocode",
-    "Mapbox",
     "overscroll",
     "pageview",
-    "Pangeo",
+    "Arena",
     "spritesheets",
     "subpage",
-    "Subroutes",
-    "toastify"
+    "Subroutes"
   ]
 }

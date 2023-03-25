@@ -3,6 +3,6 @@
 .wrapper {
   width: 100vw;
   max-width: 100vw;
-  height: var(--content-height);
-  min-height: calc(var(--content-height) - var(--footer-height));
+  height: var(--inner-height);
+  min-height: calc(var(--inner-height) - var(--footer-height));
 }

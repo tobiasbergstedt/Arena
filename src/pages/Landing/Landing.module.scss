@@ -1,0 +1,12 @@
+@import 'styles/utils/__utils';
+
+.wrapper {
+  position: relative;
+
+  width: 100%;
+  min-height: 100%;
+}
+
+.contentWrapper {
+  min-height: calc(100% - var(--menu-height));
+}

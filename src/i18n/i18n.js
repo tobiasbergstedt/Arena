@@ -135,7 +135,8 @@ i18n
                 'Om du inte fått någon kod inom 30 sekunder kan vi skicka ny kod.',
             },
             profileInfo: {
-              usernameLabel: 'Användarnamn',
+              usernameLabel: 'User name',
+              passwordLabel: 'Password',
               swapImageButton: 'Byt bild',
               editNameMessage:
                 'En kombination av bokstäver och siffror samt ett specialtecken, så som ".” “-” “_", är tillåtet. Se till att du inte använder några blanksteg.',

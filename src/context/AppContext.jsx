@@ -2,10 +2,7 @@ import React, { createContext, useRef, useState } from 'react';
 import { node } from 'prop-types';
 import { session } from 'utils/storage';
 
-import {
-  STORAGE_CONFIG_DATA_KEY,
-  STORAGE_NEXT_SHOW_DATA_KEY,
-} from 'config/constants';
+import { STORAGE_CONFIG_DATA_KEY } from 'config/constants';
 
 let AppContext;
 
@@ -18,9 +15,6 @@ const AppProvider = ({ children }) => {
     session.read(STORAGE_CONFIG_DATA_KEY)
   );
   const [activePlaces, setActivePlaces] = useState();
-  const [nextShowData, setNextShowData] = useState(
-    session.read(STORAGE_NEXT_SHOW_DATA_KEY)
-  );
 
   const [userNotification, setUserNotification] = useState(null);
 
@@ -31,8 +25,6 @@ const AppProvider = ({ children }) => {
         setAppConfig,
         activePlaces,
         setActivePlaces,
-        nextShowData,
-        setNextShowData,
         userNotification,
         setUserNotification,
       }}

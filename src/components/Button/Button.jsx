@@ -17,32 +17,17 @@ const Button = ({
   href,
   isDisabled,
   isSecondary,
-  isWhiteButton,
-  isBlueButton,
-  isSecondaryBlueButton,
-  isGhost,
   isText,
-  isRedText,
-  isTransparent,
+  isRegister,
   isLoading,
-  isLoginPage,
-  hasIcon,
   onClick,
-  hasShadow,
 }) => {
   const classNames = clsx(styles.button, className, {
     [styles.isDisabled]: isDisabled,
     [styles.isSecondary]: isSecondary,
-    [styles.isWhiteButton]: isWhiteButton,
-    [styles.isBlueButton]: isBlueButton,
-    [styles.isSecondaryBlueButton]: isSecondaryBlueButton,
-    [styles.isGhost]: isGhost,
-    [styles.isTransparent]: isTransparent,
     [styles.isText]: isText,
-    [styles.isRedText]: isRedText,
+    [styles.isRegister]: isRegister,
     [styles.isLoading]: isLoading,
-    [styles.isLoginPage]: isLoginPage,
-    [styles.hasShadow]: hasShadow,
   });
 
   const animationLabel = {
@@ -89,9 +74,6 @@ const Button = ({
         transition={animationLabel.transition}
         exit="large"
       >
-        {hasIcon && (
-          <img src={`assets/icons/${hasIcon}.svg`} className={styles.bankID} />
-        )}
         {text()}
       </motion.button>
     </>
@@ -106,17 +88,9 @@ Button.propTypes = {
   href: string,
   isDisabled: bool,
   isSecondary: bool,
-  isWhiteButton: bool,
-  isBlueButton: bool,
-  isSecondaryBlueButton: bool,
-  isGhost: bool,
   isText: bool,
-  isRedText: bool,
-  isTransparent: bool,
+  isRegister: bool,
   isLoading: bool,
-  isLoginPage: bool,
-  hasIcon: string,
-  hasShadow: bool,
   onClick: func,
 };
 
@@ -127,17 +101,9 @@ Button.defaultProps = {
   href: null,
   isDisabled: false,
   isSecondary: false,
-  isWhiteButton: false,
-  isBlueButton: false,
-  isSecondaryBlueButton: false,
-  isGhost: false,
   isText: false,
-  isRedText: false,
-  isTransparent: false,
+  isRegister: false,
   isLoading: false,
-  isLoginPage: false,
-  hasIcon: null,
-  hasShadow: false,
   onClick: () => {},
 };
 

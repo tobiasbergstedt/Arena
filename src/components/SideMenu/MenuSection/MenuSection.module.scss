@@ -1,0 +1,124 @@
+@import 'styles/utils/__utils';
+
+.gameMenuWrapper {
+  padding: 10px 0 22px;
+}
+
+.gameMenuItemsWrapper {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+
+  :nth-child(1n) {
+    justify-content: flex-start;
+  }
+
+  :nth-child(2n) {
+    justify-self: flex-end;
+  }
+}
+
+.gameMenuHeading {
+  @include font-14;
+
+  margin-bottom: 12px;
+  margin-left: 30px;
+
+  background: var(--theme-gradient-color-hover);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  font-weight: 600;
+  -webkit-text-fill-color: transparent;
+}
+
+.gameMenuItem {
+  position: relative;
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+  padding-left: 32px;
+
+  &:nth-child(2n) {
+    padding-right: 32px;
+    padding-left: 0;
+
+    &.gameItemActive ::before {
+      right: 0;
+      left: auto;
+
+      border-radius: 4px 0 0 4px;
+    }
+  }
+
+  &:hover {
+    .gameMenuIconInnerWrapper::after {
+      opacity: 1;
+    }
+
+    .title {
+      background: var(--color-golden-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  &.gameItemActive ::before {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background-image: var(--theme-gradient-color-hover-inverse);
+    border-radius: 0 4px 4px 0;
+  }
+
+  ::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-image: var(--theme-gradient-color-hover);
+
+    opacity: 0;
+    transition: opacity var(--standard-transition-quick);
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+.gameMenuIconInnerWrapper {
+  width: 26px;
+  height: 26px;
+  margin-right: 16px;
+
+  background: var(--theme-gradient-color);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.title {
+  background: var(--color-white);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  font-weight: 600;
+  font-size: 16px;
+  -webkit-text-fill-color: transparent;
+
+  transition: background var(--standard-transition-quick);
+}

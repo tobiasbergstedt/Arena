@@ -3,9 +3,7 @@
 .wrapper {
   width: 100vw;
   max-width: 100vw;
-  min-height: calc(var(--content-height) - var(--footer-height));
-
-  overflow: hidden;
+  min-height: calc(var(--inner-height) - var(--footer-height));
 }
 
 .spinner {

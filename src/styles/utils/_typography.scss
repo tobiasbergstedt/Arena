@@ -4,18 +4,25 @@
   line-height: rem(17);
 }
 
+@mixin font-16 {
+  font-weight: 400;
+  font-size: rem(16);
+  line-height: rem(19);
+}
+
 @mixin font-54 {
   font-weight: 600;
   font-size: rem(54);
   line-height: rem(58);
 }
 
-@mixin h1-large {
-  margin: 0 0 rem(8);
+@mixin h1-title {
+  margin: 0 0 rem(4);
 
-  font-weight: 600;
-  font-size: rem(50);
-  line-height: rem(60);
+  font-weight: 700;
+  font-size: rem(64);
+  line-height: rem(77);
+  text-transform: uppercase;
 
   @include is-desktop {
     font-size: rem(80);

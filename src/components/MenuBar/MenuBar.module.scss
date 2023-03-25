@@ -1,0 +1,89 @@
+.menuWrapper {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: var(--menu-height);
+
+  background: linear-gradient(
+    to bottom right,
+    var(--color-purple),
+    var(--color-dark-purple)
+  );
+
+  h2 {
+    margin: 0;
+
+    background: var(--theme-gradient-color-hover);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.iconWrapper {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 90px;
+  height: 100%;
+}
+
+.menuIcon {
+  position: relative;
+
+  width: 26px;
+  height: 22px;
+
+  cursor: pointer;
+
+  &:hover span {
+    background-color: var(--color-gold);
+  }
+
+  span {
+    position: absolute;
+    left: 0;
+    display: block;
+
+    width: 26px;
+    height: 4px;
+
+    background-color: var(--color-white);
+    border-radius: 2px;
+
+    transition: background-color var(--standard-transition-quick);
+
+    &:nth-child(1) {
+      top: 0;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      top: 9px;
+    }
+
+    &:nth-child(4) {
+      top: 18px;
+    }
+  }
+}
+
+.chatIcon {
+  width: 34px;
+  height: 32px;
+
+  cursor: pointer;
+
+  fill: var(--color-white);
+
+  transition: fill var(--standard-transition-quick);
+
+  &:hover {
+    fill: var(--color-gold);
+  }
+}

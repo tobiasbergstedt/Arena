@@ -1,0 +1,52 @@
+@import 'styles/utils/__utils';
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 350px;
+  margin-right: auto;
+  margin-bottom: 16px;
+  margin-left: auto;
+
+  background-color: transparent;
+
+  color: var(--color-white);
+}
+
+.inputLabelText {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  cursor: text;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.clearButton {
+  position: absolute;
+  top: 19px;
+  right: 18px;
+
+  width: 24px;
+  height: 24px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.infoMessage {
+  @include caption;
+
+  color: var(--color-font-base);
+}
+
+.errorMessage {
+  color: var(--color-validation-red);
+}

@@ -13,13 +13,4 @@ export default {
         return Promise.reject(error);
       }
     }),
-  useGetNextShowStart: () =>
-    useQuery('nextShow', async () => {
-      try {
-        const response = await client.get('show/nextshow');
-        return response.data;
-      } catch (error) {
-        return Promise.reject(error);
-      }
-    }),
 };

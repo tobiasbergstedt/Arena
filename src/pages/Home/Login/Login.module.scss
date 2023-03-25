@@ -5,7 +5,7 @@
   position: fixed;
 
   width: 100%;
-  height: var(--content-height);
+  height: var(--inner-height);
 
   background-color: var(--color-blue);
 
@@ -56,5 +56,6 @@
 
 .loading {
   @include flex-centered;
+
   height: var(--inner-height);
 }
