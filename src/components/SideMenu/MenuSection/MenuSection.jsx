@@ -9,13 +9,7 @@ const MenuSection = ({ items, heading, slugs }) => {
 
   return (
     <div className={styles.gameMenuWrapper}>
-      <p
-        className={clsx(
-          styles.menuSubHeading,
-          styles.gameMenuHeading,
-          styles.golden
-        )}
-      >
+      <p className={clsx(styles.menuSubHeading, styles.gameMenuHeading)}>
         {heading}
       </p>
       <div className={styles.gameMenuItemsWrapper}>

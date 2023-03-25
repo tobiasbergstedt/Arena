@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { string } from 'prop-types';
 
 import styles from './NextGame.module.scss';
@@ -6,7 +5,7 @@ import styles from './NextGame.module.scss';
 const NextGame = ({ teamLogoHome, teamLogoAway }) => {
   return (
     <div className={styles.nextGameWrapper}>
-      <p className={clsx(styles.menuSubHeading, styles.golden)}>
+      <p className={`goldenText ${styles.menuSubHeading}`}>
         Next game - League
       </p>
       <div className={styles.gameInfoWrapper}>

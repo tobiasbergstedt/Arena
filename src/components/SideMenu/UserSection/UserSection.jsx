@@ -15,7 +15,7 @@ const UserSection = ({ teamLogo }) => {
         </div>
         <div className={styles.teamInfo}>
           <h4>Behemot Bashers</h4>
-          <p className={styles.golden}>robert76</p>
+          <p className={`goldenText`}>robert76</p>
         </div>
       </div>
       <div
