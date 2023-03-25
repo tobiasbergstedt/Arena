@@ -10,3 +10,11 @@
 .contentWrapper {
   min-height: calc(100% - var(--menu-height));
 }
+
+.timeDateAndOnline {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 16px 30px 0;
+}

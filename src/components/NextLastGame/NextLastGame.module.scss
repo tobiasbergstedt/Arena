@@ -53,13 +53,24 @@
   }
 }
 
+.gameInfo {
+  display: flex;
+
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
 .teamNamesWrapper {
   p {
     margin: 0;
   }
+
+  &:nth-child(2) {
+    text-align: center;
+  }
 }
 
-.teamName {
+.thick {
   @include font-14;
 
   font-weight: 600;

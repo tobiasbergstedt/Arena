@@ -12,7 +12,7 @@ import TeamLogoAway from 'assets/images/wysiwyg.png';
 
 import styles from './SideMenu.module.scss';
 
-import NextGame from 'components/SideMenu/NextGame/NextGame';
+import NextLastGame from 'components/NextLastGame/NextLastGame';
 import gameMenuItems from 'components/SideMenu/MenuItems/gameMenuItems';
 import aboutTheGameItems from 'components/SideMenu/MenuItems/AboutTheGameItems';
 import UserMenu from 'components/SideMenu/UserMenu/UserMenu';
@@ -58,7 +58,10 @@ const SideMenu = ({ isSideMenuOpen, setIsSideMenuOpen }) => {
               <UserSection teamLogo={TeamLogo} />
             </div>
             <UserMenu slugs={slugs} />
-            <NextGame teamLogoHome={TeamLogoHome} teamLogoAway={TeamLogoAway} />
+            <NextLastGame
+              teamLogoHome={TeamLogoHome}
+              teamLogoAway={TeamLogoAway}
+            />
             <MenuSection
               heading={'Game menu'}
               items={gameMenuItems}
