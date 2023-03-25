@@ -1,4 +1,5 @@
 .menuWrapper {
+  position: relative;
   display: flex;
 
   align-items: center;
@@ -12,6 +13,19 @@
     var(--color-purple),
     var(--color-dark-purple)
   );
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+    left: 0;
+
+    height: 10px;
+
+    background-image: var(--shadow-before-gradient);
+  }
 
   h2 {
     margin: 0;
