@@ -69,7 +69,7 @@
   );
 
   // Buttons
-  --color-button-primary: var(--theme-color-primary);
+  --color-button-primary: var(--color-black);
   --color-button-primary-background: var(--theme-gradient-color);
   --color-button-primary-background-1: var(--theme-gradient-color-1);
   --color-button-primary-background-2: var(--theme-gradient-color-2);
@@ -81,11 +81,11 @@
   --color-button-primary-disabled-background: var(--color-red-2);
   --color-button-white: var(--color-red);
   --color-button-white-background: var(--color-white);
-  --color-button-secondary: var(--color-red);
-  --color-button-secondary-background: transparent;
-  --color-button-secondary-hover: var(--color-red);
-  --color-button-secondary-hover-background: var(--color-red-3);
-  --color-button-secondary-pressed: var(--color-red-3);
+  --color-button-secondary: var(--color-black);
+  --color-button-secondary-background: var(--theme-gradient-color-hover);
+  --color-button-secondary-hover: var(--color-grey-1);
+  --color-button-secondary-hover-background: var(--theme-gradient-color);
+  --color-button-secondary-pressed: var(--color-grey-1);
   --color-button-secondary-pressed-background: var(--color-red);
   --color-button-secondary-disabled: var(--color-red-2);
   --color-button-secondary-disabled-background: transparent;
@@ -126,6 +126,7 @@
   --login-padding: 24px 30px;
   --login-padding-tablet: 128px 48px 32px;
   --side-menu-padding: 0 30px;
+  --standard-padding: 30px;
 
   // Box shadow
   --box-shadow-primary: inset 0 10px 5px -5px #00000080,
@@ -142,6 +143,7 @@
   --index-header: 3;
   --index-back-button: 4;
   --index-menu: 5;
+  --index-chat: var(--index-menu);
   --index-count-down: 5;
   --index-cookie-banner: 6;
   --index-modal: 7;

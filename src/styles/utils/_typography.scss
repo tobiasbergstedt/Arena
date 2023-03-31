@@ -10,6 +10,12 @@
   line-height: rem(19);
 }
 
+@mixin font-40 {
+  font-weight: 400;
+  font-size: rem(40);
+  line-height: rem(48);
+}
+
 @mixin font-54 {
   font-weight: 600;
   font-size: rem(54);
