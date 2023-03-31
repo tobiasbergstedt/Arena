@@ -1,0 +1,29 @@
+@import 'styles/utils/__utils';
+
+.latestNewsWrapper {
+  padding: var(--standard-padding);
+
+  background-color: var(--theme-color-secondary);
+
+  box-shadow: var(--box-shadow-primary);
+}
+
+.topHeading {
+  font-weight: 700;
+  font-size: em(26);
+}
+
+.newsItemsWrapper {
+  display: flex;
+
+  flex-direction: column;
+  gap: 16px;
+}
+
+.moreNews {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 16px;
+}

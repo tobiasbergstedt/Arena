@@ -1,12 +1,13 @@
 @import 'styles/utils/__utils';
 
 .chat {
+  z-index: var(--index-menu);
   position: absolute;
   top: 0;
   left: 0;
 
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 
   // background-color: var(--theme-color-primary);
   background-color: lightgrey;
@@ -16,7 +17,7 @@
   width: 100%;
   max-width: 767px;
   height: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   margin-right: auto;
   margin-left: auto;
 
@@ -72,8 +73,8 @@
 }
 
 .contentWrapper {
-  height: 100%;
-  min-height: calc(100% - var(--menu-height));
+  height: calc(100% - var(--menu-height));
+  min-height: 100vh;
 }
 
 .messagesWrapper {
@@ -82,9 +83,8 @@
   flex-direction: column;
   gap: 20px;
 
-  height: calc(100vh - calc(var(--menu-height) + 48px));
+  min-height: calc(100vh - calc(var(--menu-height) + 48px));
   padding: 16px 20px;
-  overflow: scroll;
 }
 
 .messageOuterWrapper {
@@ -113,27 +113,22 @@
   font-weight: 700;
 }
 
-.message {
+.message,
+.myMessage {
   position: relative;
 
   padding: 13px 18px;
-
-  background-image: linear-gradient(to bottom, #fff, #fff);
-  border-radius: 12px 12px 12px 0;
-
-  color: var(--color-black);
 
   &::before {
     content: '';
 
     position: absolute;
     bottom: -9px;
-    left: 0;
 
     width: 10px;
     height: 10px;
 
-    background: inherit;
+    background: var(--color-dark-purple);
   }
 
   &::after {
@@ -141,7 +136,6 @@
 
     position: absolute;
     bottom: -18px;
-    left: 0;
 
     width: 18px;
     height: 18px;
@@ -151,11 +145,24 @@
   }
 }
 
+.message {
+  background-image: linear-gradient(to bottom, #fff, #fff);
+  border-radius: 12px 12px 12px 0;
+
+  color: var(--color-black);
+
+  &::before {
+    left: 0;
+
+    background: inherit;
+  }
+
+  &::after {
+    left: 0;
+  }
+}
+
 .myMessage {
-  position: relative;
-
-  padding: 13px 18px;
-
   background-image: linear-gradient(
     to bottom,
     var(--color-purple),
@@ -165,35 +172,14 @@
 
   color: var(--color-white);
 
-  ::before {
-    background: var(--color-dark-purple);
-  }
-
   &::before {
-    content: '';
-
-    position: absolute;
     right: 0;
-    bottom: -9px;
-
-    width: 10px;
-    height: 10px;
 
     background: var(--color-dark-purple);
   }
 
   &::after {
-    content: '';
-
-    position: absolute;
     right: 0;
-    bottom: -18px;
-
-    width: 18px;
-    height: 18px;
-
-    background: var(--theme-color-side-menu);
-    border-radius: 50%;
   }
 }
 

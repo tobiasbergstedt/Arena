@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 
 import { GA_TRACKING_ID } from 'config/settings';
 
+import { ReactComponent as CookieIcon } from 'assets/icons/cookies.svg';
+
 import styles from './CookieBanner.module.scss';
 
 const CookieBanner = () => {
@@ -41,13 +43,20 @@ const CookieBanner = () => {
   }, []);
 
   const animVariants = {
-    initial: { x: -1000, opacity: 0, transition: { delay: 2 } },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 1.5, delay: 0.5 },
+    initial: {
+      y: 'calc(var(--inner-height) + 40px)',
+      opacity: 0,
     },
-    after: { x: 1000, opacity: 0, transition: { duration: 2 } },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 50, delay: 0.5 },
+    },
+    after: {
+      y: 'calc(var(--inner-height) + 40px)',
+      opacity: 0,
+      transition: { duration: 0.4 },
+    },
   };
 
   return (
@@ -59,6 +68,7 @@ const CookieBanner = () => {
           initial="initial"
           animate="visible"
           exit="after"
+          className={styles.animBox}
         >
           <CookieConsent
             containerClasses={styles.cookieContainer}
@@ -75,8 +85,11 @@ const CookieBanner = () => {
             hideOnAccept={false}
             hideOnDecline={false}
           >
-            <span>{t('cookieBanner.heading')}</span>
-            {t('cookieBanner.text')}
+            <h5 className={styles.heading}>
+              <CookieIcon className={styles.cookieIcon} />
+              {t('cookieBanner.heading')}
+            </h5>
+            <p className={styles.paragraph}>{t('cookieBanner.text')}</p>
           </CookieConsent>
         </motion.div>
       ) : (

@@ -1,0 +1,52 @@
+@import 'styles/utils/__utils';
+
+.leaguePositionWrapper {
+  padding: var(--standard-padding);
+}
+
+.topHeading {
+  font-weight: 700;
+  font-size: em(26);
+  text-transform: uppercase;
+}
+
+.leagueName {
+  @include font-14;
+}
+
+.leaguePosition {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.position {
+  @include font-40;
+}
+
+.statistics {
+  @include font-14;
+
+  table {
+    width: 100%;
+
+    border-collapse: collapse;
+  }
+
+  td,
+  th {
+    background-clip: padding-box;
+    border: 0 solid transparent;
+  }
+
+  tr > td + td,
+  tr > th + th {
+    border-left-width: 10px;
+  }
+
+  tr + tr > td,
+  tr + tr > th {
+    border-top-width: 10px;
+  }
+}

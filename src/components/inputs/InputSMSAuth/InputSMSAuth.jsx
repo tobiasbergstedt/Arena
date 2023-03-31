@@ -1,22 +1,22 @@
 import clsx from 'clsx';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState /*, useContext*/ } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { func, string } from 'prop-types';
 import AuthCode from 'react-auth-code-input';
 
-import { UserContext } from 'context/UserContext';
+// import { UserContext } from 'context/UserContext';
 
-import client from 'api/client';
+// import client from 'api/client';
 
 import styles from './InputSMSAuth.module.scss';
 
 const InputSMSAuth = ({
-  setStep,
+  // setStep,
   setIsVerified,
-  formattedPhoneNumber,
+  // formattedPhoneNumber,
   verificationBody,
 }) => {
-  const { setMobilePhoneNo } = useContext(UserContext);
+  // const { setMobilePhoneNo } = useContext(UserContext);
   const [result, setResult] = useState();
   const [hasErrors, setHasErrors] = useState(false);
 
@@ -33,16 +33,16 @@ const InputSMSAuth = ({
         token: result,
       };
       console.log(postBody);
-      const response = await client.post('user/mobilephone/verify', postBody);
-      if (response?.status === 200) {
-        setIsVerified(true);
-        setMobilePhoneNo(formattedPhoneNumber);
-        setStep(3);
-      } else {
-        setIsVerified(false);
-        setHasErrors(true);
-      }
-      return response?.data;
+      // const response = await client.post('user/mobilephone/verify', postBody);
+      // if (response?.status === 200) {
+      //   setIsVerified(true);
+      //   setMobilePhoneNo(formattedPhoneNumber);
+      //   setStep(3);
+      // } else {
+      setIsVerified(false);
+      setHasErrors(true);
+      // }
+      // return response?.data;
     };
     sendData();
   };

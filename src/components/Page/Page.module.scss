@@ -1,8 +1,9 @@
 @import 'styles/utils/__utils';
 
-.wrapper {
+.pageWrapper {
   width: 100vw;
   max-width: 100vw;
-  height: var(--inner-height);
-  min-height: calc(var(--inner-height) - var(--footer-height));
+
+  // height: var(--inner-height);
+  min-height: calc(var(--inner-height) - var(--menu-height));
 }

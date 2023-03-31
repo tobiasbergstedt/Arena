@@ -1,0 +1,29 @@
+@import 'styles/utils/__utils';
+
+.newsItemHeading {
+  margin: 0;
+
+  font-weight: 400;
+  font-size: 20px;
+  text-decoration: underline;
+
+  cursor: pointer;
+
+  transition: text-decoration var(--standard-transition-quick);
+
+  &:hover {
+    text-decoration-color: var(--color-golden-text);
+  }
+}
+
+.dateAndTime {
+  margin-bottom: 8px;
+
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.newsItemContent {
+  @include font-14;
+}

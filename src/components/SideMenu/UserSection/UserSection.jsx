@@ -1,10 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import { string } from 'prop-types';
+import { string, func } from 'prop-types';
 
 import styles from './UserSection.module.scss';
 
-const UserSection = ({ teamLogo }) => {
-  const navigate = useNavigate();
+const UserSection = ({ teamLogo, onClick }) => {
   return (
     <div className={styles.userWrapper}>
       <div className={styles.teamWrapper}>
@@ -24,9 +22,7 @@ const UserSection = ({ teamLogo }) => {
           maskImage: 'url(assets/icons/signout.svg)',
           WebkitMaskImage: 'url(assets/icons/signout.svg)',
         }}
-        onClick={() => {
-          navigate('/');
-        }}
+        onClick={onClick}
       />
     </div>
   );
@@ -34,6 +30,7 @@ const UserSection = ({ teamLogo }) => {
 
 UserSection.propTypes = {
   teamLogo: string,
+  onClick: func,
 };
 
 export default UserSection;

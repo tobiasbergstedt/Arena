@@ -1,102 +1,120 @@
 @import 'styles/utils/__utils';
 
+.animBox {
+  z-index: var(--index-modal);
+  position: relative;
+}
+
 .cookieContainer {
+  z-index: var(--index-modal);
   position: absolute;
   right: 0;
   left: 0;
-  display: flex;
 
-  z-index: var(--index-modal);
+  width: 100%;
+  max-width: 343px;
+  margin: auto auto 16px;
+  padding: 32px 32px 24px;
 
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background-color: var(--color-white);
+  border-radius: 8px;
 
-  max-width: 300px;
-  margin-right: auto;
-  margin-bottom: 10rem;
-  margin-left: auto;
-  padding: 1.4rem 2.2rem;
+  box-shadow: 0 12px 40px 0 #00000040;
 
-  background-color: #003087;
-  border-radius: 10px;
-
-  color: white;
-
-  box-shadow: 0 0.5rem 0.75rem rgba($color: #000, $alpha: 60%);
-
-  @include is-desktop {
-    flex-direction: row;
-
-    max-width: 900px;
+  @media (min-width: 423px) {
+    margin: auto 40px 40px auto;
   }
 }
 
 .cookieContent {
-  display: flex;
+  @include flex-centered(true);
+}
 
-  flex-direction: column;
+.cookieIcon {
+  width: 24px;
+  margin-right: 11px;
+}
 
-  text-align: center;
+.heading {
+  @include flex-centered;
 
-  & :first-child {
-    margin-bottom: 0.5rem;
+  justify-content: flex-start;
 
-    font-size: 1.6rem;
-  }
+  width: 100%;
+  margin: 0 0 rem(26);
+
+  color: var(--color-black);
+}
+
+.paragraph {
+  margin: 0 0 24px;
+
+  color: var(--color-black);
+  font-size: rem(15);
+  line-height: rem(18);
 }
 
 .buttonContainer {
-  display: flex;
+  @include flex-centered;
 
-  margin-top: 1.4rem;
-
-  & :first-child {
-    margin-right: 0.8rem;
-  }
-
-  @include is-desktop {
-    flex-direction: column;
-
-    margin-top: 0;
-    margin-left: 2.2rem;
-
-    & :first-child {
-      margin-bottom: 0.8rem;
-    }
-  }
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
+.buttonClasses,
 .declineButtonClasses {
-  background-color: red;
+  @include flex-centered;
+
+  min-width: 134px;
+  height: 44px;
+  margin-bottom: 8px;
+
+  background-color: var(--color-white);
+  border: 2px solid var(--color-button-secondary);
+  border-radius: 24px;
+
+  color: var(--color-red);
+  font-weight: 600;
+  font-size: rem(18);
+  line-height: rem(21);
+
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
 
   &:hover {
-    background-color: darkred;
+    background-color: var(--color-button-secondary-hover-background);
 
-    color: white;
+    color: var(--color-button-secondary-hover);
+  }
+
+  &:active {
+    background-color: var(--color-button-secondary-pressed-background);
+    border-color: var(--color-button-secondary-pressed-background);
+
+    color: var(--color-button-secondary-pressed);
+
+    outline: none;
   }
 }
 
 .buttonClasses {
-  background-color: #f09;
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+
+  color: var(--color-white);
+
+  outline: 0 none;
 
   &:hover {
-    background-color: rgb(196, 0, 118);
+    background-color: var(--color-button-primary-hover-background);
+    border-color: var(--color-button-primary-hover-background);
 
-    color: white;
+    color: var(--color-button-primary-hover);
   }
-}
 
-.declineButtonClasses,
-.buttonClasses {
-  min-width: 130px;
-  padding: 0.7rem 1.4rem;
+  &:active {
+    background-color: var(--color-button-primary-pressed-background);
+    border-color: var(--color-button-primary-pressed-background);
 
-  border-radius: 0.4rem;
-
-  font-size: 1.1rem;
-
-  @include is-desktop {
-    width: 100%;
+    color: var(--color-button-primary-pressed);
   }
 }

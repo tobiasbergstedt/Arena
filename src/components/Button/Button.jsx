@@ -20,6 +20,8 @@ const Button = ({
   isText,
   isRegister,
   isLoading,
+  isSmall,
+  hasIcon,
   onClick,
 }) => {
   const classNames = clsx(styles.button, className, {
@@ -28,6 +30,7 @@ const Button = ({
     [styles.isText]: isText,
     [styles.isRegister]: isRegister,
     [styles.isLoading]: isLoading,
+    [styles.isSmall]: isSmall,
   });
 
   const animationLabel = {
@@ -74,6 +77,7 @@ const Button = ({
         transition={animationLabel.transition}
         exit="large"
       >
+        {hasIcon && <img src={hasIcon} className={styles.hasIcon} />}
         {text()}
       </motion.button>
     </>
@@ -91,6 +95,8 @@ Button.propTypes = {
   isText: bool,
   isRegister: bool,
   isLoading: bool,
+  isSmall: bool,
+  hasIcon: string,
   onClick: func,
 };
 
@@ -104,6 +110,8 @@ Button.defaultProps = {
   isText: false,
   isRegister: false,
   isLoading: false,
+  isSmall: false,
+  hasIcon: null,
   onClick: () => {},
 };
 

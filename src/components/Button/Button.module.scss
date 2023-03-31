@@ -69,31 +69,14 @@
 
     color: var(--color-button-secondary);
 
-    outline: 2px solid var(--color-button-secondary);
-    outline-offset: -2px;
-
-    &:hover {
-      background: var(--color-button-secondary-hover-background);
-
-      color: var(--color-button-secondary-hover);
-    }
-
-    &:active {
-      background: var(--color-button-secondary-pressed-background);
-
-      color: var(--color-button-secondary-pressed);
-
-      outline: none;
-
-      transition: background-color 0.25s, color 0.25s;
+    &::before {
+      background-image: var(--gradient-white);
     }
 
     &.isDisabled {
       background: var(--color-button-secondary-disabled-background);
 
       color: var(--color-button-secondary-disabled);
-
-      outline-color: var(--color-button-secondary-disabled);
     }
   }
 
@@ -163,5 +146,21 @@
 
     align-items: center;
     justify-content: center;
+  }
+
+  &.isSmall {
+    @include font-14;
+
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+    padding: 8px 24px;
+  }
+
+  .hasIcon {
+    width: 26px;
+    margin-top: -4px;
+    margin-right: 22px;
+    margin-bottom: -4px;
   }
 }

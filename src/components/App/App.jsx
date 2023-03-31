@@ -19,7 +19,7 @@ import SpinnerGlobe from 'components/SpinnerGlobe/SpinnerGlobe';
 import UserNotifications from 'components/UserNotifications/UserNotifications';
 
 const Locations = React.lazy(() => import('pages/Locations/Locations'));
-const Home = React.lazy(() => import('pages/Home/Home'));
+// const Home = React.lazy(() => import('pages/Home/Home'));
 const Beneficiary = React.lazy(() => import('pages/Beneficiary/Beneficiary'));
 const Overview = React.lazy(() => import('pages/Overview/Overview'));
 const Profile = React.lazy(() => import('pages/Profile/Profile'));
@@ -60,7 +60,7 @@ const App = () => {
                             path="/"
                             element={
                               <HomeProvider>
-                                {false ? <Home /> : <Login />}
+                                {false ? <Landing /> : <Login />}
                               </HomeProvider>
                             }
                           />
