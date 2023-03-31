@@ -3,8 +3,8 @@ import { func, string } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import { UserContext } from 'context/UserContext';
-import { EditContext } from 'context/EditContext';
-import client from 'api/client';
+// import { EditContext } from 'context/EditContext';
+// import client from 'api/client';
 
 import InputPhone from 'components/inputs/InputPhone/InputPhone';
 import Button from 'components/Button/Button';
@@ -12,37 +12,37 @@ import Button from 'components/Button/Button';
 import styles from './SendVerification.module.scss';
 
 const SendVerification = ({
-  cleanPhoneNumber,
+  // cleanPhoneNumber,
   setCleanPhoneNumber,
   setPhoneNumber,
-  setVerificationBody,
+  // setVerificationBody,
 }) => {
   const { mobilePhoneNo } = useContext(UserContext);
-  const { setStep } = useContext(EditContext);
+  // const { setStep } = useContext(EditContext);
 
   const { t } = useTranslation();
 
   const sendVerification = () => {
-    const sendData = async () => {
-      const formattedPhoneNumber = `${t(
-        'global.countryCode'
-      )}${cleanPhoneNumber}`;
-      const postBody = {
-        MobilePhoneNo: formattedPhoneNumber,
-      };
-      const response = await client.post(
-        'user/mobilephone/verifyInit',
-        postBody
-      );
-      if (response?.status === 200) {
-        setVerificationBody(response.data);
-      }
-      return response?.data;
-    };
-    if (cleanPhoneNumber?.length === 9) {
-      sendData();
-      setStep(2);
-    }
+    // const sendData = async () => {
+    // const formattedPhoneNumber = `${t(
+    //   'global.countryCode'
+    // )}${cleanPhoneNumber}`;
+    // const postBody = {
+    //   MobilePhoneNo: formattedPhoneNumber,
+    // };
+    // const response = await client.post(
+    //   'user/mobilephone/verifyInit',
+    //   postBody
+    // );
+    // if (response?.status === 200) {
+    //   setVerificationBody(response.data);
+    // }
+    // return response?.data;
+    // if (cleanPhoneNumber?.length === 9) {
+    //   sendData();
+    //   setStep(2);
+    // }
+    // };
   };
 
   const hasPhoneNumber = mobilePhoneNo !== undefined;

@@ -1,10 +1,12 @@
 import Page from 'components/Page/Page';
 import NextLastGame from 'components/NextLastGame/NextLastGame';
+import LatestNews from 'components/News/LatestNews/LatestNews';
 
 import TeamLogoHome from 'assets/images/behemot_bashers.png';
 import TeamLogoAway from 'assets/images/wysiwyg.png';
 
 import styles from './Landing.module.scss';
+import LeaguePosition from 'components/LeaguePosition/LeaguePosition';
 
 const Landing = () => {
   return (
@@ -20,6 +22,8 @@ const Landing = () => {
             teamLogoHome={TeamLogoHome}
             isLastGame
           />
+          <LatestNews />
+          <LeaguePosition />
         </div>
       </div>
     </Page>

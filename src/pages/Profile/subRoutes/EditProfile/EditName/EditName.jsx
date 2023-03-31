@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { UserContext } from 'context/UserContext';
-import client from 'api/client';
+// import client from 'api/client';
 
 import Button from 'components/Button/Button';
 import InputText from 'components/inputs/InputText/InputText';
@@ -40,12 +40,12 @@ const EditName = () => {
   const onClickState = () => {
     const isValid = inputData?.result.valid;
     const sendData = async () => {
-      const newUserName = inputData.value;
-      const postBody = {
-        newUsername: newUserName,
-      };
-      const response = await client.put('user/changeusername', postBody);
-      return response?.data;
+      // const newUserName = inputData.value;
+      // const postBody = {
+      //   newUsername: newUserName,
+      // };
+      // const response = await client.put('user/changeusername', postBody);
+      // return response?.data;
     };
 
     if (isValid) {

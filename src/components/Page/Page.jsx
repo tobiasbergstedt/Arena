@@ -33,8 +33,8 @@ const Page = ({ children, className }) => {
       initial="initial"
       animate="in"
       exit="out"
-      key="pageWrapper"
-      className={clsx(styles.wrapper, className)}
+      key="pageWrapper15"
+      className={clsx(styles.pageWrapper, className)}
     >
       <MenuBar
         isSideMenuOpen={isSideMenuOpen}

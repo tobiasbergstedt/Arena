@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { bool, func } from 'prop-types';
 
@@ -21,9 +21,12 @@ import UserSection from 'components/SideMenu/UserSection/UserSection';
 const SideMenu = ({ isSideMenuOpen, setIsSideMenuOpen }) => {
   const location = useLocation();
   const slugs = location.pathname?.split('/') ?? [];
+  const navigate = useNavigate();
 
   const animVariants = {
-    initial: { left: '-100vw' },
+    initial: {
+      left: '-100vw',
+    },
     visible: {
       left: '0px',
       transition: { duration: 1 },
@@ -55,7 +58,7 @@ const SideMenu = ({ isSideMenuOpen, setIsSideMenuOpen }) => {
                   onClick={() => setIsSideMenuOpen(false)}
                 />
               </div>
-              <UserSection teamLogo={TeamLogo} />
+              <UserSection teamLogo={TeamLogo} onClick={() => navigate('/')} />
             </div>
             <UserMenu slugs={slugs} />
             <NextLastGame
