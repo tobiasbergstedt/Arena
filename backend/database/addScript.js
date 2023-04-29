@@ -1,16 +1,16 @@
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc } from 'firebase/firestore';
 
-import { db } from './firebase.js'
+import { db } from './firebase.js';
 
-async function addScript(newHamster) {
-	const colRef = collection(db, 'hamsters')
-	const newDocRef = await addDoc(colRef, newHamster)
+async function addScript(newTeam) {
+  const colRef = collection(db, 'teams');
+  const newDocRef = await addDoc(colRef, newTeam);
 
-	console.log('Lade till nytt hamsterdokument med ', { id: newDocRef.id })
+  console.log('Added a new team with id: ', { id: newDocRef.id });
 
-	let newId = newDocRef.id
+  let newId = newDocRef.id;
 
-	return newId
+  return newId;
 }
 
-export default addScript
+export default addScript;

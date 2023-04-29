@@ -8,6 +8,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import hamsters from './routes/hamsters.js';
+import players from './routes/players.js';
+import chatMessages from './routes/chatMessages.js';
+import news from './routes/news.js';
+import teams from './routes/teams.js';
+import divisions from './routes/divisions.js';
 import matches from './routes/matches.js';
 import matchWinners from './routes/matchWinners.js';
 import winners from './routes/winners.js';
@@ -35,6 +40,11 @@ app.use('/assets/', express.static(path.join(__dirname, '/assets/')));
 
 // Endpoints
 app.use('/hamsters', hamsters);
+app.use('/players', players);
+app.use('/chat', chatMessages);
+app.use('/news', news);
+app.use('/teams', teams);
+app.use('/divisions', divisions);
 app.use('/matches', matches);
 app.use('/matchWinners', matchWinners);
 app.use('/winners', winners);
