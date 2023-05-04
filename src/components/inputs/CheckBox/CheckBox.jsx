@@ -1,11 +1,11 @@
-import { string, func, bool } from 'prop-types';
+import { string, func, bool, arrayOf } from 'prop-types';
 import clsx from 'clsx';
 
 import styles from './CheckBox.module.scss';
 
 const CheckBox = ({ isLarge, onChange, onClick, agreement, text }) => {
   return (
-    <div className={styles.rememberMe}>
+    <div className={styles.checked}>
       <label
         className={clsx(styles.checkBoxWrapper, {
           [styles.isLarge]: isLarge,
@@ -13,8 +13,8 @@ const CheckBox = ({ isLarge, onChange, onClick, agreement, text }) => {
       >
         <input
           type="checkbox"
-          name="a"
-          id="rememberMe"
+          name="checked"
+          id="checked"
           className={styles.checkBox}
           onChange={onChange}
           checked={agreement}
@@ -37,15 +37,12 @@ CheckBox.propTypes = {
   text: string,
   onChange: func,
   onClick: func,
-  agreement: bool,
+  agreement: arrayOf(bool),
 };
 
 CheckBox.defaultProps = {
   isLarge: false,
   text: '',
-  onChange: () => {},
-  onClick: () => {},
-  agreement: false,
 };
 
 export default CheckBox;

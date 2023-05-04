@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { bool, func } from 'prop-types';
+import { bool, func, string } from 'prop-types';
 
 import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
 
@@ -10,6 +10,7 @@ const MenuBar = ({
   setIsSideMenuOpen,
   isChatOpen,
   setIsChatOpen,
+  title,
 }) => {
   return (
     <div className={styles.menuWrapper}>
@@ -28,7 +29,7 @@ const MenuBar = ({
           <span />
         </div>
       </div>
-      <h2>Start</h2>
+      <h2>{title}</h2>
       <div className={styles.iconWrapper}>
         <ChatIcon
           className={styles.chatIcon}
@@ -42,6 +43,7 @@ const MenuBar = ({
 };
 
 MenuBar.propTypes = {
+  title: string.isRequired,
   isSideMenuOpen: bool,
   setIsSideMenuOpen: func,
   isChatOpen: bool,

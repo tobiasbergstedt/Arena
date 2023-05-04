@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -17,6 +17,14 @@ import Select from 'components/inputs/Select/Select';
 import { ReactComponent as ArrowBack } from 'assets/icons/arrow-back.svg';
 
 import styles from './Login.module.scss';
+import { UserContext } from 'context/UserContext';
+import {
+  createUserWithEmailAndPassword,
+  // sendEmailVerification,
+  // updateProfile,
+} from 'firebase/auth';
+import { auth } from 'api/firebase';
+import Spinner from 'components/Spinner/Spinner';
 
 const Login = () => {
   const [inputData, setInputData] = useState({ userName: '', password: '' });
@@ -30,6 +38,9 @@ const Login = () => {
     confirmEmail: '',
     termsAndConditions: false,
   });
+  const [displayError, setDisplayError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { signin } = useContext(UserContext);
   const [agreement, setAgreement] = useState(false);
   const [acceptTermsAndConditions, setAcceptTermsAndConditions] =
     useState(false);
@@ -50,50 +61,99 @@ const Login = () => {
       .required('Du måste fylla i ett nytt användarnamn.'),
   });
 
+  const createTeam = async () => {
+    setDisplayError('');
+    try {
+      setLoading(true);
+      await createUserWithEmailAndPassword(
+        auth,
+        signupInputData.email,
+        signupInputData.password
+      ).catch((error) => {
+        setDisplayError(error.message);
+      });
+      // await sendEmailVerification(auth.currentUser).catch((error) => {
+      //   setDisplayError(error.message);
+      // });
+      // await updateProfile(auth.currentUser, {
+      //   displayName: signupInputData.userName,
+      // }).catch((error) => {
+      //   setDisplayError(error.message);
+      // });
+      setLoading(false);
+      if (auth.currentUser) {
+        navigate('landing');
+      }
+    } catch (error) {
+      setLoading(false);
+      setDisplayError(error.message);
+    }
+  };
+
+  const handleSignin = async () => {
+    setDisplayError('');
+    try {
+      setLoading(true);
+      await signin(inputData.userName, inputData.password);
+      setLoading(false);
+      navigate('landing');
+    } catch (error) {
+      setLoading(false);
+      setDisplayError(error.message);
+      console.log(error.message);
+    }
+  };
+
   const signUpInputs = [
     {
       value: signupInputData.teamName,
       onChange: (data) => {
         setSignupInputData({ ...signupInputData, teamName: data.value });
       },
-      label: 'Team name',
+      label: t('login.inputs.teamName'),
     },
     {
       value: signupInputData.userName,
       onChange: (data) => {
         setSignupInputData({ ...signupInputData, userName: data.value });
       },
-      label: 'User name',
+      label: t('login.inputs.userName'),
     },
     {
       value: signupInputData.password,
       onChange: (data) => {
         setSignupInputData({ ...signupInputData, password: data.value });
       },
-      label: 'Password',
+      label: t('login.inputs.password'),
     },
     {
       value: signupInputData.confirmPassword,
       onChange: (data) => {
         setSignupInputData({ ...signupInputData, confirmPassword: data.value });
       },
-      label: 'Confirm password',
+      label: t('login.inputs.confirmPassword'),
     },
     {
       value: signupInputData.email,
       onChange: (data) => {
         setSignupInputData({ ...signupInputData, email: data.value });
       },
-      label: 'Email',
+      label: t('login.inputs.email'),
     },
     {
       value: signupInputData.confirmEmail,
       onChange: (data) => {
         setSignupInputData({ ...signupInputData, confirmEmail: data.value });
       },
-      label: 'Confirm email',
+      label: t('login.inputs.confirmEmail'),
     },
   ];
+
+  const handleKeyPress = (e) => {
+    if (e.key == 'Enter' || e.keyCode === 13) {
+      handleSignin();
+    }
+  };
 
   useEffect(() => {
     setWindowWidth(window.innerWidth);
@@ -105,8 +165,13 @@ const Login = () => {
   }, []);
 
   const selectValues = {
-    options: ['Humans', 'Elves', 'Dwarves', 'Orcs'],
-    label: 'Race',
+    options: [
+      t('login.races.humans'),
+      t('login.races.elves'),
+      t('login.races.dwarves'),
+      t('login.races.orcs'),
+    ],
+    label: t('login.races.race'),
   };
 
   const animVariants = {
@@ -144,11 +209,11 @@ const Login = () => {
       className={styles.innerWrapper}
     >
       <div className={styles.welcomeWrapper}>
-        <h2>Welcome to</h2>
-        <h1 className={styles.headingTitle}>Arena</h1>
+        <h2>{t('login.welcome')}</h2>
+        <h1 className={styles.headingTitle}>{t('arena')}</h1>
         {isMobile ? (
           <div className={styles.infoButton}>
-            <p>i</p>
+            <p>{t('login.information')}</p>
           </div>
         ) : (
           <div>
@@ -179,7 +244,7 @@ const Login = () => {
             exit="after"
             className={styles.signinWrapper}
           >
-            <h2>SIGN IN</h2>
+            <h2 className={styles.signIn}>{t('login.signIn')}</h2>
             <InputTextNew
               value={inputData.value}
               ref={inputRef}
@@ -187,15 +252,18 @@ const Login = () => {
               onChange={(data) => {
                 setInputData({ ...inputData, userName: data.value });
               }}
+              onKeyDown={() => handleKeyPress(event)}
               label={t('profilePage.profileInfo.usernameLabel')}
             />
             <InputTextNew
+              type="password"
               value={inputData.value}
               ref={inputRef}
               validationSchema={validationSchema}
               onChange={(data) => {
                 setInputData({ ...inputData, password: data.value });
               }}
+              onKeyDown={() => handleKeyPress(event)}
               label={t('profilePage.profileInfo.passwordLabel')}
             />
             <div className={styles.optionsWrapper}>
@@ -207,20 +275,26 @@ const Login = () => {
                   setAgreement(!agreement);
                 }}
                 agreement={agreement}
-                text={'Remember me'}
+                text={t('login.rememberMe')}
               />
-              <HoverText text="Forgot password?" />
+              <HoverText text={t('login.forgotPassword')} />
             </div>
             <div className={styles.buttonsWrapper}>
-              <Button onClick={() => navigate('/landing')}>Sign in</Button>
-              <p>or</p>
+              {loading && (
+                <div className={styles.loadingLogin}>
+                  <Spinner />
+                </div>
+              )}
+              {displayError && <p>{displayError}</p>}
+              <Button onClick={handleSignin}>{t('login.signIn')}</Button>
+              <p>{t('login.or')}</p>
               <Button
                 isRegister
                 onClick={() => {
                   setIsSignIn(false);
                 }}
               >
-                Get your very own team!
+                {t('login.getYourOwn')}
               </Button>
             </div>
             <Copyright />
@@ -235,7 +309,7 @@ const Login = () => {
             className={styles.signupWrapper}
           >
             <div className={styles.headingWrapper}>
-              <h2>SIGN UP</h2>
+              <h2>{t('login.signUp')}</h2>
               <ArrowBack
                 className={styles.arrowBack}
                 onClick={() => {
@@ -259,6 +333,7 @@ const Login = () => {
                 ref={inputRef}
                 validationSchema={validationSchema}
                 onChange={onChange}
+                onKeyDown={() => handleKeyPress(event)}
                 label={label}
               />
             ))}
@@ -278,13 +353,21 @@ const Login = () => {
                   setAcceptTermsAndConditions(!acceptTermsAndConditions);
                 }}
               >
-                I accept the{' '}
-                <span className={styles.underLine}>terms and conditions</span>{' '}
-                as well as the handling of personal information.
+                {t('login.iAccept')}
+                <span className={styles.underLine}>
+                  {t('login.termsAndConditions')}
+                </span>{' '}
+                {t('login.asWellAs')}
               </p>
             </div>
+            {loading && (
+              <div className={styles.loading}>
+                <Spinner />
+              </div>
+            )}
+            {displayError && <p>{displayError}</p>}
             <div className={styles.buttonsWrapper}>
-              <Button>Create team</Button>
+              <Button onClick={createTeam}>{t('login.createTeam')}</Button>
             </div>
           </motion.div>
         )}

@@ -1,6 +1,7 @@
 :root {
   // Fonts
   --font-family-body: 'RadioCanada', sans-serif;
+  --font-family-secondary: 'Poppins', sans-serif;
   --font-family-title: var(--font-family-body);
 
   // Color
@@ -36,6 +37,8 @@
   --theme-gradient-color-2: var(--color-white);
   --theme-gradient-hover-color-1: #e4db87;
   --theme-gradient-hover-color-2: #e38935;
+  --theme-gradient-hover-color-3: #e6c24b;
+  --theme-gradient-hover-color-4: #ee7322;
   --theme-gradient-color: linear-gradient(
     90deg,
     var(--theme-gradient-color-1) 0%,
@@ -51,6 +54,11 @@
     to bottom right,
     var(--theme-gradient-hover-color-1) 0%,
     var(--theme-gradient-hover-color-2) 100%
+  );
+  --theme-gradient-color-hover-tertiary: linear-gradient(
+    to bottom right,
+    var(--theme-gradient-hover-color-3) 0%,
+    var(--theme-gradient-hover-color-4) 100%
   );
   --gradient-white: linear-gradient(
     to top left,
@@ -89,6 +97,18 @@
   --color-button-secondary-pressed-background: var(--color-red);
   --color-button-secondary-disabled: var(--color-red-2);
   --color-button-secondary-disabled-background: transparent;
+  --color-button-tertiary: var(--color-black);
+  --color-button-tertiary-background: var(
+    --theme-gradient-color-hover-tertiary
+  );
+  --color-button-tertiary-hover: var(--color-grey-1);
+  --color-button-tertiary-hover-background: var(
+    --theme-gradient-color-hover-tertiary
+  );
+  --color-button-tertiary-pressed: var(--color-grey-1);
+  --color-button-tertiary-pressed-background: var(--color-red);
+  --color-button-tertiary-disabled: var(--color-red-2);
+  --color-button-tertiary-disabled-background: transparent;
 
   // Greyscale
   --color-grey-dark: #1c1c1c;
@@ -123,10 +143,10 @@
   --button-border-radius: 10px 0;
 
   // Padding
-  --login-padding: 24px 30px;
-  --login-padding-tablet: 128px 48px 32px;
-  --side-menu-padding: 0 30px;
   --standard-padding: 30px;
+  --login-padding: 24px var(--standard-padding);
+  --login-padding-tablet: 128px 48px 32px;
+  --side-menu-padding: 0 var(--standard-padding);
 
   // Box shadow
   --box-shadow-primary: inset 0 10px 5px -5px #00000080,

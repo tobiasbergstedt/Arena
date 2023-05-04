@@ -87,6 +87,10 @@
   }
 }
 
+.signIn {
+  text-transform: uppercase;
+}
+
 .headingWrapper {
   display: flex;
 
@@ -149,4 +153,22 @@
     cursor: pointer;
     text-decoration-color: var(--color-gold);
   }
+}
+
+.loading,
+.loadingLogin {
+  display: flex;
+
+  justify-content: center;
+
+  width: 100%;
+  height: 50px;
+}
+
+.loadingLogin {
+  align-items: flex-start;
+}
+
+.loading {
+  align-items: flex-end;
 }

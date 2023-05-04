@@ -11,6 +11,7 @@
 .topHeading {
   font-weight: 700;
   font-size: em(26);
+  text-transform: uppercase;
 }
 
 .newsItemsWrapper {
@@ -26,4 +27,12 @@
   justify-content: flex-end;
 
   margin-top: 16px;
+}
+
+.spinner {
+  display: flex;
+
+  justify-content: center;
+
+  padding: 40px 0 24px;
 }

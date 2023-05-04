@@ -1,0 +1,33 @@
+@import 'styles/utils/__utils';
+
+.isLoading {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: calc(100vh - var(--menu-height));
+}
+
+.header {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: var(--standard-padding) var(--standard-padding) 12px;
+}
+
+.golden {
+  margin: 0;
+
+  font-weight: 600;
+  font-size: rem(16);
+}
+
+.teamName {
+  margin: 0;
+
+  font-weight: 700;
+  font-size: rem(22);
+}

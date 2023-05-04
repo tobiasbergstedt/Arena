@@ -1,10 +1,10 @@
-import { useContext, useLayoutEffect, useRef } from 'react';
-import { node, string, bool } from 'prop-types';
+import { useLayoutEffect, useRef } from 'react';
+import { node, string, bool, func } from 'prop-types';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
-import { ModalContext } from 'context/ModalContext';
+// import { ModalContext } from 'context/ModalContext';
 
 import { ReactComponent as CloseIcon } from 'assets/icons/close-cross.svg';
 
@@ -12,11 +12,11 @@ import styles from './Modal.module.scss';
 
 const noop = () => {};
 
-const Modal = ({ children, className, hasCloseButton, canClose }) => {
+const Modal = ({ children, className, hasCloseButton, canClose, onClick }) => {
   const scrollRef = useRef(null);
-  const { setCurrentModal } = useContext(ModalContext);
+  // const { setCurrentModal } = useContext(ModalContext);
 
-  const onClose = () => setCurrentModal(null);
+  // const onClose = () => setCurrentModal(null);
 
   useLayoutEffect(() => {
     disableBodyScroll(scrollRef.current);
@@ -32,7 +32,7 @@ const Modal = ({ children, className, hasCloseButton, canClose }) => {
         className={clsx(styles.bg, {
           [styles.canClose]: canClose,
         })}
-        onClick={canClose ? onClose : noop}
+        onClick={onClick ? onClick : noop}
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.75 }}
         exit={{
@@ -74,7 +74,7 @@ const Modal = ({ children, className, hasCloseButton, canClose }) => {
           <motion.button
             type="button"
             className={styles.closeButton}
-            onClick={canClose ? onClose : noop}
+            onClick={onClick ? onClick : noop}
             initial={{
               opacity: 0,
               scale: 0.8,
@@ -107,12 +107,14 @@ Modal.propTypes = {
   className: string,
   hasCloseButton: bool,
   canClose: bool,
+  onClick: func,
 };
 
 Modal.defaultProps = {
   className: null,
   hasCloseButton: true,
   canClose: true,
+  onClick: () => {},
 };
 
 export default Modal;
