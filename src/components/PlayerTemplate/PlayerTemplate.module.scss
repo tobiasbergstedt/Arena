@@ -1,0 +1,264 @@
+@import 'styles/utils/__utils';
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap';
+
+.playerWrapper {
+  position: relative;
+
+  padding: var(--standard-padding);
+
+  background-color: var(--theme-color-secondary);
+
+  box-shadow: var(--box-shadow-primary);
+  cursor: pointer;
+
+  &.isSinglePlayerView {
+    background-color: var(--theme-color-primary);
+
+    box-shadow: none;
+    cursor: default;
+
+    .playerNumberWrapper,
+    .playerJersey {
+      width: 45px;
+      height: 45px;
+    }
+
+    .bottomWrapper {
+      margin-top: 16px;
+    }
+  }
+
+  &.isTransferList {
+    padding: calc(var(--standard-padding) / 2) var(--standard-padding);
+
+    cursor: default;
+  }
+
+  &:nth-child(2n) {
+    background-color: transparent;
+
+    box-shadow: none;
+  }
+
+  &:hover {
+    .playerJersey {
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &.isSinglePlayerView,
+    &.isTransferList {
+      .playerJersey {
+        &::after {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+.topWrapper {
+  position: relative;
+  display: flex;
+
+  align-items: center;
+}
+
+.playerNumberWrapper {
+  position: relative;
+
+  width: 36px;
+  height: 36px;
+}
+
+.playerJersey {
+  width: 36px;
+  height: 36px;
+
+  background: var(--theme-gradient-color);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-image: var(--theme-gradient-color-hover);
+
+    opacity: 0;
+    transition: opacity var(--standard-transition-quick);
+  }
+}
+
+.playerNumber {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--theme-color-secondary);
+  font-weight: 700;
+  font-family: Poppins, sans-serif;
+
+  &:nth-child(2n) {
+    color: var(--theme-color-primary);
+  }
+}
+
+.nameAndPos {
+  margin-left: 16px;
+}
+
+.playerName {
+  margin: 0;
+
+  font-weight: 600;
+  font-size: rem(16);
+
+  &.isSinglePlayerView {
+    font-size: rem(22);
+  }
+}
+
+.position {
+  margin: 0;
+
+  font-weight: 600;
+  font-size: rem(14);
+
+  &.isSinglePlayerView {
+    font-size: rem(16);
+  }
+}
+
+.bottomWrapper {
+  display: flex;
+
+  gap: 40px;
+  justify-content: space-between;
+
+  margin-top: 8px;
+}
+
+.left,
+.right {
+  width: 50%;
+  max-width: 175px;
+}
+
+.textBlock p,
+.deadline {
+  @include font-14;
+
+  margin: 0 0 2px;
+
+  font-weight: 600;
+}
+
+.textBlock {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.team {
+  @include font-14;
+
+  margin: 0;
+
+  font-weight: 600;
+}
+
+.openCloseArrow {
+  position: absolute;
+  top: 120px;
+  right: 12px;
+  transition: transform 0.5s;
+}
+
+.openCloseArrowIcon {
+  width: 20px;
+  height: 20px;
+
+  fill: var(--color-white);
+  transition: fill 0.2s;
+
+  &:hover {
+    fill: var(--color-gold);
+  }
+}
+
+.cityOfOrigin {
+  padding-left: 12px;
+}
+
+.playerOptions {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 20px;
+}
+
+.attributesAndPlaceBid {
+  display: grid;
+
+  grid-template-rows: 0fr;
+
+  margin: 0;
+
+  transition: grid-template-rows 0.25s, margin 0.25s;
+}
+
+.attributesAndPlaceBid > div {
+  overflow: hidden;
+}
+
+.isOpen {
+  grid-template-rows: 1fr;
+
+  margin: 20px 0 5px;
+}
+
+.attributes {
+  @include font-16;
+
+  margin-bottom: 8px;
+
+  font-weight: 600;
+}
+
+.attributesWrapper {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+
+  margin-bottom: 16px;
+}
+
+.innerWrapper {
+  display: flex;
+
+  justify-content: space-between;
+
+  p {
+    @include font-14;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+}

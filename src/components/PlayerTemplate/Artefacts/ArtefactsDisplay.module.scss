@@ -1,0 +1,22 @@
+@import 'styles/utils/__utils';
+
+.artefactsWrapper {
+  position: absolute;
+  top: 0;
+  left: 70%;
+  display: flex;
+}
+
+.artefacts {
+  display: flex;
+
+  gap: 4px;
+  align-items: center;
+
+  overflow: visible;
+}
+
+.artefactImage {
+  width: 24px;
+  height: 24px;
+}
