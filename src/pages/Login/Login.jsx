@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -50,16 +50,8 @@ const Login = () => {
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === MOBILE;
 
-  const inputRef = useRef();
   const { t } = useTranslation();
   const navigate = useNavigate();
-
-  const validationSchema = Yup.object().shape({
-    input: Yup.string()
-      .trim()
-      .min(4, 'Användarnamnet måste vara minst 4 tecken långt.')
-      .required('Du måste fylla i ett nytt användarnamn.'),
-  });
 
   const createTeam = async () => {
     setDisplayError('');
@@ -247,8 +239,6 @@ const Login = () => {
             <h2 className={styles.signIn}>{t('login.signIn')}</h2>
             <InputTextNew
               value={inputData.value}
-              ref={inputRef}
-              validationSchema={validationSchema}
               onChange={(data) => {
                 setInputData({ ...inputData, userName: data.value });
               }}
@@ -258,8 +248,6 @@ const Login = () => {
             <InputTextNew
               type="password"
               value={inputData.value}
-              ref={inputRef}
-              validationSchema={validationSchema}
               onChange={(data) => {
                 setInputData({ ...inputData, password: data.value });
               }}
@@ -320,7 +308,6 @@ const Login = () => {
             <Select
               value={signupInputData.race}
               options={selectValues.options}
-              validationSchema={validationSchema}
               onChange={(data) => {
                 setSignupInputData({ ...inputData, race: data });
               }}
@@ -330,8 +317,6 @@ const Login = () => {
               <InputTextNew
                 key={label + index}
                 value={value}
-                ref={inputRef}
-                validationSchema={validationSchema}
                 onChange={onChange}
                 onKeyDown={() => handleKeyPress(event)}
                 label={label}

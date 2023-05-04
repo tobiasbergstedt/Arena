@@ -27,6 +27,9 @@ i18n
             sellPlayer: 'Sell Player',
             tactics: 'Tactics',
           },
+          error: {
+            teamNotFound: 'Team name not found.',
+          },
           copyright: {
             copyright: 'Copyright',
             copyrightSymbol: '©',
@@ -130,6 +133,10 @@ i18n
             losses: 'L',
             plusMinus: '+/-',
             points: 'P',
+          },
+          general: {
+            edit: 'Edit',
+            return: 'Return',
           },
           playerProfile: {
             attributes: 'Attributes',

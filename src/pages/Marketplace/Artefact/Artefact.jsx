@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { func, object } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
@@ -15,16 +14,7 @@ const Artefact = ({
   searchInputArtefact,
   handleKeyPress,
 }) => {
-  const inputRef = useRef();
-
   const { t } = useTranslation();
-
-  const validationSchema = Yup.object().shape({
-    input: Yup.string()
-      .trim()
-      .min(4, 'Användarnamnet måste vara minst 4 tecken långt.')
-      .required('Du måste fylla i ett nytt användarnamn.'),
-  });
 
   const inputs = [
     {
@@ -88,8 +78,6 @@ const Artefact = ({
         {inputs.map(({ value, onChange, label }) => (
           <InputTextNew
             value={value}
-            ref={inputRef}
-            validationSchema={validationSchema}
             onChange={onChange}
             onKeyDown={() => handleKeyPress(event)}
             label={label}

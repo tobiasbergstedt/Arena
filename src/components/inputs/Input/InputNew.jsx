@@ -1,4 +1,4 @@
-import { func, string, shape, bool, number } from 'prop-types';
+import { func, string, shape, number } from 'prop-types';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
@@ -13,7 +13,6 @@ const InputNew = ({
   onFocus,
   onBlur,
   onKeyDown,
-  hasErrors,
   maxLength,
   placeholder,
 }) => {
@@ -40,10 +39,8 @@ const InputNew = ({
     const hasFocus = document.activeElement === inputRef.current;
     // Focus, no errors
     if (hasFocus) return 'focus';
-    // Errors
-    if (hasErrors) return 'error';
-    // No focus, no errors
-    if (!hasFocus && !hasErrors) return 'default';
+    // No focus
+    if (!hasFocus) return 'default';
   };
 
   return (
@@ -76,7 +73,6 @@ InputNew.propTypes = {
   onFocus: func,
   onBlur: func,
   onKeyDown: func,
-  hasErrors: bool,
   maxLength: number,
   placeholder: string,
 };
@@ -90,7 +86,6 @@ InputNew.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   onKeyDown: () => {},
-  hasErrors: false,
   maxLength: 1000,
   placeholder: '',
 };

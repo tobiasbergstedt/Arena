@@ -548,9 +548,11 @@ const Squad = () => {
         <>
           <div className={styles.header}>
             <ItemHeadings
-              heading="Squad"
-              subHeading={userTeam ? userTeam.teamName : 'Team name not found.'}
-              hasEdit
+              heading={t('pageTitles.squad')}
+              subHeading={
+                userTeam ? userTeam.teamName : t('error.teamNotFound')
+              }
+              hasButton={t('general.edit')}
             />
           </div>
           <div className={styles.playersWrapper}>

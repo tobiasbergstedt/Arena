@@ -1,4 +1,4 @@
-import { string, bool } from 'prop-types';
+import { string, bool, func } from 'prop-types';
 import clsx from 'clsx';
 
 import styles from './ItemHeadings.module.scss';
@@ -7,7 +7,8 @@ const ItemHeadings = ({
   heading,
   subHeading,
   hasDropDown,
-  hasEdit,
+  hasButton,
+  onClick,
   isAllCapsSubHeading,
 }) => {
   return (
@@ -23,7 +24,11 @@ const ItemHeadings = ({
         </span>
       </div>
       {hasDropDown && <select></select>}
-      {hasEdit && <p className={styles.edit}>Edit</p>}
+      {hasButton && (
+        <p className={styles.edit} onClick={onClick}>
+          {hasButton}
+        </p>
+      )}
     </div>
   );
 };
@@ -32,7 +37,8 @@ ItemHeadings.propTypes = {
   heading: string,
   subHeading: string,
   hasDropDown: bool,
-  hasEdit: bool,
+  hasButton: string,
+  onClick: func,
   isAllCapsSubHeading: bool,
 };
 
@@ -40,7 +46,8 @@ ItemHeadings.defaultProps = {
   heading: '',
   subHeading: '',
   hasDropDown: false,
-  hasEdit: false,
+  hasButton: '',
+  onClick: () => {},
   isAllCapsSubHeading: false,
 };
 

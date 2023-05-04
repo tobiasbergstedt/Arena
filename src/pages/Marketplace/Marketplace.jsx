@@ -30,7 +30,7 @@ const Marketplace = () => {
     maxBid: '',
   });
   const [isSelected, setIsSelected] = useState(0);
-  const [searchResultPlayer, setSearchResultPlayer] = useState();
+  const [searchResultPlayer, setSearchResultPlayer] = useState([]);
 
   const { t } = useTranslation();
 
@@ -97,6 +97,8 @@ const Marketplace = () => {
                   ? t('marketplace.results')
                   : t('marketplace.result')
               }`}
+              hasButton={t('general.return')}
+              onClick={() => setSearchResultPlayer([])}
             />
             <p className={styles.playerResultsDescription}>
               Click players to see more information about them.

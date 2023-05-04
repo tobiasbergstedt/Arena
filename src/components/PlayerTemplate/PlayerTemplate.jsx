@@ -9,7 +9,7 @@ import ArtefactsDisplay from 'components/PlayerTemplate/Artefacts/ArtefactsDispl
 
 import styles from './PlayerTemplate.module.scss';
 import Button from 'components/Button/Button';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import InputTextNew from 'components/inputs/InputText/InputTextNew';
 
@@ -37,7 +37,6 @@ const PlayerTemplate = ({
 
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const inputRef = useRef();
 
   return (
     <div
@@ -157,7 +156,6 @@ const PlayerTemplate = ({
               </div>
               <InputTextNew
                 value={inputData.value}
-                ref={inputRef}
                 onChange={(data) => {
                   setInputData({ ...inputData, userName: data.value });
                 }}

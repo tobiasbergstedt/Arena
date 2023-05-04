@@ -31,6 +31,10 @@
 
   font-weight: 600;
 
+  cursor: pointer;
+
+  transition: transform 0.1s;
+
   &::after {
     content: '';
 
@@ -42,5 +46,14 @@
     height: 1px;
 
     background-image: var(--theme-gradient-color-hover);
+  }
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  &:active,
+  &:focus {
+    transform: translateY(2px);
   }
 }
