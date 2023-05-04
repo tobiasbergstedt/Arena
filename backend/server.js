@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 
 import hamsters from './routes/hamsters.js';
 import players from './routes/players.js';
+import transferList from './routes/transferList.js';
 import chatMessages from './routes/chatMessages.js';
 import news from './routes/news.js';
 import teams from './routes/teams.js';
@@ -41,6 +42,7 @@ app.use('/assets/', express.static(path.join(__dirname, '/assets/')));
 // Endpoints
 app.use('/hamsters', hamsters);
 app.use('/players', players);
+app.use('/transferList', transferList);
 app.use('/chat', chatMessages);
 app.use('/news', news);
 app.use('/teams', teams);
