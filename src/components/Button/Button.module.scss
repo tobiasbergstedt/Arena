@@ -80,6 +80,22 @@
     }
   }
 
+  &.isTertiary {
+    background: var(--color-button-tertiary-background);
+
+    color: var(--color-button-tertiary);
+
+    &::before {
+      background-image: var(--color-button-secondary-background);
+    }
+
+    &.isDisabled {
+      background: var(--color-button-tertiary-disabled-background);
+
+      color: var(--color-button-tertiary-disabled);
+    }
+  }
+
   &.isText {
     @include h5;
 

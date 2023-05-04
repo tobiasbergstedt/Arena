@@ -2,29 +2,39 @@
 
 .chat {
   z-index: var(--index-menu);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  display: flex;
+
+  flex-grow: 1;
 
   width: 100%;
-  height: 100%;
 
   // background-color: var(--theme-color-primary);
   background-color: lightgrey;
+  overflow: hidden;
 }
 
 .chatContent {
+  position: relative;
+
   width: 100%;
   max-width: 767px;
-  height: 100%;
   min-height: 100%;
   margin-right: auto;
   margin-left: auto;
 
   background-color: var(--theme-color-side-menu);
+
+  overflow: scroll;
 }
 
 .topWrapper {
+  z-index: 3;
+  position: sticky;
+  top: 0;
+  left: 0;
   display: flex;
 
   align-items: center;
@@ -73,7 +83,7 @@
 }
 
 .contentWrapper {
-  height: calc(100% - var(--menu-height));
+  min-height: calc(100% - var(--menu-height));
   min-height: 100vh;
 }
 

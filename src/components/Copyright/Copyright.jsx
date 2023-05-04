@@ -1,9 +1,14 @@
+import { useTranslation } from 'react-i18next';
 import styles from './Copyright.module.scss';
 
 const Copyright = () => {
+  const { t } = useTranslation();
+
   return (
     <p className={styles.copyRight}>
-      Copyright <span className={`goldenText`}>©</span> 2023, Tobias Bergstedt
+      {t('copyright.copyright')}{' '}
+      <span className={`goldenText`}>{t('copyright.copyrightSymbol')}</span>{' '}
+      {t('copyright.copyrightHolder')}
     </p>
   );
 };

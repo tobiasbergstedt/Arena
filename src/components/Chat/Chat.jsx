@@ -1,26 +1,96 @@
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import { bool, func, number } from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
-import { bool, func } from 'prop-types';
+import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
+
 import CloseCross from 'assets/icons/close-cross.svg';
 import Smiley from 'assets/icons/chat/smiley.svg';
 import SendMessage from 'assets/icons/chat/send-message.svg';
 import SoundOn from 'assets/icons/chat/sound-on.svg';
 import SoundOff from 'assets/icons/chat/sound-off.svg';
 
+import { UserContext } from 'context/UserContext';
+
 import styles from './Chat.module.scss';
-import { useLayoutEffect, useRef, useState } from 'react';
-import clsx from 'clsx';
+import fixUrl from 'utils/fix-url';
 
-import messages from './ChatMessages';
-
-const Chat = ({ isChatOpen, setIsChatOpen }) => {
+const Chat = ({ isChatOpen, setIsChatOpen, chatHeight }) => {
+  const { user } = useContext(UserContext);
   const [isSoundOn, setIsSoundOn] = useState(true);
-  const chatRef = useRef();
+  const [message, setMessage] = useState('');
+  const [chatMessages, setChatMessages] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [isFixed, setIsFixed] = useState(false);
+  const contentRef = useRef();
+  const { t } = useTranslation();
+
+  const scrollToBottom = () => {
+    contentRef?.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  };
+
+  const getMessages = async () => {
+    const response = await fetch(fixUrl(`/chat`));
+    const apiData = await response.json();
+    setChatMessages(apiData);
+    setIsSubmitting(false);
+  };
+
+  const sendMessage = async () => {
+    setIsSubmitting(false);
+    if (message.trim() === '') {
+      alert('Enter valid message');
+      return;
+    }
+
+    const newMessage = {
+      content: message,
+      dateAndTime: Math.floor(Date.now() / 1000),
+      sentBy: user.displayName,
+      uid: user.uid,
+    };
+
+    await fetch(fixUrl('/chat'), {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newMessage),
+    });
+
+    setMessage('');
+    setIsSubmitting(true);
+    getMessages();
+  };
 
   useLayoutEffect(() => {
-    if (chatRef.current) {
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    if (!isSubmitting && isChatOpen) {
+      scrollToBottom();
     }
-  }, [chatRef]);
+  }, [isSubmitting, isChatOpen]);
+
+  useEffect(() => {
+    getMessages();
+
+    const timer = setInterval(() => {
+      if (isChatOpen) {
+        getMessages();
+      }
+    }, 20000);
+
+    return () => clearInterval(timer);
+  }, [isChatOpen]);
 
   const animVariants = {
     initial: { left: '100vw' },
@@ -41,8 +111,12 @@ const Chat = ({ isChatOpen, setIsChatOpen }) => {
           animate="visible"
           exit="after"
           className={styles.chat}
+          style={{ minHeight: `${chatHeight}px` }}
         >
-          <div className={styles.chatContent}>
+          <div
+            className={styles.chatContent}
+            style={{ height: window.innerHeight }}
+          >
             <div className={styles.topWrapper}>
               <div
                 className={styles.icon}
@@ -52,7 +126,7 @@ const Chat = ({ isChatOpen, setIsChatOpen }) => {
                 }}
                 onClick={() => setIsChatOpen(false)}
               />
-              <h2>Community chat</h2>
+              <h2>{t('communityChat.title')}</h2>
               <div
                 className={styles.icon}
                 style={{
@@ -64,43 +138,47 @@ const Chat = ({ isChatOpen, setIsChatOpen }) => {
                 onClick={() => setIsSoundOn(!isSoundOn)}
               />
             </div>
-            <div className={styles.contentWrapper}>
-              <div className={styles.messagesWrapper} ref={chatRef}>
-                {messages.map(({ text, author, date, time }, index) => (
-                  <div
-                    key={(date, time, index)}
-                    className={clsx(styles.messageOuterWrapper, {
-                      [styles.messageOuterWrapperUser]: author === 'User 2',
-                    })}
-                  >
-                    <div className={styles.messageInformation}>
-                      <span
-                        className={clsx({
-                          [styles.userAuthor]: author === 'User 2',
-                        })}
-                      >
-                        {author === 'User 2' ? 'me' : author}
-                      </span>
-                      <span>
-                        {date} {time}
-                      </span>
-                    </div>
+            <div className={styles.contentWrapper} ref={contentRef}>
+              <div className={styles.messagesWrapper}>
+                {chatMessages.map(
+                  ({ content, sentBy, dateAndTime, uid }, index) => (
                     <div
-                      className={clsx({
-                        [styles.message]: author !== 'User 2',
-                        [styles.myMessage]: author === 'User 2',
+                      key={(dateAndTime, index)}
+                      className={clsx(styles.messageOuterWrapper, {
+                        [styles.messageOuterWrapperUser]: uid === user.uid,
                       })}
                     >
-                      {text}
+                      <div className={styles.messageInformation}>
+                        <span
+                          className={clsx({
+                            [styles.userAuthor]: uid === user.uid,
+                          })}
+                        >
+                          {uid === user.uid ? 'me' : sentBy}
+                        </span>
+                        <span>
+                          {new Date(dateAndTime * 1000).toLocaleString()}
+                        </span>
+                      </div>
+                      <div
+                        className={clsx({
+                          [styles.message]: uid !== user.uid,
+                          [styles.myMessage]: uid === user.uid,
+                        })}
+                      >
+                        {content}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
               <div className={styles.inputWrapper}>
                 <input
                   type="text"
                   className={styles.messageInput}
-                  placeholder="Type your message here..."
+                  placeholder={t('communityChat.inputPlaceholder')}
+                  onChange={(e) => setMessage(e.target.value)}
+                  value={message}
                 />
                 <div className={styles.messageIcons}>
                   <div className={styles.messageIconsInnerWrapper}>
@@ -126,7 +204,8 @@ const Chat = ({ isChatOpen, setIsChatOpen }) => {
                         maskPosition: 'center',
                         WebkitMaskPosition: 'center',
                       }}
-                      onClick={() => null}
+                      onClick={() => sendMessage()}
+                      // onClick={() => null}
                     />
                   </div>
                 </div>
@@ -140,8 +219,13 @@ const Chat = ({ isChatOpen, setIsChatOpen }) => {
 };
 
 Chat.propTypes = {
-  isChatOpen: bool,
-  setIsChatOpen: func,
+  isChatOpen: bool.isRequired,
+  setIsChatOpen: func.isRequired,
+  chatHeight: number,
+};
+
+Chat.defaultProps = {
+  chatHeight: 0,
 };
 
 export default Chat;
