@@ -1,9 +1,63 @@
 @import 'styles/utils/__utils';
 
 .pageWrapper {
+  position: relative;
+
   width: 100vw;
   max-width: 100vw;
 
   // height: var(--inner-height);
   min-height: calc(var(--inner-height) - var(--menu-height));
+}
+
+.loggedOut {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+  padding: 40px 24px;
+
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-purple),
+    var(--color-dark-purple)
+  );
+
+  text-align: center;
+}
+
+.loggedOutIcon {
+  max-width: 75vw;
+  max-height: 40vh;
+}
+
+.heading {
+  @include font-24-bold;
+
+  margin-top: 36px;
+}
+
+.paragraph {
+  @include font-16;
+}
+
+.heading,
+.paragraph {
+  max-width: 450px;
+}
+
+.underline {
+  text-decoration: underline;
+
+  cursor: pointer;
+
+  transition: text-decoration-color 0.25s;
+
+  &:hover {
+    text-decoration-color: var(--color-gold);
+  }
 }
