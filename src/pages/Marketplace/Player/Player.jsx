@@ -1,6 +1,5 @@
 import { func, object } from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import * as Yup from 'yup';
 import { motion } from 'framer-motion';
 
 import Button from 'components/Button/Button';

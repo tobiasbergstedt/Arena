@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
 import throttle from 'lodash.throttle';
