@@ -1,15 +1,10 @@
 @import 'styles/utils/__utils';
 
 .spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
   display: block;
 
   width: 1.5em;
   height: 1.5em;
-
-  transform: translate(-50%, -50%);
 
   &::after {
     content: '';
@@ -19,8 +14,8 @@
     width: 1.5em;
     height: 1.5em;
 
-    border: 2px solid var(--color-blue);
-    border-top-color: var(--color-blue-light);
+    border: 2px solid var(--theme-gradient-hover-color-2);
+    border-top-color: var(--theme-gradient-hover-color-1);
     border-radius: 50%;
 
     will-change: transform;

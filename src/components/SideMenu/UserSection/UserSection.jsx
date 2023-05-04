@@ -1,26 +1,31 @@
 import { string, func } from 'prop-types';
+import { useContext } from 'react';
+
+import { UserContext } from 'context/UserContext';
+
+import SignOutIcon from 'assets/icons/signout.svg';
 
 import styles from './UserSection.module.scss';
 
-const UserSection = ({ teamLogo, onClick }) => {
+const UserSection = ({ onClick }) => {
+  const { user, userTeam } = useContext(UserContext);
+
   return (
     <div className={styles.userWrapper}>
       <div className={styles.teamWrapper}>
         <div className={styles.teamLogo}>
-          <div className={styles.teamLogoInnerWrapper}>
-            <img src={teamLogo} alt="Behemot Bashers Logo" />
-          </div>
+          <img src={userTeam?.logo} alt={`${userTeam?.teamName} Logo`} />
         </div>
         <div className={styles.teamInfo}>
-          <h4>Behemot Bashers</h4>
-          <p className={`goldenText`}>robert76</p>
+          <h4>{userTeam?.teamName}</h4>
+          <p className={`goldenText`}>{user?.displayName}</p>
         </div>
       </div>
       <div
         className={styles.signOutIcon}
         style={{
-          maskImage: 'url(assets/icons/signout.svg)',
-          WebkitMaskImage: 'url(assets/icons/signout.svg)',
+          maskImage: `url(${SignOutIcon})`,
+          WebkitMaskImage: `url(${SignOutIcon})`,
         }}
         onClick={onClick}
       />

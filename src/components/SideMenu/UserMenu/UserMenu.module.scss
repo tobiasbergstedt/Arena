@@ -22,6 +22,8 @@
 
   min-width: 26px;
 
+  cursor: pointer;
+
   &:hover {
     .iconInnerWrapper::after {
       opacity: 1;
