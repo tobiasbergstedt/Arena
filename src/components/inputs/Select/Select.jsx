@@ -14,6 +14,7 @@ const Select = ({
   hasErrors,
   label,
   options,
+  isSmall,
 }) => {
   const ref = useRef();
 
@@ -44,15 +45,21 @@ const Select = ({
   };
 
   return (
-    <label className={styles.label}>
+    <label
+      className={clsx(styles.label, {
+        [styles.labelIsSmall]: isSmall,
+      })}
+    >
       <motion.select
-        className={clsx(styles.select, className)}
+        className={clsx(styles.select, className, {
+          [styles.isSmall]: isSmall,
+        })}
         ref={ref}
         // initial="default"
-        variants={animVariants}
+        variants={isSmall ? null : animVariants}
         animate={animState}
-        whileHover={animVariants.focus}
-        transition={animVariants.transition}
+        whileHover={isSmall ? null : animVariants.focus}
+        transition={isSmall ? null : animVariants.transition}
         type={type}
         onChange={() => {
           onChange(ref.current.value);
@@ -88,6 +95,7 @@ Select.propTypes = {
   hasErrors: bool,
   label: string,
   options: array,
+  isSmall: bool,
 };
 
 Select.defaultProps = {
@@ -99,6 +107,7 @@ Select.defaultProps = {
   hasErrors: false,
   label: '',
   options: [],
+  isSmall: false,
 };
 
 export default Select;

@@ -20,7 +20,16 @@ import styles from './InputTextNew.module.scss';
 
 const InputTextNew = forwardRef(
   (
-    { value, label, validationSchema, onChange, maxLength, infoMessage },
+    {
+      value,
+      label,
+      validationSchema,
+      onChange,
+      onKeyDown,
+      maxLength,
+      infoMessage,
+      type,
+    },
     ref
   ) => {
     const [inputValue, setInputValue] = useState(value || '');
@@ -90,12 +99,13 @@ const InputTextNew = forwardRef(
     return (
       <div className={styles.inputWrapper}>
         <InputNew
-          type="text"
+          type={type}
           inputRef={inputRef}
           inputValue={inputValue}
           onChange={handleChange}
           onFocus={onFocus}
           onBlur={onBlur}
+          onKeyDown={onKeyDown}
           hasErrors={errors !== null}
           maxLength={maxLength}
         />
@@ -166,8 +176,10 @@ InputTextNew.propTypes = {
   label: string,
   validationSchema: object,
   onChange: func,
+  onKeyDown: func,
   maxLength: number,
   infoMessage: string,
+  type: string,
 };
 
 InputTextNew.defaultProps = {
@@ -175,8 +187,10 @@ InputTextNew.defaultProps = {
   label: '',
   validationSchema: null,
   onChange: () => {},
+  onKeyDown: () => {},
   maxLength: 1000,
   infoMessage: '',
+  type: 'text',
 };
 
 export default InputTextNew;

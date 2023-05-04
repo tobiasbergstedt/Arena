@@ -12,6 +12,7 @@ const InputNew = ({
   onChange,
   onFocus,
   onBlur,
+  onKeyDown,
   hasErrors,
   maxLength,
   placeholder,
@@ -61,6 +62,7 @@ const InputNew = ({
       onBlur={onBlur}
       maxLength={maxLength}
       placeholder={placeholder}
+      onKeyDown={onKeyDown}
     />
   );
 };
@@ -73,6 +75,7 @@ InputNew.propTypes = {
   onChange: func,
   onFocus: func,
   onBlur: func,
+  onKeyDown: func,
   hasErrors: bool,
   maxLength: number,
   placeholder: string,
@@ -86,6 +89,7 @@ InputNew.defaultProps = {
   onChange: () => {},
   onFocus: () => {},
   onBlur: () => {},
+  onKeyDown: () => {},
   hasErrors: false,
   maxLength: 1000,
   placeholder: '',

@@ -24,10 +24,13 @@ const Beneficiary = React.lazy(() => import('pages/Beneficiary/Beneficiary'));
 const Overview = React.lazy(() => import('pages/Overview/Overview'));
 const Profile = React.lazy(() => import('pages/Profile/Profile'));
 const Dev = React.lazy(() => import('pages/Dev/Dev'));
-
-import styles from './App.module.scss';
 import Login from 'pages/Login/Login';
 import Landing from 'pages/Landing/Landing';
+import Squad from 'pages/Squad/Squad';
+import PlayerProfile from 'pages/PlayerProfile/PlayerProfile';
+import Marketplace from 'pages/Marketplace/Marketplace';
+
+import styles from './App.module.scss';
 
 const queryClient = new QueryClient(queryConfig);
 
@@ -52,7 +55,7 @@ const App = () => {
                     <Suspense
                       fallback={<SpinnerGlobe className={styles.spinner} />}
                     >
-                      <AnimatePresence>
+                      <AnimatePresence mode="wait">
                         <Routes location={location} key={slugs[1]}>
                           <Route path="/locations" element={<Locations />} />
                           <Route path="/overview" element={<Overview />} />
@@ -60,7 +63,7 @@ const App = () => {
                             path="/"
                             element={
                               <HomeProvider>
-                                {false ? <Landing /> : <Login />}
+                                <Login />
                               </HomeProvider>
                             }
                           />
@@ -74,6 +77,12 @@ const App = () => {
                           />
                           <Route path="profile/*" element={<Profile />} />
                           <Route path="/landing" element={<Landing />} />
+                          <Route path="/squad" element={<Squad />} />
+                          <Route path="/player/*" element={<PlayerProfile />} />
+                          <Route
+                            path="/marketplace"
+                            element={<Marketplace />}
+                          />
                           <Route path="dev/*" element={<Dev />} />
                         </Routes>
                       </AnimatePresence>
