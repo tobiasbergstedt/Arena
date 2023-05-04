@@ -42,7 +42,10 @@ const Marketplace = () => {
     ) {
       queryParams += `&race=${searchInputPlayer.race}`;
     }
-    if (searchInputPlayer.position.length !== 0) {
+    if (
+      searchInputPlayer.position.length !== 0 &&
+      searchInputPlayer.position !== t('positions.any')
+    ) {
       queryParams += `&position=${searchInputPlayer.position}`;
     }
     if (searchInputPlayer.minInjury.length !== 0) {

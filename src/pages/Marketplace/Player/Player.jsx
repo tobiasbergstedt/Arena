@@ -44,6 +44,7 @@ const Player = ({
     {
       value: searchInputPlayer.position,
       options: [
+        t('positions.short.any'),
         t('positions.short.goalkeeper'),
         t('positions.short.centralDefender'),
         t('positions.short.leftRightDefender'),
@@ -56,6 +57,7 @@ const Player = ({
         setSearchInputPlayer({
           ...searchInputPlayer,
           position:
+            (data === t('positions.short.any') && t('positions.any')) ||
             (data === t('positions.short.goalkeeper') &&
               t('positions.goalkeeper')) ||
             (data === t('positions.short.centralDefender') &&

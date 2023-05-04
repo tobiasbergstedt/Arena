@@ -175,6 +175,7 @@ i18n
             siicusTattoo: 'Siicus tattoo',
           },
           positions: {
+            any: 'Any position',
             goalkeeper: 'Goalkeeper',
             centralDefender: 'Central defender',
             leftRightDefender: 'Left/right defender',
@@ -183,6 +184,7 @@ i18n
             centralForward: 'Central forward',
             leftRightForward: 'Left/right forward',
             short: {
+              any: 'Any pos.',
               goalkeeper: 'GK',
               centralDefender: 'CD',
               leftRightDefender: 'LD/RD',
