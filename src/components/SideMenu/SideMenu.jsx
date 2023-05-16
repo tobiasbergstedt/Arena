@@ -6,8 +6,8 @@ import MenuSection from 'components/SideMenu/MenuSection/MenuSection';
 import Copyright from 'components/Copyright/Copyright';
 
 import CloseCross from 'assets/icons/close-cross.svg';
-import TeamLogoHome from 'assets/images/behemot_bashers.png';
-import TeamLogoAway from 'assets/images/wysiwyg.png';
+import { ReactComponent as TeamLogoAway } from 'assets/icons/elf_team.svg';
+import { ReactComponent as TeamLogoHome } from 'assets/icons/human_team.svg';
 
 import styles from './SideMenu.module.scss';
 
@@ -21,6 +21,7 @@ import { UserContext } from 'context/UserContext';
 import { useTranslation } from 'react-i18next';
 
 const SideMenu = ({ isSideMenuOpen, setIsSideMenuOpen }) => {
+  const { userTeam } = useContext(UserContext);
   const location = useLocation();
   const slugs = location.pathname?.split('/') ?? [];
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const SideMenu = ({ isSideMenuOpen, setIsSideMenuOpen }) => {
     try {
       await logout();
       navigate('/');
+      setIsSideMenuOpen(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -44,7 +46,7 @@ const SideMenu = ({ isSideMenuOpen, setIsSideMenuOpen }) => {
       left: '0px',
       transition: { duration: 1 },
     },
-    after: { left: '-100vw', transition: { duration: 1 } },
+    after: { left: '-100vw', transition: { duration: 0.5 } },
   };
 
   return (
@@ -74,20 +76,23 @@ const SideMenu = ({ isSideMenuOpen, setIsSideMenuOpen }) => {
               </div>
               <UserSection onClick={handleLogout} />
             </div>
-            <UserMenu slugs={slugs} />
+            <UserMenu slugs={slugs} setIsSideMenuOpen={setIsSideMenuOpen} />
             <NextLastGame
-              teamLogoHome={TeamLogoHome}
-              teamLogoAway={TeamLogoAway}
+              TeamLogoHome={TeamLogoHome}
+              TeamLogoAway={TeamLogoAway}
+              userTeam={userTeam}
             />
             <MenuSection
               heading={t('menu.gameMenu')}
               items={gameMenuItems}
               slugs={slugs}
+              setIsSideMenuOpen={setIsSideMenuOpen}
             />
             <MenuSection
               heading={t('menu.aboutMenu')}
               items={aboutTheGameItems}
               slugs={slugs}
+              setIsSideMenuOpen={setIsSideMenuOpen}
             />
             <Copyright />
           </div>

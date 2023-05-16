@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { string, arrayOf, object, array } from 'prop-types';
+import { string, arrayOf, object, array, func } from 'prop-types';
 
 import styles from './MenuSection.module.scss';
 import { useNavigate } from 'react-router-dom';
 
-const MenuSection = ({ items, heading, slugs }) => {
+const MenuSection = ({ items, heading, slugs, setIsSideMenuOpen }) => {
   const navigate = useNavigate();
 
   return (
@@ -19,7 +19,10 @@ const MenuSection = ({ items, heading, slugs }) => {
             className={clsx(styles.gameMenuItem, {
               [styles.gameItemActive]: linkTo === slugs[1],
             })}
-            onClick={() => navigate(`/${linkTo}`)}
+            onClick={() => {
+              navigate(`/${linkTo}`);
+              setIsSideMenuOpen(false);
+            }}
           >
             <div
               className={styles.gameMenuIconInnerWrapper}
@@ -40,6 +43,7 @@ MenuSection.propTypes = {
   heading: string.isRequired,
   items: arrayOf(object),
   slugs: array.isRequired,
+  setIsSideMenuOpen: func,
 };
 
 export default MenuSection;

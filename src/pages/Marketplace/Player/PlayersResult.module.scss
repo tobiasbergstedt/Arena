@@ -1,0 +1,21 @@
+@import 'styles/utils/__utils';
+
+.headings {
+  padding: var(--standard-padding) var(--standard-padding) 0;
+}
+
+.playerResultsDescription {
+  @include font-16;
+
+  margin: 6px 0;
+
+  font-weight: 600;
+}
+
+.amountDisplayed {
+  @include font-14;
+
+  margin-bottom: 14px;
+
+  font-weight: 600;
+}

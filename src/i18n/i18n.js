@@ -138,6 +138,12 @@ i18n
             edit: 'Edit',
             return: 'Return',
           },
+          errorMessages: {
+            alreadyHighestBidder: 'You already have the highest bid.',
+            bidMustBeHigher: 'Your bid must be higher than the current bid.',
+            successful:
+              'Your bid was registered successfully, congratulations!',
+          },
           playerProfile: {
             attributes: 'Attributes',
           },
@@ -146,8 +152,16 @@ i18n
             subHeading: 'Transfer list',
             result: 'result',
             results: 'results',
+            placeBid: 'Place bid',
+            newBid: 'New bid',
+            highestBid: 'Highest bid:',
+            deadline: 'Deadline:',
             description:
               'Leave fields/dropdowns blank to exclude values from search.',
+            resultDescriptionPlayers:
+              'Click the arrow on a player to bid or see more information about them.',
+            resultDescriptionArtefacts:
+              'Click the arrow on an item to show bid input fields.',
             players: 'Players',
             artefacts: 'Artefacts',
             search: 'Search',
@@ -173,6 +187,7 @@ i18n
             },
           },
           artefacts: {
+            any: 'Any artefact',
             amulet: 'Amulet',
             aura: 'Aura',
             cantaniRing: 'Cantani ring',
@@ -180,6 +195,25 @@ i18n
             mithrilArmor: 'Mithril armor',
             shadowBrew: 'Shadow brew',
             siicusTattoo: 'Siicus tattoo',
+            short: {
+              any: 'anyArtefact',
+              amulet: 'amulet',
+              aura: 'Aura',
+              cantaniRing: 'cantaniRing',
+              gryphonBoots: 'gryphonBoots',
+              mithrilArmor: 'mithrilArmor',
+              shadowBrew: 'shadowBrew',
+              siicusTattoo: 'siicusTattoo',
+            },
+            description: {
+              aura: 'Permanent effect',
+              amulet: 'Permanent effect',
+              cantaniRing: 'Permanent effect',
+              gryphonBoots: 'Permanent effect',
+              mithrilArmor: 'Permanent effect',
+              shadowBrew: 'Temporary effect',
+              siicusTattoo: 'Permanent effect',
+            },
           },
           positions: {
             any: 'Any position',

@@ -47,7 +47,12 @@ const PlayerTemplate = ({
       })}
       onClick={isTransferList ? () => null : () => navigate(`/player/${id}`)}
     >
-      <div className={styles.topWrapper}>
+      <div
+        className={clsx(styles.topWrapper, {
+          [styles.topWrapperTransferList]: isTransferList,
+        })}
+        onClick={isTransferList ? () => navigate(`/player/${id}`) : () => null}
+      >
         <div className={styles.playerNumberWrapper}>
           <div
             className={styles.playerJersey}
@@ -137,7 +142,6 @@ const PlayerTemplate = ({
             className={clsx(styles.attributesAndPlaceBid, {
               [styles.isOpen]: isTranferObjectOpen,
             })}
-            onClick={(e) => e.stopPropagation()}
           >
             <div>
               <p className={clsx(`goldenText`, styles.attributes)}>
@@ -157,12 +161,12 @@ const PlayerTemplate = ({
               <InputTextNew
                 value={inputData.value}
                 onChange={(data) => {
-                  setInputData({ ...inputData, userName: data.value });
+                  setInputData({ ...inputData, userName: data });
                 }}
                 onKeyDown={() => null}
-                label={'New bid'}
+                label={t('marketplace.newBid')}
               />
-              <Button>Place bid</Button>
+              <Button>{t('marketplace.placeBid')}</Button>
             </div>
           </div>
         </>

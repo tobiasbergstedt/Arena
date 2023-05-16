@@ -12,6 +12,7 @@ const Artefact = ({
   setSearchInputArtefact,
   searchInputArtefact,
   handleKeyPress,
+  getSearchResultArtefacts,
 }) => {
   const { t } = useTranslation();
 
@@ -21,7 +22,7 @@ const Artefact = ({
       onChange: (data) => {
         setSearchInputArtefact({
           ...searchInputArtefact,
-          minBid: data.value,
+          minBid: data,
         });
       },
       label: t('marketplace.inputs.minBid'),
@@ -31,7 +32,7 @@ const Artefact = ({
       onChange: (data) => {
         setSearchInputArtefact({
           ...searchInputArtefact,
-          maxBid: data.value,
+          maxBid: data,
         });
       },
       label: t('marketplace.inputs.maxBid'),
@@ -59,6 +60,7 @@ const Artefact = ({
       <Select
         value={searchInputArtefact.race}
         options={[
+          t('artefacts.any'),
           t('artefacts.amulet'),
           t('artefacts.aura'),
           t('artefacts.cantaniRing'),
@@ -68,7 +70,23 @@ const Artefact = ({
           t('artefacts.siicusTattoo'),
         ]}
         onChange={(data) => {
-          setSearchInputArtefact({ ...searchInputArtefact, race: data });
+          setSearchInputArtefact({
+            ...searchInputArtefact,
+            artefactType:
+              (data === t('artefacts.any') && t('artefacts.short.any')) ||
+              (data === t('artefacts.amulet') && t('artefacts.short.amulet')) ||
+              (data === t('artefacts.aura') && t('artefacts.short.aura')) ||
+              (data === t('artefacts.cantaniRing') &&
+                t('artefacts.short.cantaniRing')) ||
+              (data === t('artefacts.gryphonBoots') &&
+                t('artefacts.short.gryphonBoots')) ||
+              (data === t('artefacts.mithrilArmor') &&
+                t('artefacts.short.mithrilArmor')) ||
+              (data === t('artefacts.shadowBrew') &&
+                t('artefacts.short.shadowBrew')) ||
+              (data === t('artefacts.siicusTattoo') &&
+                t('artefacts.short.siicusTattoo')),
+          });
         }}
         label={t('marketplace.dropdowns.artefactType')}
         key={t('marketplace.dropdowns.artefactType')}
@@ -81,10 +99,14 @@ const Artefact = ({
             onKeyDown={() => handleKeyPress(event)}
             label={label}
             key={label}
+            type="tel"
           />
         ))}
       </div>
-      <Button>{t('marketplace.search')}</Button>
+
+      <Button onClick={getSearchResultArtefacts}>
+        {t('marketplace.search')}
+      </Button>
     </motion.div>
   );
 };
@@ -93,6 +115,7 @@ Artefact.propTypes = {
   searchInputArtefact: object,
   setSearchInputArtefact: func,
   handleKeyPress: func,
+  getSearchResultArtefacts: func,
 };
 
 export default Artefact;

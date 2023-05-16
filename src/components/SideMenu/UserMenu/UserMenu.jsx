@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import { array } from 'prop-types';
+import { array, func } from 'prop-types';
 
 import userMenuItems from 'components/SideMenu/MenuItems/userMenuItems';
 
 import styles from './UserMenu.module.scss';
 
-const UserMenu = ({ slugs }) => {
+const UserMenu = ({ slugs, setIsSideMenuOpen }) => {
   const navigate = useNavigate();
   return (
     <div className={styles.userMenuWrapper}>
@@ -16,7 +16,10 @@ const UserMenu = ({ slugs }) => {
           className={clsx(styles.userMenuIconWrapper, {
             [styles.active]: linkTo === slugs[1],
           })}
-          onClick={() => navigate(`/${linkTo}`)}
+          onClick={() => {
+            navigate(`/${linkTo}`);
+            setIsSideMenuOpen(false);
+          }}
         >
           <div
             className={styles.iconInnerWrapper}
@@ -33,6 +36,7 @@ const UserMenu = ({ slugs }) => {
 
 UserMenu.propTypes = {
   slugs: array,
+  setIsSideMenuOpen: func,
 };
 
 export default UserMenu;

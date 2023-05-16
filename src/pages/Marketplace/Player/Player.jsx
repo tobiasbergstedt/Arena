@@ -2,8 +2,8 @@ import { func, object } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
-import Button from 'components/Button/Button';
 import InputTextNew from 'components/inputs/InputText/InputTextNew';
+import Button from 'components/Button/Button';
 import Select from 'components/inputs/Select/Select';
 
 import styles from './Player.module.scss';
@@ -105,7 +105,7 @@ const Player = ({
       onChange: (data) => {
         setSearchInputPlayer({
           ...searchInputPlayer,
-          minSalary: data.value,
+          minSalary: data,
         });
       },
       label: t('marketplace.inputs.minSalary'),
@@ -115,7 +115,7 @@ const Player = ({
       onChange: (data) => {
         setSearchInputPlayer({
           ...searchInputPlayer,
-          maxSalary: data.value,
+          maxSalary: data,
         });
       },
       label: t('marketplace.inputs.maxSalary'),
@@ -125,7 +125,7 @@ const Player = ({
       onChange: (data) => {
         setSearchInputPlayer({
           ...searchInputPlayer,
-          minBid: data.value,
+          minBid: data,
         });
       },
       label: t('marketplace.inputs.minBid'),
@@ -135,7 +135,7 @@ const Player = ({
       onChange: (data) => {
         setSearchInputPlayer({
           ...searchInputPlayer,
-          maxBid: data.value,
+          maxBid: data,
         });
       },
       label: t('marketplace.inputs.maxBid'),
@@ -171,6 +171,7 @@ const Player = ({
             onKeyDown={() => handleKeyPress(event)}
             label={label}
             key={label}
+            type="tel"
           />
         ))}
       </div>
