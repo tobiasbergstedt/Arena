@@ -2,13 +2,13 @@ import { collection, doc, updateDoc } from 'firebase/firestore';
 
 import { db } from './firebase.js';
 
-async function updateScript(newData) {
+async function updateTransferArtefact(newData) {
   const idToUpdate = newData.id;
 
-  const colRef = collection(db, 'hamsters');
+  const colRef = collection(db, 'transferListArtefacts');
   const oldDocRef = doc(colRef, idToUpdate);
 
   updateDoc(oldDocRef, newData);
 }
 
-export default updateScript;
+export default updateTransferArtefact;

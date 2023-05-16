@@ -88,7 +88,7 @@ router.get('/cutest', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  const userToken = req.headers.authorization.split(' ')[1];
+  const userToken = req?.headers?.authorization?.split(' ')[1];
   const colRef = collection(db, 'players');
   let idString = req.params.id;
   let players = [];
@@ -98,8 +98,6 @@ router.get('/:id', async (req, res) => {
   });
 
   const player = players.filter((p) => p.id === idString)[0];
-
-  console.log(player);
 
   if (players.length > 0) {
     if (userToken === player.team) {

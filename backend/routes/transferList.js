@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../database/firebase.js';
+import updateTransferArtefact from '../database/updateTransferArtefact.js';
 
 router.get('/', async (req, res) => {
   const {
@@ -15,7 +16,7 @@ router.get('/', async (req, res) => {
     maxBid,
   } = req.query;
 
-  const transferListColRef = collection(db, 'transferList');
+  const transferListColRef = collection(db, 'transferListPlayers');
   let transferList = [];
   const transferListSnapshot = await getDocs(transferListColRef);
   transferListSnapshot.docs.forEach((docSnapshot) => {
@@ -38,28 +39,23 @@ router.get('/', async (req, res) => {
     playersList.push({ ...docSnapshot.data(), id: docSnapshot.id });
   });
 
-  let transferListItems = transferList[0].players;
-  const matchingPlayers = playersList
-    .filter((transferObject) => {
-      return transferListItems.some(
-        (player) => player.id === transferObject.id
-      );
-    })
-    .map((transferObject) => {
-      const player = transferListItems.find(
-        (player) => player.id === transferObject.id
-      );
-      return { ...transferObject, ...player };
+  const matchingPlayers = [];
+  playersList.forEach((player) => {
+    const id = player.id;
+    const data1 = player;
+    transferList.forEach((transferObject) => {
+      const data2 = transferObject;
+      if (data2.playerId === id) {
+        matchingPlayers.push({ id, ...data1, ...data2 });
+      }
     });
+  });
 
   let filteredPlayers = matchingPlayers;
   if (race) {
     filteredPlayers = filteredPlayers.filter((item) => item.race === race);
   }
   if (position) {
-    // filteredPlayers = filteredPlayers.filter((item) =>
-    //   item.position.some((value) => position.includes(value))
-    // );
     filteredPlayers = filteredPlayers.filter((item) =>
       item.position.some((value) => value.position === position)
     );
@@ -88,8 +84,6 @@ router.get('/', async (req, res) => {
     filteredPlayers = filteredPlayers.filter(
       (item) => item.bid[0] >= Number(minBid)
     );
-    // console.log('Min bid: ', minBid);
-    // console.log('Bid 0: ', item.bid[0]);
   }
   if (maxBid) {
     filteredPlayers = filteredPlayers.filter(
@@ -106,6 +100,96 @@ router.get('/', async (req, res) => {
 
   if (playersList && playersList.length > 0) {
     res.send(filteredPlayerswithTeamName);
+    return;
+  }
+
+  res.sendStatus(404);
+  return;
+});
+
+router.get('/artefacts', async (req, res) => {
+  const { artefactType, minBid, maxBid } = req.query;
+
+  const transferListColRef = collection(db, 'transferListArtefacts');
+  let transferList = [];
+  const transferListSnapshot = await getDocs(transferListColRef);
+  transferListSnapshot.docs.forEach((docSnapshot) => {
+    transferList.push({ ...docSnapshot.data(), id: docSnapshot.id });
+  });
+
+  const artefactsListColRef = collection(db, 'artefacts');
+  let artefactsList = [];
+  const artefactsListSnapshot = await getDocs(artefactsListColRef);
+  artefactsListSnapshot.docs.forEach((docSnapshot) => {
+    artefactsList.push({ ...docSnapshot.data(), id: docSnapshot.id });
+  });
+
+  const matchingArtefacts = [];
+  artefactsList.forEach((artefact) => {
+    const id = artefact.id;
+    const data1 = artefact;
+    transferList.forEach((transferObject) => {
+      const data2 = transferObject;
+      if (data2.artefactId === id) {
+        matchingArtefacts.push({ id, ...data1, ...data2 });
+      }
+    });
+  });
+
+  let filteredArtefacts = matchingArtefacts;
+  if (artefactType) {
+    filteredArtefacts = filteredArtefacts.filter(
+      (item) => item.type === artefactType
+    );
+  }
+  if (minBid) {
+    filteredArtefacts = filteredArtefacts.filter(
+      (item) => item.bid[0] >= Number(minBid)
+    );
+  }
+  if (maxBid) {
+    filteredArtefacts = filteredArtefacts.filter(
+      (item) => item.bid[0] <= Number(maxBid)
+    );
+  }
+
+  if (artefactsList && artefactsList.length > 0) {
+    res.send(filteredArtefacts);
+    return;
+  }
+
+  res.sendStatus(404);
+  return;
+});
+
+router.put('/artefacts/:id', async (req, res) => {
+  const colRef = collection(db, 'transferListArtefacts');
+  let { idString, bid, bidder } = req.body;
+  let artefactsList = [];
+  const snapshot = await getDocs(colRef);
+  snapshot.docs.forEach((docSnapshot) => {
+    artefactsList.push({ ...docSnapshot.data(), id: docSnapshot.id });
+  });
+
+  artefactsList = artefactsList.filter((p) => p.id === idString);
+
+  if (artefactsList.length > 0) {
+    let newData = {
+      artefactId: artefactsList[0].artefactId,
+      endDate: artefactsList[0].endDate,
+      bid: bid,
+      bidder: bidder,
+      id: idString,
+    };
+    if (
+      newData.bid === artefactsList[0].bid &&
+      newData.bidder === artefactsList[0].bidder
+    ) {
+      res.sendStatus(400);
+      return;
+    }
+    await updateTransferArtefact(newData);
+    res.sendStatus(200);
     return;
   }
 
