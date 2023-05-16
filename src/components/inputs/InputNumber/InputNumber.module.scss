@@ -26,10 +26,6 @@
 
   user-select: none;
   pointer-events: none;
-
-  &.isLight {
-    color: var(--color-grey-1);
-  }
 }
 
 .clearButton {

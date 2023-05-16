@@ -1,4 +1,4 @@
-import { func, string, shape, number } from 'prop-types';
+import { func, string, shape, number, bool } from 'prop-types';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
@@ -14,6 +14,7 @@ const InputNew = ({
   onBlur,
   onKeyDown,
   maxLength,
+  isLight,
   placeholder,
 }) => {
   const animVariants = {
@@ -36,7 +37,7 @@ const InputNew = ({
   };
 
   const animState = () => {
-    const hasFocus = document.activeElement === inputRef.current;
+    const hasFocus = document.activeElement === inputRef?.current;
     // Focus, no errors
     if (hasFocus) return 'focus';
     // No focus
@@ -45,7 +46,9 @@ const InputNew = ({
 
   return (
     <motion.input
-      className={clsx(styles.input, className)}
+      className={clsx(styles.input, className, {
+        [styles.isLight]: isLight,
+      })}
       ref={inputRef}
       initial="default"
       variants={animVariants}
@@ -75,6 +78,7 @@ InputNew.propTypes = {
   onKeyDown: func,
   maxLength: number,
   placeholder: string,
+  isLight: bool,
 };
 
 InputNew.defaultProps = {
@@ -88,6 +92,7 @@ InputNew.defaultProps = {
   onKeyDown: () => {},
   maxLength: 1000,
   placeholder: '',
+  isLight: false,
 };
 
 export default InputNew;

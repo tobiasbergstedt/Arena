@@ -1,24 +1,21 @@
 /* eslint react/prop-types: 0 */
-import clsx from 'clsx';
-import { string, func, number, bool } from 'prop-types';
+import { string, func, number } from 'prop-types';
 import { useEffect, useState, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import InputNew from '../Input/InputNew';
 
 import { ReactComponent as ClearIcon } from 'assets/icons/input-clear.svg';
-import { ReactComponent as ClearIconLight } from 'assets/icons/input-clear-dark.svg';
 
-import styles from './InputTextNew.module.scss';
+import styles from './InputNumber.module.scss';
 
-const InputTextNew = ({
+const InputNumber = ({
   value,
   label,
   onChange,
   onKeyDown,
   maxLength,
   infoMessage,
-  isLight,
   type,
 }) => {
   const [inputValue, setInputValue] = useState(value || '');
@@ -29,16 +26,12 @@ const InputTextNew = ({
   const onFocus = () => setHasFocus(true);
   const onBlur = () => setHasFocus(false);
 
-  const formatNumber = (value) => {
-    const number = value.replace(/[^\d]/g, '');
-    return number;
-  };
-
   const handleChange = async (event) => {
-    const formattedNumber = formatNumber(event.target.value);
     const { value } = event.target;
-    setInputValue(type === 'tel' ? formattedNumber : value);
-    onChange(type === 'tel' ? formattedNumber : value);
+    setInputValue(value);
+    onChange({
+      value,
+    });
   };
 
   const resetInput = () => {
@@ -48,7 +41,7 @@ const InputTextNew = ({
   };
 
   const setFocus = () => {
-    inputRef?.current.focus();
+    inputRef.current.focus();
   };
 
   useEffect(() => {
@@ -88,13 +81,10 @@ const InputTextNew = ({
         onBlur={onBlur}
         onKeyDown={onKeyDown}
         maxLength={maxLength}
-        isLight={isLight}
       />
       <AnimatePresence initial={false}>
         <motion.span
-          className={clsx(styles.inputLabelText, {
-            [styles.isLight]: isLight,
-          })}
+          className={styles.inputLabelText}
           key="inputLabelText"
           variants={animLabel}
           initial="large"
@@ -114,17 +104,10 @@ const InputTextNew = ({
             whileHover="hover"
             exit="hidden"
           >
-            {isLight ? (
-              <ClearIconLight
-                className={styles.clearButton}
-                onClick={() => resetInput()}
-              />
-            ) : (
-              <ClearIcon
-                className={styles.clearButton}
-                onClick={() => resetInput()}
-              />
-            )}
+            <ClearIcon
+              className={styles.clearButton}
+              onClick={() => resetInput()}
+            />
           </motion.span>
         )}
         <motion.span
@@ -143,26 +126,24 @@ const InputTextNew = ({
   );
 };
 
-InputTextNew.propTypes = {
+InputNumber.propTypes = {
   value: string,
   label: string,
   onChange: func,
   onKeyDown: func,
   maxLength: number,
   infoMessage: string,
-  isLight: bool,
   type: string,
 };
 
-InputTextNew.defaultProps = {
+InputNumber.defaultProps = {
   value: '',
   label: '',
   onChange: () => {},
   onKeyDown: () => {},
   maxLength: 1000,
   infoMessage: '',
-  isLight: false,
   type: 'text',
 };
 
-export default InputTextNew;
+export default InputNumber;

@@ -18,7 +18,7 @@ import { ReactComponent as ClearIcon } from 'assets/icons/close-cross.svg';
 import { ReactComponent as FlagIcon } from 'assets/icons/sweden-flag.svg';
 
 import styles from './InputPhone.module.scss';
-import Input from '../Input/Input';
+import InputNew from '../Input/InputNew';
 
 const InputPhone = forwardRef(
   (
@@ -101,7 +101,7 @@ const InputPhone = forwardRef(
 
     return (
       <div className={styles.inputWrapper}>
-        <Input
+        <InputNew
           type="tel"
           inputRef={inputRef}
           placeholder={placeholder}

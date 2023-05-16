@@ -18,7 +18,22 @@
 
   outline: none;
 
+  -moz-appearance: textfield;
+
   transition: border 0.25s;
 
   caret-color: var(--color-gold);
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    margin: 0;
+
+    -webkit-appearance: none;
+  }
+}
+
+.isLight {
+  background-color: var(--color-grey-5) !important;
+
+  color: var(--color-grey-1);
 }
