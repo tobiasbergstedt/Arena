@@ -6,6 +6,13 @@
   min-height: calc(var(--inner-height) - var(--footer-height));
 }
 
+.pageWrapper {
+  position: relative;
+
+  width: 100%;
+  min-height: 100%;
+}
+
 .spinner {
   z-index: var(--index-loader-spinner);
   position: fixed;

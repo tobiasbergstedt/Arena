@@ -246,9 +246,19 @@
   }
 }
 
-.buttonsWrapper {
+.buttonsWrapperSmall {
   display: flex;
 
   gap: 30px;
   justify-content: center;
+}
+
+.buttonsWrapper {
+  display: flex;
+
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+
+  padding-top: 10px;
 }

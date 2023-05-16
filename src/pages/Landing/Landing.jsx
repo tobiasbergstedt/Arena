@@ -5,15 +5,18 @@ import NextLastGame from 'components/NextLastGame/NextLastGame';
 import LatestNews from 'components/News/LatestNews/LatestNews';
 import LeaguePosition from 'components/LeaguePosition/LeaguePosition';
 
-import TeamLogoHome from 'assets/images/behemot_bashers.png';
-import TeamLogoAway from 'assets/images/wysiwyg.png';
+import { ReactComponent as TeamLogoHome } from 'assets/icons/elf_team.svg';
+import { ReactComponent as TeamLogoAway } from 'assets/icons/orc_team.svg';
 
 import styles from './Landing.module.scss';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { UserContext } from 'context/UserContext';
+import Spinner from 'components/Spinner/Spinner';
 
 const Landing = () => {
+  const { userTeam } = useContext(UserContext);
   // const { t } = useTranslation();
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -45,23 +48,32 @@ const Landing = () => {
       : currentTime.getSeconds();
 
   return (
-    <Page className={styles.wrapper} pageTitle={t('pageTitles.home')}>
-      <div className={styles.contentWrapper}>
-        <div className={styles.topSection}>
-          <div className={styles.timeDateAndOnline}>
-            <span>{`${date} ${hours}:${minutes}:${seconds}`}</span>
-            {/* <span>173 {t('landing.online')}</span> */}
+    // <Page className={styles.wrapper} pageTitle={t('pageTitles.home')}>
+    <>
+      {userTeam ? (
+        <div className={styles.contentWrapper}>
+          <div className={styles.topSection}>
+            <div className={styles.timeDateAndOnline}>
+              <span>{`${date} ${hours}:${minutes}:${seconds}`}</span>
+              {/* <span>173 {t('landing.online')}</span> */}
+            </div>
+            <NextLastGame
+              TeamLogoAway={TeamLogoAway}
+              TeamLogoHome={TeamLogoHome}
+              isLastGame
+              userTeam={userTeam}
+            />
+            <LatestNews />
+            <LeaguePosition userTeam={userTeam} />
           </div>
-          <NextLastGame
-            teamLogoAway={TeamLogoAway}
-            teamLogoHome={TeamLogoHome}
-            isLastGame
-          />
-          <LatestNews />
-          <LeaguePosition />
         </div>
-      </div>
-    </Page>
+      ) : (
+        <div className={styles.isLoading}>
+          <Spinner />
+        </div>
+      )}
+    </>
+    // </Page>
   );
 };
 

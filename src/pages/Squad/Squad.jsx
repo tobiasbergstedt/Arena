@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from 'context/UserContext';
 import fixUrl from 'utils/fix-url';
 
-import Page from 'components/Page/Page';
+// import Page from 'components/Page/Page';
 import PlayerTemplate from 'components/PlayerTemplate/PlayerTemplate';
 
 import styles from './Squad.module.scss';
@@ -539,7 +539,8 @@ const Squad = () => {
   // console.log('Players: ', players);
 
   return (
-    <Page pageTitle={t('pageTitles.squad')}>
+    // <Page pageTitle={t('pageTitles.squad')}>
+    <>
       {!players ? (
         <div className={styles.isLoading}>
           <Spinner />
@@ -597,7 +598,8 @@ const Squad = () => {
       {/* <button disabled onClick={handleAddTeam}>
         Add teams
       </button> */}
-    </Page>
+    </>
+    // </Page>
   );
 };
 

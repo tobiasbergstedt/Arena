@@ -67,21 +67,24 @@ const UserProvider = ({ children }) => {
     async function getData() {
       const response = await fetch(fixUrl('/teams'));
       const apiData = await response.json();
-      const matchingUser = apiData.find((team) => team.userUID === user.uid);
-      setUserTeam(matchingUser);
-      session.write(STORAGE_USERTEAM_DATA, matchingUser);
+      if (user) {
+        const matchingUser = apiData.find((team) => team.userUID === user.uid);
+        setUserTeam(matchingUser);
+        session.write(STORAGE_USERTEAM_DATA, matchingUser);
+      }
       // updateProfile(auth.currentUser, {
       //   displayName: 'taraki',
       // });
     }
     getData();
-  }, []);
+  }, [user]);
 
   const signin = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const logout = () => {
+    session.destroy(STORAGE_USERTEAM_DATA);
     return signOut(auth);
   };
 

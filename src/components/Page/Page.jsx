@@ -8,18 +8,22 @@ import { UserContext } from 'context/UserContext';
 import MenuBar from 'components/MenuBar/MenuBar';
 import SideMenu from 'components/SideMenu/SideMenu';
 import Chat from 'components/Chat/Chat';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as LoggedOutIcon } from 'assets/icons/background-icons/not-logged-in.svg';
 
 import styles from './Page.module.scss';
+import { ROUTE_CONSTANTS } from 'config/constants';
 
-const Page = ({ children, className, pageTitle }) => {
+const Page = ({ children, className }) => {
+  const { user } = useContext(UserContext);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const { user } = useContext(UserContext);
+  const [activeRoute, setActiveRoute] = useState('');
+  const [title, setTitle] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const currentHeightRef = useRef(null);
 
@@ -34,17 +38,34 @@ const Page = ({ children, className, pageTitle }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const slugs = location.pathname?.split('/') ?? [];
+    const activeLocation = slugs[1];
+    setActiveRoute(activeLocation);
+  }, [location]);
+
+  useEffect(() => {
+    const matchedConstant = ROUTE_CONSTANTS.find(
+      (constant) => constant.slug === activeRoute
+    );
+    if (matchedConstant) {
+      setTitle(matchedConstant.title);
+    } else {
+      setTitle('Arena');
+    }
+  }, [activeRoute]);
+
   return (
     <div ref={currentHeightRef} className={clsx(styles.pageWrapper, className)}>
       <AnimatePresence mode="wait">
-        {user ? (
+        {user && activeRoute !== '' && (
           <>
             <MenuBar
               isSideMenuOpen={isSideMenuOpen}
               setIsSideMenuOpen={setIsSideMenuOpen}
               isChatOpen={isChatOpen}
               setIsChatOpen={setIsChatOpen}
-              title={pageTitle}
+              title={title}
             />
             <SideMenu
               isSideMenuOpen={isSideMenuOpen}
@@ -57,7 +78,8 @@ const Page = ({ children, className, pageTitle }) => {
             />
             {children && children}
           </>
-        ) : (
+        )}
+        {!user && activeRoute !== '' && (
           <motion.div className={styles.loggedOut}>
             <LoggedOutIcon className={styles.loggedOutIcon} />
             <h2 className={styles.heading}>
@@ -72,6 +94,7 @@ const Page = ({ children, className, pageTitle }) => {
             </p>
           </motion.div>
         )}
+        {!user && activeRoute === '' && <>{children && children}</>}
       </AnimatePresence>
     </div>
   );
@@ -80,12 +103,10 @@ const Page = ({ children, className, pageTitle }) => {
 Page.propTypes = {
   children: node.isRequired,
   className: string,
-  pageTitle: string,
 };
 
 Page.defaultProps = {
   className: null,
-  pageTitle: 'Arena',
 };
 
 export default Page;

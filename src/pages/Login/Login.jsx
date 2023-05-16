@@ -39,7 +39,7 @@ const Login = () => {
   });
   const [displayError, setDisplayError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signin } = useContext(UserContext);
+  const { signin, user } = useContext(UserContext);
   const [agreement, setAgreement] = useState(false);
   const [acceptTermsAndConditions, setAcceptTermsAndConditions] =
     useState(false);
@@ -99,42 +99,42 @@ const Login = () => {
     {
       value: signupInputData.teamName,
       onChange: (data) => {
-        setSignupInputData({ ...signupInputData, teamName: data.value });
+        setSignupInputData({ ...signupInputData, teamName: data });
       },
       label: t('login.inputs.teamName'),
     },
     {
       value: signupInputData.userName,
       onChange: (data) => {
-        setSignupInputData({ ...signupInputData, userName: data.value });
+        setSignupInputData({ ...signupInputData, userName: data });
       },
       label: t('login.inputs.userName'),
     },
     {
       value: signupInputData.password,
       onChange: (data) => {
-        setSignupInputData({ ...signupInputData, password: data.value });
+        setSignupInputData({ ...signupInputData, password: data });
       },
       label: t('login.inputs.password'),
     },
     {
       value: signupInputData.confirmPassword,
       onChange: (data) => {
-        setSignupInputData({ ...signupInputData, confirmPassword: data.value });
+        setSignupInputData({ ...signupInputData, confirmPassword: data });
       },
       label: t('login.inputs.confirmPassword'),
     },
     {
       value: signupInputData.email,
       onChange: (data) => {
-        setSignupInputData({ ...signupInputData, email: data.value });
+        setSignupInputData({ ...signupInputData, email: data });
       },
       label: t('login.inputs.email'),
     },
     {
       value: signupInputData.confirmEmail,
       onChange: (data) => {
-        setSignupInputData({ ...signupInputData, confirmEmail: data.value });
+        setSignupInputData({ ...signupInputData, confirmEmail: data });
       },
       label: t('login.inputs.confirmEmail'),
     },
@@ -153,6 +153,12 @@ const Login = () => {
     }, 50);
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      navigate('/landing');
+    }
   }, []);
 
   const selectValues = {
@@ -239,7 +245,7 @@ const Login = () => {
             <InputTextNew
               value={inputData.value}
               onChange={(data) => {
-                setInputData({ ...inputData, userName: data.value });
+                setInputData({ ...inputData, userName: data });
               }}
               onKeyDown={() => handleKeyPress(event)}
               label={t('profilePage.profileInfo.usernameLabel')}
@@ -248,7 +254,7 @@ const Login = () => {
               type="password"
               value={inputData.value}
               onChange={(data) => {
-                setInputData({ ...inputData, password: data.value });
+                setInputData({ ...inputData, password: data });
               }}
               onKeyDown={() => handleKeyPress(event)}
               label={t('profilePage.profileInfo.passwordLabel')}

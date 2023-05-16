@@ -13,3 +13,10 @@ export const COOKIE_NAME = 'pangeo_cookies';
 export const STORAGE_NEXT_SHOW_DATA_KEY = 'next_pangeo_show';
 export const STORAGE_SKIPPED_INSTRUCTIONS = 'storage_skipped_instruction';
 export const RECURRING_PANGEO_USER = 'recurring_pangeo_user';
+
+export const ROUTE_CONSTANTS = [
+  { slug: 'landing', title: 'Home' },
+  { slug: 'marketplace', title: 'Marketplace' },
+  { slug: 'squad', title: 'Squad' },
+  { slug: 'player', title: 'Player' },
+];

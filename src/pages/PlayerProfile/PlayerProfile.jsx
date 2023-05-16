@@ -8,7 +8,7 @@ import fixUrl from 'utils/fix-url';
 
 import { UserContext } from 'context/UserContext';
 
-import Page from 'components/Page/Page';
+// import Page from 'components/Page/Page';
 import PlayerTemplate from 'components/PlayerTemplate/PlayerTemplate';
 import CheckBox from 'components/inputs/CheckBox/CheckBox';
 import ItemHeadings from 'components/ItemHeadings/ItemHeadings';
@@ -21,6 +21,7 @@ import Modal from 'modals/Modal/Modal';
 
 import styles from './PlayerProfile.module.scss';
 import Spinner from 'components/Spinner/Spinner';
+import InputTextNew from 'components/inputs/InputText/InputTextNew';
 
 const PlayerProfile = () => {
   const { t } = useTranslation();
@@ -59,6 +60,17 @@ const PlayerProfile = () => {
     console.log('clicked');
   };
 
+  const handleDeletePlayer = () => {
+    fetch(fixUrl(`/players/${playerID}`), {
+      method: 'DELETE',
+    });
+  };
+
+  const handleSellPlayer = () => {
+    null;
+    // setModalVisible('NONE');
+  };
+
   useEffect(() => {
     async function getPlayers() {
       if (playerID.length > 0 && userTeam) {
@@ -76,7 +88,8 @@ const PlayerProfile = () => {
   }, []);
 
   return (
-    <Page pageTitle={t('pageTitles.player')}>
+    // <Page pageTitle={t('pageTitles.player')}>
+    <>
       {!player ? (
         <div className={styles.isLoading}>
           <Spinner />
@@ -244,13 +257,17 @@ const PlayerProfile = () => {
           <AnimatePresence>
             {modalVisible === 'RELEASE' && (
               <Modal canClose onClick={() => setModalVisible('NONE')}>
-                <h3>Släppa &#34;Spelarnamn&#34;?</h3>
+                <h3>Release {player.name}?</h3>
                 <p>
-                  Är du säker på att du vill släppa &#34;Spelarnamn&#34;? Det
-                  här beslutet går inte att ångra.
+                  Are you sure you want to release {player.name}? This action is
+                  irreversible. The player will be lost forever.
                 </p>
-                <div className={styles.buttonsWrapper}>
-                  <Button isSmall isTertiary>
+                <div className={styles.buttonsWrapperSmall}>
+                  <Button
+                    isSmall
+                    isTertiary
+                    onClick={() => handleDeletePlayer()}
+                  >
                     Confirm
                   </Button>
                   <Button
@@ -263,10 +280,30 @@ const PlayerProfile = () => {
                 </div>
               </Modal>
             )}
+            {modalVisible === 'SELL' && (
+              <Modal canClose onClick={() => setModalVisible('NONE')}>
+                <h3>Sell {player.name}?</h3>
+                <p>
+                  When placed on the transfer list, the player will be sold
+                  after deadline has passed. Unless no bids comes in, in which
+                  case {player.name} will remain at your club.
+                </p>
+                <div className={styles.buttonsWrapper}>
+                  <InputTextNew type="tel" isLight label="Starting bid" />
+                  <Button isTertiary onClick={() => handleSellPlayer()}>
+                    Sell
+                  </Button>
+                  <Button isQuaternary onClick={() => setModalVisible('NONE')}>
+                    Cancel
+                  </Button>
+                </div>
+              </Modal>
+            )}
           </AnimatePresence>
         </>
       )}
-    </Page>
+    </>
+    // </Page>
   );
 };
 

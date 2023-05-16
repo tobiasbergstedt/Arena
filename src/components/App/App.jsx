@@ -18,10 +18,10 @@ import RouteChangeTracker from './RouteChangeTracker';
 import SpinnerGlobe from 'components/SpinnerGlobe/SpinnerGlobe';
 import UserNotifications from 'components/UserNotifications/UserNotifications';
 
-const Locations = React.lazy(() => import('pages/Locations/Locations'));
+// const Locations = React.lazy(() => import('pages/Locations/Locations'));
 // const Home = React.lazy(() => import('pages/Home/Home'));
-const Beneficiary = React.lazy(() => import('pages/Beneficiary/Beneficiary'));
-const Overview = React.lazy(() => import('pages/Overview/Overview'));
+// const Beneficiary = React.lazy(() => import('pages/Beneficiary/Beneficiary'));
+// const Overview = React.lazy(() => import('pages/Overview/Overview'));
 const Profile = React.lazy(() => import('pages/Profile/Profile'));
 const Dev = React.lazy(() => import('pages/Dev/Dev'));
 import Login from 'pages/Login/Login';
@@ -31,6 +31,7 @@ import PlayerProfile from 'pages/PlayerProfile/PlayerProfile';
 import Marketplace from 'pages/Marketplace/Marketplace';
 
 import styles from './App.module.scss';
+import Page from 'components/Page/Page';
 
 const queryClient = new QueryClient(queryConfig);
 
@@ -56,35 +57,34 @@ const App = () => {
                       fallback={<SpinnerGlobe className={styles.spinner} />}
                     >
                       <AnimatePresence mode="wait">
-                        <Routes location={location} key={slugs[1]}>
-                          <Route path="/locations" element={<Locations />} />
-                          <Route path="/overview" element={<Overview />} />
-                          <Route
-                            path="/"
-                            element={
-                              <HomeProvider>
-                                <Login />
-                              </HomeProvider>
-                            }
-                          />
-                          <Route
-                            path="/map"
-                            element={<Navigate replace to="/" />}
-                          />
-                          <Route
-                            path="/beneficiary"
-                            element={<Beneficiary />}
-                          />
-                          <Route path="profile/*" element={<Profile />} />
-                          <Route path="/landing" element={<Landing />} />
-                          <Route path="/squad" element={<Squad />} />
-                          <Route path="/player/*" element={<PlayerProfile />} />
-                          <Route
-                            path="/marketplace"
-                            element={<Marketplace />}
-                          />
-                          <Route path="dev/*" element={<Dev />} />
-                        </Routes>
+                        <Page className={styles.pageWrapper}>
+                          <Routes location={location} key={slugs[1]}>
+                            <Route
+                              path="/"
+                              element={
+                                <HomeProvider>
+                                  <Login />
+                                </HomeProvider>
+                              }
+                            />
+                            <Route
+                              path="/map"
+                              element={<Navigate replace to="/" />}
+                            />
+                            <Route path="profile/*" element={<Profile />} />
+                            <Route path="/landing" element={<Landing />} />
+                            <Route path="/squad" element={<Squad />} />
+                            <Route
+                              path="/player/*"
+                              element={<PlayerProfile />}
+                            />
+                            <Route
+                              path="/marketplace"
+                              element={<Marketplace />}
+                            />
+                            <Route path="dev/*" element={<Dev />} />
+                          </Routes>
+                        </Page>
                       </AnimatePresence>
                     </Suspense>
                   </AnimatePresence>

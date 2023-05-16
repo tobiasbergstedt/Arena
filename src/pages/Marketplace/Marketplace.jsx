@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 
-import Page from 'components/Page/Page';
-import Spinner from 'components/Spinner/Spinner';
+import fixUrl from 'utils/fix-url';
 
-import styles from './Marketplace.module.scss';
+// import Page from 'components/Page/Page';
+// import Spinner from 'components/Spinner/Spinner';
 import ItemHeadings from 'components/ItemHeadings/ItemHeadings';
 import Player from './Player/Player';
 import Artefact from './Artefact/Artefact';
-import { AnimatePresence } from 'framer-motion';
-import fixUrl from 'utils/fix-url';
-import PlayerTemplate from 'components/PlayerTemplate/PlayerTemplate';
+import ArtefactsResult from './Artefact/ArtefactsResult';
+import PlayersResult from './Player/PlayersResult';
+
+import styles from './Marketplace.module.scss';
 
 const Marketplace = () => {
   const [searchInputPlayer, setSearchInputPlayer] = useState({
@@ -31,6 +33,7 @@ const Marketplace = () => {
   });
   const [isSelected, setIsSelected] = useState(0);
   const [searchResultPlayer, setSearchResultPlayer] = useState([]);
+  const [searchResultArtefact, setSearchResultArtefact] = useState([]);
 
   const { t } = useTranslation();
 
@@ -73,90 +76,62 @@ const Marketplace = () => {
     setSearchResultPlayer(apiData);
   }
 
+  async function getSearchResultArtefacts() {
+    let queryParams = '';
+    if (
+      searchInputArtefact.artefactType.length !== 0 &&
+      searchInputArtefact.artefactType !== t('artefacts.short.any')
+    ) {
+      queryParams += `&artefactType=${searchInputArtefact.artefactType}`;
+    }
+    if (searchInputArtefact.minBid.length !== 0) {
+      queryParams += `&minBid=${Number(searchInputArtefact.minBid)}`;
+    }
+    if (searchInputArtefact.maxBid.length !== 0) {
+      queryParams += `&maxBid=${Number(searchInputArtefact.maxBid)}`;
+    }
+    const url = `/transferlist/artefacts?${queryParams.slice(1)}`;
+
+    const response = await fetch(fixUrl(url));
+    const apiData = await response.json();
+    setSearchResultArtefact(apiData);
+  }
+
   const handleKeyPress = (e) => {
     if (e.key == 'Enter' || e.keyCode === 13) {
       if (isSelected === 0) {
         getSearchResultPlayers();
       }
+      if (isSelected === 1) {
+        getSearchResultArtefacts();
+      }
     }
   };
 
-  console.log(searchResultPlayer && searchResultPlayer);
-
   return (
-    <Page pageTitle={t('pageTitles.marketplace')}>
-      {searchResultPlayer?.length > 0 ? (
+    // <Page pageTitle={t('pageTitles.marketplace')}>
+    <>
+      {searchResultPlayer?.length > 0 || searchResultArtefact?.length > 0 ? (
         <>
-          <div className={styles.headings}>
-            <ItemHeadings
-              heading={t('marketplace.subHeading')}
-              subHeading={`${searchResultPlayer.length} ${
-                searchResultPlayer.length > 1
-                  ? t('marketplace.results')
-                  : searchResultPlayer.length === 0
-                  ? t('marketplace.results')
-                  : t('marketplace.result')
-              }`}
-              hasButton={t('general.return')}
-              onClick={() => setSearchResultPlayer([])}
+          {isSelected === 0 ? (
+            <PlayersResult
+              searchResultPlayer={searchResultPlayer}
+              setSearchResultPlayer={setSearchResultPlayer}
             />
-            <p className={styles.playerResultsDescription}>
-              Click players to see more information about them.
-            </p>
-            <p className={styles.amountDisplayed}>
-              (Displaying 1-
-              {searchResultPlayer?.length <= 9
-                ? searchResultPlayer.length
-                : '10'}
-              )
-            </p>
-          </div>
-          {searchResultPlayer.map(
-            ({
-              id,
-              name,
-              position,
-              number,
-              artefacts,
-              salary,
-              matchForm,
-              race,
-              injuryLevel,
-              cityOfOrigin,
-              endDate,
-              bid,
-              teamName,
-              attributes,
-            }) => (
-              <PlayerTemplate
-                key={id}
-                isTransferList
-                id={id}
-                name={name}
-                position={position[0].position}
-                number={number}
-                artefacts={artefacts}
-                salary={salary}
-                matchForm={matchForm}
-                race={race}
-                injuryLevel={injuryLevel}
-                bid={bid[0]}
-                teamName={teamName}
-                endDate={new Date(endDate.seconds * 1000).toLocaleString(
-                  'sv-SE'
-                )}
-                cityOfOrigin={cityOfOrigin}
-                attributes={attributes}
-              />
-            )
+          ) : (
+            <ArtefactsResult
+              setSearchResultArtefact={setSearchResultArtefact}
+              searchResultArtefact={searchResultArtefact}
+              getSearchResultArtefacts={getSearchResultArtefacts}
+            />
           )}
         </>
       ) : (
         <>
           <div className={styles.headings}>
             <ItemHeadings
-              heading={t('marketplace.subHeading')}
-              subHeading={t('marketplace.heading')}
+              heading={t('marketplace.heading')}
+              subHeading={t('marketplace.subHeading')}
             />
           </div>
           <p className={styles.description}>{t('marketplace.description')}</p>
@@ -196,13 +171,15 @@ const Marketplace = () => {
                   searchInputArtefact={searchInputArtefact}
                   handleKeyPress={handleKeyPress}
                   key="artefactsOptionsWrapper"
+                  getSearchResultArtefacts={getSearchResultArtefacts}
                 />
               )}
             </AnimatePresence>
           </div>
         </>
       )}
-    </Page>
+      {/* </Page> */}
+    </>
   );
 };
 
