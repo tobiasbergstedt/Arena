@@ -78,6 +78,12 @@
   box-shadow: var(--box-shadow-primary);
 }
 
+.selectWrapper {
+  position: absolute;
+  top: calc(var(--standard-padding) + 8px);
+  right: var(--standard-padding);
+}
+
 .lineStats {
   display: flex;
 
@@ -244,6 +250,18 @@
 
     font-weight: 600;
   }
+}
+
+.modalContent {
+  p {
+    @include font-14;
+
+    font-weight: 600;
+  }
+}
+
+.deadline {
+  margin-bottom: 2px;
 }
 
 .buttonsWrapperSmall {
