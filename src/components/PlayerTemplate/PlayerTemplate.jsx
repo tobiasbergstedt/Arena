@@ -84,18 +84,22 @@ const PlayerTemplate = ({
       <div className={styles.bottomWrapper}>
         <div className={styles.left}>
           <div className={styles.textBlock}>
-            <p>Salary:</p>
-            <p>{salary} gold</p>
+            <p>{t('playerProfile.salary')}:</p>
+            <p>
+              {salary} {t('global.gold')}
+            </p>
           </div>
           <div className={styles.textBlock}>
             {isTransferList ? (
               <>
-                <p>Bid:</p>
-                <p>{bid.toLocaleString()} gold</p>
+                <p>{t('playerProfile.bid')}:</p>
+                <p>
+                  {bid.toLocaleString()} {t('global.gold')}
+                </p>
               </>
             ) : (
               <>
-                <p>Match form:</p>
+                <p>{t('playerProfile.matchForm')}:</p>
                 <p>{matchForm}%</p>
               </>
             )}
@@ -103,11 +107,11 @@ const PlayerTemplate = ({
         </div>
         <div className={styles.right}>
           <div className={styles.textBlock}>
-            <p>Race:</p>
+            <p>{t('login.races.race')}:</p>
             <p>{race}</p>
           </div>
           <div className={styles.textBlock}>
-            <p>Injury level:</p>
+            <p>{t('playerProfile.injuryLevel')}:</p>
             <p>{injuryLevel}</p>
           </div>
         </div>
@@ -115,11 +119,12 @@ const PlayerTemplate = ({
       {isTransferList && (
         <>
           <p className={styles.deadline}>
-            Deadline:
+            {t('marketplace.deadline')}
             <span style={{ marginLeft: '16px' }}>{endDate.slice(0, -3)}</span>
           </p>
           <p className={styles.team}>
-            Team: <span style={{ marginLeft: '16px' }}>{teamName}</span>
+            {t('playerProfile.team')}:{' '}
+            <span style={{ marginLeft: '16px' }}>{teamName}</span>
           </p>
           <motion.span
             className={styles.openCloseArrow}
@@ -175,19 +180,19 @@ const PlayerTemplate = ({
         <>
           <div className={styles.textBlock}>
             <p>
-              City of origin:{' '}
+              {t('playerProfile.cityOfOrigin')}:{' '}
               <span className={styles.cityOfOrigin}>{cityOfOrigin}</span>
             </p>
           </div>
           <div className={styles.playerOptions}>
             <Button isSmall onClick={() => onClick('SELL')}>
-              Sell
+              {t('playerProfile.sell')}
             </Button>
             <Button isSmall onClick={() => onClick('EDIT')}>
-              Edit
+              {t('buttons.edit')}
             </Button>
             <Button isSmall onClick={() => onClick('RELEASE')}>
-              Release
+              {t('playerProfile.release')}
             </Button>
           </div>
         </>

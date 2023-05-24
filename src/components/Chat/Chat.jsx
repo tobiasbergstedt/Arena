@@ -157,7 +157,9 @@ const Chat = ({ isChatOpen, setIsChatOpen, chatHeight }) => {
                           {uid === user.uid ? 'me' : sentBy}
                         </span>
                         <span>
-                          {new Date(dateAndTime * 1000).toLocaleString()}
+                          {new Date(dateAndTime * 1000).toLocaleString(
+                            t('global.localeString')
+                          )}
                         </span>
                       </div>
                       <div

@@ -1,6 +1,3 @@
-// import { useTranslation } from 'react-i18next';
-
-import Page from 'components/Page/Page';
 import NextLastGame from 'components/NextLastGame/NextLastGame';
 import LatestNews from 'components/News/LatestNews/LatestNews';
 import LeaguePosition from 'components/LeaguePosition/LeaguePosition';
@@ -17,12 +14,11 @@ import Spinner from 'components/Spinner/Spinner';
 
 const Landing = () => {
   const { userTeam } = useContext(UserContext);
-  // const { t } = useTranslation();
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const { t } = useTranslation();
 
-  const date = currentTime.toLocaleDateString('sv-SE');
+  const date = currentTime.toLocaleDateString(t('global.localeString'));
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -48,14 +44,13 @@ const Landing = () => {
       : currentTime.getSeconds();
 
   return (
-    // <Page className={styles.wrapper} pageTitle={t('pageTitles.home')}>
     <>
       {userTeam ? (
         <div className={styles.contentWrapper}>
           <div className={styles.topSection}>
             <div className={styles.timeDateAndOnline}>
               <span>{`${date} ${hours}:${minutes}:${seconds}`}</span>
-              {/* <span>173 {t('landing.online')}</span> */}
+              <span>173 {t('landing.online')}</span>
             </div>
             <NextLastGame
               TeamLogoAway={TeamLogoAway}

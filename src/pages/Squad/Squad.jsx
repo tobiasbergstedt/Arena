@@ -539,7 +539,6 @@ const Squad = () => {
   // console.log('Players: ', players);
 
   return (
-    // <Page pageTitle={t('pageTitles.squad')}>
     <>
       {!players ? (
         <div className={styles.isLoading}>
@@ -594,12 +593,11 @@ const Squad = () => {
               <p>{divisionID}</p>
             </div>
           )
-      )} */}
-      {/* <button disabled onClick={handleAddTeam}>
+      )}
+      <button disabled onClick={handleAddTeam}>
         Add teams
       </button> */}
     </>
-    // </Page>
   );
 };
 

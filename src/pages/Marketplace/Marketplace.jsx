@@ -109,7 +109,6 @@ const Marketplace = () => {
   };
 
   return (
-    // <Page pageTitle={t('pageTitles.marketplace')}>
     <>
       {searchResultPlayer?.length > 0 || searchResultArtefact?.length > 0 ? (
         <>
@@ -178,7 +177,6 @@ const Marketplace = () => {
           </div>
         </>
       )}
-      {/* </Page> */}
     </>
   );
 };

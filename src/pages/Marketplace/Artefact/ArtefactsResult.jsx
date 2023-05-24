@@ -103,7 +103,7 @@ const ArtefactsResult = ({ searchResultArtefact, setSearchResultArtefact }) => {
           {t('marketplace.resultDescriptionArtefacts')}
         </p>
         <p className={styles.amountDisplayed}>
-          (Displaying 1-
+          ({t('marketplace.displaying')} 1-
           {searchResultArtefact?.length <= 9
             ? searchResultArtefact.length
             : '10'}
@@ -133,7 +133,9 @@ const ArtefactsResult = ({ searchResultArtefact, setSearchResultArtefact }) => {
             </p>
             <p className={styles.bidParagraph}>
               {t('marketplace.deadline')}{' '}
-              {new Date(endDate.seconds * 1000).toLocaleString('sv-SE')}
+              {new Date(endDate.seconds * 1000).toLocaleString(
+                t('global.localeString')
+              )}
             </p>
           </div>
           <motion.span

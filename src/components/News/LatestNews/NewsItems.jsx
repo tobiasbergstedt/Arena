@@ -15,7 +15,9 @@ const NewsItems = ({ news }) => {
           <div className={styles.newsItem} key={heading + summary}>
             <h3 className={styles.newsItemHeading}>{heading}</h3>
             <p className={styles.dateAndTime}>
-              {new Date(dateAndTime.seconds * 1000).toLocaleString('sv-SE')}
+              {new Date(dateAndTime.seconds * 1000).toLocaleString(
+                t('global.localeString')
+              )}
             </p>
             {summary.slice(0, 2).map((element) => (
               <p key={element} className={styles.newsItemContent}>

@@ -18,6 +18,8 @@ i18n
           global: {
             countryCode: '+46',
             countryAbbr: 'sv',
+            localeString: 'sv-SE',
+            gold: 'gold',
           },
           pageTitles: {
             home: 'Start',
@@ -80,6 +82,15 @@ i18n
           login: {
             welcome: 'Welcome to',
             information: 'i',
+            gameDescription1:
+              'Arena is a manager game in a fantasy setting. Join the fight with the other teams with the ambition to raise the Koodudorf Cup.',
+            gameDescription2:
+              'In the game, you can choose between 4 races for your team - Humans, Dwarves, Elves and Orcs. You can buy and sell players and artefacts. Hire coaches and magicians, make tactical moves in preparition for the games, as well as take part in all else that occurs in this magical world called Mambenna.',
+            gameDescription3:
+              'You don’t have to download anything to play, just use your browser to take part. It’s completely free to play.',
+            gameDescription4:
+              'If you have any questions, feel free to contact us at: ',
+            contact: 'info@playthearena.com',
             signIn: 'Sign in',
             signUp: 'Sign up',
             rememberMe: 'Remember me',
@@ -145,7 +156,44 @@ i18n
               'Your bid was registered successfully, congratulations!',
           },
           playerProfile: {
+            salary: 'Salary',
+            bid: 'Bid',
+            matchForm: 'Match form',
+            injuryLevel: 'Injury level',
             attributes: 'Attributes',
+            round: 'Round',
+            attempts: 'Attempts',
+            successful: 'Successful',
+            stats: 'Stats',
+            ranking: 'Ranking',
+            personal: 'Personal',
+            statistics: 'Statistics',
+            bestSuited: 'Best suited',
+            positions: 'Positions',
+            transfer: 'Transfer',
+            history: 'History',
+            team: 'Team',
+            cityOfOrigin: 'City of origin',
+            from: 'From',
+            to: 'To',
+            sum: 'Sum',
+            loyalHistory:
+              '{{playerName}} has been loyal to Behemot Bashers for his entire career, after being brought up from the clubs youth department.',
+            release: 'Release',
+            confirmDelete:
+              'Are you sure you want to release {{playerName}}? This action is irreversible. The player will be lost forever.',
+            sell: 'Sell',
+            transferListInfo:
+              'When placed on the transfer list, the player will be sold after deadline has passed. Unless no bids comes in, in which case {{playerName}} will remain at your club.',
+            endDateInfo: '7 days from now',
+            transferInfo: 'Transfers go through every hour',
+            startingBid: 'Starting bid',
+            edit: 'Edit',
+          },
+          buttons: {
+            confirm: 'Confirm',
+            cancel: 'Cancel',
+            edit: 'Edit',
           },
           marketplace: {
             heading: 'Search',
@@ -185,6 +233,10 @@ i18n
               minBid: 'Minimum bid',
               maxBid: 'Maximum bid',
             },
+            displaying: 'Displaying',
+          },
+          nextLastGame: {
+            teamNotFound: 'Team not found',
           },
           artefacts: {
             any: 'Any artefact',

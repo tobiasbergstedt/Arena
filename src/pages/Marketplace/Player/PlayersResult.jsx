@@ -62,7 +62,7 @@ const PlayersResult = ({ searchResultPlayer, setSearchResultPlayer }) => {
             injuryLevel={injuryLevel}
             bid={bid[0]}
             teamName={teamName}
-            endDate={new Date(endDate.seconds * 1000).toLocaleString('sv-SE')}
+            endDate={new Date(endDate).toLocaleString(t('global.localeString'))}
             cityOfOrigin={cityOfOrigin}
             attributes={attributes}
           />
