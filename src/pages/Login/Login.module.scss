@@ -1,12 +1,13 @@
 @import 'styles/utils/__utils';
 
 .innerWrapper {
+  position: relative;
   display: flex;
 
   flex-direction: column;
 
   width: 100%;
-  min-height: 100%;
+  min-height: inherit;
   padding: var(--login-padding);
 
   @include is-tablet {
@@ -14,6 +15,18 @@
 
     padding: var(--login-padding-tablet);
   }
+}
+
+.backgroundWrapper {
+  z-index: -1;
+  position: absolute;
+
+  background-image: url('assets/backgrounds/login-bg.svg');
+  background-position: center;
+  background-size: cover;
+
+  opacity: 0.15;
+  inset: 0;
 }
 
 .welcomeWrapper {
@@ -45,6 +58,7 @@
 }
 
 .infoButton {
+  position: relative;
   display: flex;
 
   align-items: center;
@@ -53,17 +67,54 @@
   width: 35px;
   height: 35px;
 
-  border: 2px solid rgb(218, 165, 32);
   border-radius: 50%;
+
+  cursor: pointer;
+
+  ::before {
+    content: '';
+
+    position: absolute;
+
+    padding: 2px;
+
+    background: var(--theme-gradient-color-hover);
+    border-radius: 50px;
+    inset: 0;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  ::after {
+    content: '';
+
+    position: absolute;
+
+    padding: 2px;
+
+    background: var(--theme-gradient-color-hover-inverse);
+    border-radius: 50px;
+
+    opacity: 0;
+    inset: 0;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    transition: opacity 0.15s;
+  }
 
   p {
     margin: 0;
   }
 
   &:hover {
-    background-color: var(--color-grey-dark);
-
-    cursor: pointer;
+    ::after {
+      opacity: 1;
+    }
   }
 }
 
@@ -171,4 +222,20 @@
 
 .loading {
   align-items: flex-end;
+}
+
+.contactLink {
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+
+  text-decoration: underline;
+
+  cursor: pointer;
+}
+
+.modalContent {
+  p {
+    @include font-14;
+  }
 }

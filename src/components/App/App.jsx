@@ -17,21 +17,16 @@ import ModalSwitch from 'modals/ModalSwitch/ModalSwitch';
 import RouteChangeTracker from './RouteChangeTracker';
 import SpinnerGlobe from 'components/SpinnerGlobe/SpinnerGlobe';
 import UserNotifications from 'components/UserNotifications/UserNotifications';
+import Page from 'components/Page/Page';
 
-// const Locations = React.lazy(() => import('pages/Locations/Locations'));
-// const Home = React.lazy(() => import('pages/Home/Home'));
-// const Beneficiary = React.lazy(() => import('pages/Beneficiary/Beneficiary'));
-// const Overview = React.lazy(() => import('pages/Overview/Overview'));
-const Profile = React.lazy(() => import('pages/Profile/Profile'));
-const Dev = React.lazy(() => import('pages/Dev/Dev'));
 import Login from 'pages/Login/Login';
 import Landing from 'pages/Landing/Landing';
 import Squad from 'pages/Squad/Squad';
 import PlayerProfile from 'pages/PlayerProfile/PlayerProfile';
 import Marketplace from 'pages/Marketplace/Marketplace';
+import Club from 'pages/Club/Club';
 
 import styles from './App.module.scss';
-import Page from 'components/Page/Page';
 
 const queryClient = new QueryClient(queryConfig);
 
@@ -71,7 +66,6 @@ const App = () => {
                               path="/map"
                               element={<Navigate replace to="/" />}
                             />
-                            <Route path="profile/*" element={<Profile />} />
                             <Route path="/landing" element={<Landing />} />
                             <Route path="/squad" element={<Squad />} />
                             <Route
@@ -82,7 +76,7 @@ const App = () => {
                               path="/marketplace"
                               element={<Marketplace />}
                             />
-                            <Route path="dev/*" element={<Dev />} />
+                            <Route path="/club" element={<Club />} />
                           </Routes>
                         </Page>
                       </AnimatePresence>

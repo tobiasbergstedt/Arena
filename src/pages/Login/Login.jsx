@@ -24,6 +24,8 @@ import {
 } from 'firebase/auth';
 import { auth } from 'api/firebase';
 import Spinner from 'components/Spinner/Spinner';
+import Modal from 'modals/Modal/Modal';
+import clsx from 'clsx';
 
 const Login = () => {
   const [inputData, setInputData] = useState({ userName: '', password: '' });
@@ -44,6 +46,9 @@ const Login = () => {
   const [acceptTermsAndConditions, setAcceptTermsAndConditions] =
     useState(false);
   const [isSignIn, setIsSignIn] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
 
   const breakpoint = useBreakpoint();
@@ -102,6 +107,7 @@ const Login = () => {
         setSignupInputData({ ...signupInputData, teamName: data });
       },
       label: t('login.inputs.teamName'),
+      type: 'text',
     },
     {
       value: signupInputData.userName,
@@ -109,6 +115,7 @@ const Login = () => {
         setSignupInputData({ ...signupInputData, userName: data });
       },
       label: t('login.inputs.userName'),
+      type: 'text',
     },
     {
       value: signupInputData.password,
@@ -116,6 +123,7 @@ const Login = () => {
         setSignupInputData({ ...signupInputData, password: data });
       },
       label: t('login.inputs.password'),
+      type: 'password',
     },
     {
       value: signupInputData.confirmPassword,
@@ -123,6 +131,7 @@ const Login = () => {
         setSignupInputData({ ...signupInputData, confirmPassword: data });
       },
       label: t('login.inputs.confirmPassword'),
+      type: 'password',
     },
     {
       value: signupInputData.email,
@@ -130,6 +139,7 @@ const Login = () => {
         setSignupInputData({ ...signupInputData, email: data });
       },
       label: t('login.inputs.email'),
+      type: 'text',
     },
     {
       value: signupInputData.confirmEmail,
@@ -137,6 +147,7 @@ const Login = () => {
         setSignupInputData({ ...signupInputData, confirmEmail: data });
       },
       label: t('login.inputs.confirmEmail'),
+      type: 'text',
     },
   ];
 
@@ -145,6 +156,31 @@ const Login = () => {
       handleSignin();
     }
   };
+
+  const checkIsDisabled = () => {
+    if (
+      !signupInputData.termsAndConditions ||
+      signupInputData.race.length === 0 ||
+      signupInputData.teamName.length === 0 ||
+      signupInputData.userName.length === 0 ||
+      signupInputData.password.length === 0 ||
+      signupInputData.confirmPassword.length === 0 ||
+      signupInputData.email.length === 0 ||
+      signupInputData.confirmEmail.length === 0 ||
+      signupInputData.password !== signupInputData.confirmPassword ||
+      signupInputData.email !== signupInputData.confirmEmail
+    ) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+  };
+
+  const toggleHover = () => setIsHovered(!isHovered);
+
+  useEffect(() => {
+    checkIsDisabled();
+  }, [signupInputData]);
 
   useEffect(() => {
     setWindowWidth(window.innerWidth);
@@ -159,6 +195,7 @@ const Login = () => {
     if (user) {
       navigate('/landing');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const selectValues = {
@@ -205,29 +242,72 @@ const Login = () => {
       key="pageWrapper"
       className={styles.innerWrapper}
     >
+      <div className={styles.backgroundWrapper} />
       <div className={styles.welcomeWrapper}>
         <h2>{t('login.welcome')}</h2>
-        <h1 className={styles.headingTitle}>{t('arena')}</h1>
+        <h1 className={clsx('goldenText', styles.headingTitle)}>
+          {t('arena')}
+        </h1>
         {isMobile ? (
-          <div className={styles.infoButton}>
-            <p>{t('login.information')}</p>
-          </div>
+          <>
+            <div
+              className={styles.infoButton}
+              onClick={() => setIsModalVisible(true)}
+            >
+              <p>{t('login.information')}</p>
+            </div>
+            <AnimatePresence>
+              {isModalVisible && (
+                <Modal canClose onClick={() => setIsModalVisible(false)}>
+                  <div className={styles.modalContent}>
+                    <h3 className="goldenText">
+                      {t('login.welcome')} {t('arena')}
+                    </h3>
+                    <p>{t('login.gameDescription1')}</p>
+                    <p>{t('login.gameDescription2')}</p>
+                    <p>{t('login.gameDescription3')}</p>
+                    <p>
+                      {t('login.gameDescription4')}
+                      <span
+                        onMouseEnter={() => toggleHover()}
+                        onMouseLeave={() => toggleHover()}
+                        onClick={() =>
+                          (window.location.href = `mailto:${t(
+                            'login.contact'
+                          )}`)
+                        }
+                        className={clsx(styles.contactLink, {
+                          ['goldenText']: isHovered,
+                        })}
+                      >
+                        {t('login.contact')}
+                      </span>
+                    </p>
+                  </div>
+                </Modal>
+              )}
+            </AnimatePresence>
+          </>
         ) : (
           <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
-            corporis autem accusamus exercitationem, similique doloremque
-            commodi nam ipsum ea unde impedit labore animi repudiandae
-            accusantium aliquam in ex, repellendus ipsa! Lorem ipsum, dolor sit
-            amet consectetur adipisicing elit. Laudantium, in natus, ipsam
-            ratione excepturi aperiam sit, reiciendis magni tempora quam nobis.
-            Eos suscipit aut cumque quam veniam quia aliquid autem! Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. Deleniti id aut
-            provident eligendi accusamus eum non ullam necessitatibus numquam,
-            earum aliquam sed, officiis ipsa obcaecati quisquam eaque vel facere
-            quasi! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Molestiae tempora cupiditate eaque! Accusantium delectus in ut
-            fugiat corporis ea aliquid quam quae esse sapiente natus explicabo,
-            mollitia eum amet ullam.
+            <p>{t('login.gameDescription1')}</p>
+            <p>{t('login.gameDescription2')}</p>
+            <p>{t('login.gameDescription3')}</p>
+            <p>
+              {t('login.gameDescription4')}
+              <span
+                onMouseEnter={() => toggleHover()}
+                onMouseLeave={() => toggleHover()}
+                onClick={() =>
+                  (window.location.href = `mailto:${t('login.contact')}`)
+                }
+                className={clsx(styles.contactLink, {
+                  ['goldenText']: isHovered,
+                })}
+              >
+                {t('login.contact')}
+              </span>
+            </p>
           </div>
         )}
       </div>
@@ -314,17 +394,18 @@ const Login = () => {
               value={signupInputData.race}
               options={selectValues.options}
               onChange={(data) => {
-                setSignupInputData({ ...inputData, race: data });
+                setSignupInputData({ ...signupInputData, race: data });
               }}
               label={selectValues.label}
             />
-            {signUpInputs.map(({ onChange, label, value }, index) => (
+            {signUpInputs.map(({ onChange, label, value, type }, index) => (
               <InputTextNew
                 key={label + index}
                 value={value}
                 onChange={onChange}
                 onKeyDown={() => handleKeyPress(event)}
                 label={label}
+                type={type}
               />
             ))}
             <div className={styles.optionsWrapper}>
@@ -357,7 +438,9 @@ const Login = () => {
             )}
             {displayError && <p>{displayError}</p>}
             <div className={styles.buttonsWrapper}>
-              <Button onClick={createTeam}>{t('login.createTeam')}</Button>
+              <Button isDisabled={isDisabled} onClick={createTeam}>
+                {t('login.createTeam')}
+              </Button>
             </div>
           </motion.div>
         )}
