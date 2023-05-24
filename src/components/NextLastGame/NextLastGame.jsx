@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { string, bool, object } from 'prop-types';
+import { func, bool, object } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import fixUrl from 'utils/fix-url';
@@ -101,10 +101,12 @@ const NextLastGame = ({ TeamLogoHome, TeamLogoAway, isLastGame, userTeam }) => {
         <div className={styles.gameInfo}>
           <div className={styles.teamNamesWrapper}>
             <p className={styles.thick}>
+              {/* {t('nextLastGame.teamNotFound')} */}
               {isLastGame ? userTeam?.teamName : 'Twin Peaks'}
             </p>
             <p className={styles.versus}>{t('menu.vs')}</p>
             <p className={styles.thick}>
+              {/* {t('nextLastGame.teamNotFound')} */}
               {isLastGame ? 'Behemot Bashers' : userTeam?.teamName}
             </p>
           </div>
@@ -122,8 +124,8 @@ const NextLastGame = ({ TeamLogoHome, TeamLogoAway, isLastGame, userTeam }) => {
 };
 
 NextLastGame.propTypes = {
-  TeamLogoHome: string,
-  TeamLogoAway: string,
+  TeamLogoHome: func,
+  TeamLogoAway: func,
   isLastGame: bool,
   userTeam: object,
 };

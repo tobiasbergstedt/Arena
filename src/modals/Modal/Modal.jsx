@@ -4,9 +4,7 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
-// import { ModalContext } from 'context/ModalContext';
-
-import { ReactComponent as CloseIcon } from 'assets/icons/close-cross.svg';
+import CloseCross from 'assets/icons/close-cross.svg';
 
 import styles from './Modal.module.scss';
 
@@ -14,9 +12,6 @@ const noop = () => {};
 
 const Modal = ({ children, className, hasCloseButton, canClose, onClick }) => {
   const scrollRef = useRef(null);
-  // const { setCurrentModal } = useContext(ModalContext);
-
-  // const onClose = () => setCurrentModal(null);
 
   useLayoutEffect(() => {
     disableBodyScroll(scrollRef.current);
@@ -94,7 +89,13 @@ const Modal = ({ children, className, hasCloseButton, canClose, onClick }) => {
               scale: 0.8,
             }}
           >
-            <CloseIcon />
+            <div
+              className={styles.icon}
+              style={{
+                maskImage: `url(${CloseCross})`,
+                WebkitMaskImage: `url(${CloseCross})`,
+              }}
+            />
           </motion.button>
         )}
       </motion.div>
