@@ -1,4 +1,5 @@
 import express from 'express';
+import * as cron from 'node-cron';
 const router = express.Router();
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../database/firebase.js';
@@ -195,6 +196,10 @@ router.put('/artefacts/:id', async (req, res) => {
 
   res.sendStatus(404);
   return;
+});
+
+cron.schedule('* * * * *', () => {
+  console.log('running every minute');
 });
 
 export default router;

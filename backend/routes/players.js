@@ -1,10 +1,18 @@
 import express from 'express';
 const router = express.Router();
-import { collection, getDocs } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+  query,
+  where,
+} from 'firebase/firestore';
 import { db } from '../database/firebase.js';
-import addScript from '../database/addScript.js';
 import updateScript from '../database/updateScript.js';
 import deleteScript from '../database/deleteScript.js';
+import addPlayerScript from '../database/addPlayerScript.js';
+import addTransferPlayer from '../database/addTransferPlayer.js';
 
 router.get('/', async (req, res) => {
   const colRef = collection(db, 'players');
@@ -28,15 +36,15 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/team/:id', async (req, res) => {
-  const colRef = collection(db, 'players');
   let teamId = req.params.id;
+  const colRef = query(collection(db, 'players'), where('team', '==', teamId));
   let players = [];
   const snapshot = await getDocs(colRef);
   snapshot.docs.forEach((docSnapshot) => {
     players.push({ ...docSnapshot.data(), id: docSnapshot.id });
   });
 
-  players = players.filter((p) => p.team === teamId);
+  // players = players.filter((p) => p.team === teamId);
 
   if (players && players.length > 0) {
     res.send(players);
@@ -47,59 +55,14 @@ router.get('/team/:id', async (req, res) => {
   return;
 });
 
-router.get('/random', async (req, res) => {
-  const colRef = collection(db, 'players');
-  let players = [];
-  const snapshot = await getDocs(colRef);
-  snapshot.docs.forEach((docSnapshot) => {
-    players.push({ ...docSnapshot.data(), id: docSnapshot.id });
-  });
-
-  if (players && players.length > 0) {
-    res.send(players[Math.floor(Math.random() * players.length)]);
-    return;
-  }
-
-  res.sendStatus(404);
-  return;
-});
-
-router.get('/cutest', async (req, res) => {
-  const colRef = collection(db, 'players');
-  let players = [];
-  const snapshot = await getDocs(colRef);
-  snapshot.docs.forEach((docSnapshot) => {
-    players.push({ ...docSnapshot.data(), id: docSnapshot.id });
-  });
-
-  if (players && players.length > 0) {
-    let maxDifferential = players
-      .map((h) => h.wins - h.defeats)
-      .reduce((acc, cur) => Math.max(acc, cur), -1000);
-
-    let cutest = players.filter((h) => h.wins - h.defeats === maxDifferential);
-
-    res.status(200).send(cutest);
-    return;
-  }
-
-  res.sendStatus(404);
-  return;
-});
-
 router.get('/:id', async (req, res) => {
   const userToken = req?.headers?.authorization?.split(' ')[1];
-  const colRef = collection(db, 'players');
   let idString = req.params.id;
-  let players = [];
-  const snapshot = await getDocs(colRef);
-  snapshot.docs.forEach((docSnapshot) => {
-    players.push({ ...docSnapshot.data(), id: docSnapshot.id });
-  });
+  const docRef = doc(db, 'players', idString);
+  const snapshot = await getDoc(docRef);
+  const player = { ...snapshot.data(), id: idString };
 
-  const player = players.filter((p) => p.id === idString)[0];
-
-  if (players.length > 0) {
+  if (player) {
     if (userToken === player.team) {
       res.status(200).send(player);
       return;
@@ -116,19 +79,32 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   if (req.body) {
-    let newHamster = {
-      name: req.body.name,
-      age: Number(req.body.age),
-      favFood: req.body.favFood,
-      loves: req.body.loves,
-      imgName: req.body.imgName,
-      wins: Number(req.body.wins),
-      defeats: Number(req.body.defeats),
-      games: Number(req.body.games),
-    };
+    let newPlayer = req.body;
 
-    var newHamsterId = await addScript(newHamster);
-    res.status(200).send({ id: newHamsterId });
+    var newPlayerId = await addPlayerScript(newPlayer);
+    res.status(200).send({ id: newPlayerId });
+    return;
+  }
+
+  res.sendStatus(400);
+  return;
+});
+
+router.post('/transferlist', async (req, res) => {
+  let newTransferPlayer = req.body;
+  const colRef = query(
+    collection(db, 'transferListPlayers'),
+    where('playerId', '==', newTransferPlayer.playerId)
+  );
+  let transferListedPlayers = [];
+  const snapshot = await getDocs(colRef);
+  snapshot.docs.forEach((docSnapshot) => {
+    transferListedPlayers.push({ ...docSnapshot.data(), id: docSnapshot.id });
+  });
+
+  if (transferListedPlayers.length === 0) {
+    var newTransferPlayerId = await addTransferPlayer(newTransferPlayer);
+    res.status(200).send({ id: newTransferPlayerId });
     return;
   }
 
@@ -182,17 +158,12 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  let toBeDeleted = req.params.id;
-  const colRef = collection(db, 'players');
-  let players = [];
-  const snapshot = await getDocs(colRef);
-  snapshot.docs.forEach((docSnapshot) => {
-    players.push({ ...docSnapshot.data(), id: docSnapshot.id });
-  });
+  const toBeDeleted = req.params.id;
+  const docRef = doc(db, 'players', toBeDeleted);
+  const snapshot = await getDoc(docRef);
+  const player = snapshot.data();
 
-  players = players.filter((p) => p.id === toBeDeleted);
-
-  if (players.length > 0) {
+  if (player) {
     await deleteScript(toBeDeleted);
     res.sendStatus(200);
     return;
