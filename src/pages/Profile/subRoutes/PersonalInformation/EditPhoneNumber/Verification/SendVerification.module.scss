@@ -1,9 +1,0 @@
-@import 'styles/utils/__utils';
-
-.paragraph {
-  @include paragraph-small;
-
-  max-width: 335px;
-  margin-right: auto;
-  margin-left: auto;
-}

@@ -1,8 +1,0 @@
-@import 'styles/utils/__utils';
-
-.wrapper {
-  @include flex-centered(true);
-
-  width: 100%;
-  padding: 0 20px;
-}
