@@ -19,6 +19,7 @@ i18n
             countryCode: '+46',
             countryAbbr: 'sv',
             localeString: 'sv-SE',
+            loading: 'Loading...',
             gold: 'gold',
           },
           pageTitles: {
@@ -65,19 +66,10 @@ i18n
             buyCoins: ' Buy Coins',
             search: 'Search',
             contact: 'Contact',
-            overview: 'Översikt',
-            map: 'Hem',
-            beneficiary: 'Engagemang',
-            profile: 'Profil',
-            places: 'Platser',
           },
           communityChat: {
             title: 'Community chat',
             inputPlaceholder: 'Type your message here...',
-          },
-          splashScreen: {
-            heading: 'Välkommen till',
-            loadingText: 'Laddar din pangeovärld...',
           },
           login: {
             welcome: 'Welcome to',
@@ -116,21 +108,59 @@ i18n
             termsAndConditions: 'terms and conditions',
             asWellAs: 'as well as the handling of personal information.',
             createTeam: 'Create team',
-            openBankIDHeading: 'Öppna BankID',
-            openBankIDText:
-              'Fortsätt genom att öppna appen BankID på din mobil eller dator.',
-            openBankIDButton: 'Öppna appen BankID',
-            openDevLoginButton: 'Dev Login',
-            welcomeHeading: 'Välkommen till Pangeo',
-            welcomeBackHeading: 'Välkommen tillbaka',
-            logIn: 'Logga in',
-            createAccount: 'Skapa konto',
-            newUser: 'Ny användare',
-            recurringUser: 'Jag har redan ett konto',
-            almostDoneHeading: 'Strax klart',
-            almostDoneText:
-              'Vi har nu skapat en profil åt dig. Fyll i några enkla kompletterande uppgifter för att börja spela.',
-            continue: 'Fortsätt',
+          },
+          termsAndConditions: {
+            heading: 'Terms and Conditions',
+            text: `These Terms and Conditions ("Agreement") govern your use of Arena Inc.'s services and website ("Services"). By accessing or using our Services, you agree to be bound by this Agreement. If you do not agree with any part of these terms, please refrain from using our Services.`,
+            listItem1: {
+              subHeading: '1. Acceptance of Terms',
+              subItem1:
+                '1.1 By accessing or using our Services, you affirm that you are of legal age and have the capacity to enter into a binding agreement. If you are accessing our Services on behalf of a company or organization, you represent that you have the authority to bind such entity to this Agreement.',
+              subItem2:
+                '1.2 We reserve the right to modify or update these Terms and Conditions at any time without prior notice. By continuing to use our Services after any changes, you accept and agree to the revised terms.',
+            },
+            listItem2: {
+              subHeading: '2. Intellectual Property',
+              subItem1:
+                '2.1 All content, materials, and trademarks on our website are the intellectual property of Arena Inc. or its licensors. You may not reproduce, modify, distribute, or exploit any content from our Services without prior written permission from us.',
+              subItem2:
+                '2.2 You retain ownership of any content you submit or transmit through our Services. However, by submitting or transmitting such content, you grant Arena Inc. a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, distribute, and display it for the purpose of providing our Services.',
+            },
+            listItem3: {
+              subHeading: '3. Use of Services',
+              subItem1:
+                '3.1 You agree to use our Services in compliance with all applicable laws and regulations. You are solely responsible for your use of our Services and any consequences that may arise from it.',
+              subItem2:
+                '3.2 You must not engage in any activity that may interfere with or disrupt the functionality of our Services or compromise the security of our systems.',
+              subItem3:
+                '3.3 Arena Inc. reserves the right to suspend or terminate your access to our Services if we reasonably believe that you have violated these Terms and Conditions or engaged in any illegal or unauthorized activities.',
+            },
+            listItem4: {
+              subHeading: '4. Privacy',
+              subItem1:
+                '4.1 We collect and process personal data in accordance with our Privacy Policy, which forms an integral part of this Agreement.',
+              subItem2:
+                '4.2 By using our Services, you consent to the collection, storage, and processing of your personal data as outlined in our Privacy Policy.',
+            },
+            listItem5: {
+              subHeading: '5. Limitation of Liability',
+              subItem1:
+                '5.1 To the fullest extent permitted by applicable law, Arena Inc. and its officers, directors, employees, and affiliates shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in connection with your use of our Services.',
+              subItem2:
+                '5.2 Arena Inc. shall not be liable for any loss, damage, or disruption to your computer systems or data resulting from the use of our Services.',
+              subItem3:
+                '5.3 We do not warrant or guarantee the accuracy, completeness, or reliability of any content on our website or obtained through our Services.',
+            },
+            listItem6: {
+              subHeading: '6. Governing Law and Jurisdiction',
+              subItem1:
+                '6.1 This Agreement shall be governed by and construed in accordance with the laws of Sweden. Any disputes arising out of or relating to this Agreement shall be subject to the exclusive jurisdiction of the courts located in Göteborg, Sweden.',
+            },
+            listItem7: {
+              subHeading: '7. Severability',
+              subItem1:
+                '7.1 If any provision of this Agreement is found to be invalid, illegal, or unenforceable, the remaining provisions shall remain in full force and effect.',
+            },
           },
           landing: {
             online: 'online',
@@ -178,7 +208,7 @@ i18n
             to: 'To',
             sum: 'Sum',
             loyalHistory:
-              '{{playerName}} has been loyal to Behemot Bashers for his entire career, after being brought up from the clubs youth department.',
+              '{{playerName}} has been loyal to {{teamName}} for his entire career, after being brought up from the clubs youth department.',
             release: 'Release',
             confirmDelete:
               'Are you sure you want to release {{playerName}}? This action is irreversible. The player will be lost forever.',
@@ -188,7 +218,6 @@ i18n
             endDateInfo: '7 days from now',
             transferInfo: 'Transfers go through every hour',
             startingBid: 'Starting bid',
-            edit: 'Edit',
           },
           buttons: {
             confirm: 'Confirm',
@@ -295,134 +324,39 @@ i18n
             saves: 'Saves',
             blocks: 'Blocks',
           },
-          modals: {
-            testModal: {
-              heading: 'Test modal',
-              text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            },
-          },
-          mapPage: {
-            heading: 'Map',
-            loadUser: 'Load user',
-          },
-          homePage: {
-            logIn: 'Logga in',
-            logInLater: 'Logga in senare',
-            searchSheet: {
-              label: 'Sök plats i Pangeo',
-              placeholder: 'Sök på ort, gata etc.',
-              previousSearches: 'Tidigare sökningar',
-              noResults: 'Inget sökresultat',
-            },
-          },
-          overviewPage: {
-            heading: 'Overview',
-            setUserToken: 'Set userToken',
-            logout: 'Logout user',
-          },
-          beneficiaryPage: {
-            heading: 'Beneficiary',
-            showModal: 'Show Modal',
-          },
-          profilePage: {
-            editProfile: 'Redigera profil',
-            logIn: 'Logga in',
-            createAccount: 'Bli medlem',
-            walletSection: {
-              myWallet: 'Min plånbok',
-              viewTransactions: 'Se alla transaktioner',
-              balance: 'Saldo',
-            },
-            menu: {
-              settingsHeader: 'Inställningar',
-              personalInfo: 'Personlig info',
-              notifications: 'Notifikationer',
-              payments: 'Betalningar',
-              gameLimits: 'Spelgränsningar',
-              gameStop: 'Spelstopp',
-              helpHeader: 'Hjälp',
-              needHelp: 'Behöver du hjälp?',
-              whatDoYouThinkAboutUs: 'Vad tycker du om oss?',
-              legalHeader: 'Juridiskt',
-              thisIsPangeo: 'Det här är Pangeo',
-              gamePlan: 'Vinstplan',
-              winners: 'Vinnare',
-              userAgreement: 'Användarvillkor',
-              integrityPolicy: 'Integritetspolicy',
-            },
-            personalInfo: {
-              label: 'Personlig information',
-              name: 'Förnamn och efternamn',
-              mobilePhone: 'Mobilnummer',
-              add: 'Lägg till',
-              addText:
-                'Lägg till ditt mobilnummer för att vi enkelt kan lorem ipsum dolor sit amet.',
-              edit: 'Ändra',
-              editText:
-                'Ändra ditt mobilnummer nedan för att vi enkelt ska kunna lorem ipsum dolor.',
-              deleteAccount: 'Radera konto',
-              deleteHeading: 'Radera för gott?',
-              deleteText:
-                'Är du säker på att du vill radera ditt konto? Genom att radera ditt konto kommer du permanent bli av med din profil och din vinsthistorik. ',
-              deleteTextWarning: 'Det här går inte att ångra.',
-              goBackHeading: 'Gå bakåt utan att spara?',
-              goBackText:
-                'Välj avbryt om du vill gå tillbaka och spara. Annars går dina ändringar förlorade.',
-              activePinsText:
-                'Du har aktiva pins för den här veckans dragning. ',
-              creditsInWalletText: 'Du har krediter kvar i din spelplånbok. ',
-              makeSureText:
-                'Innan du kan radera ditt konto, se till att du varken har några aktiva pins eller krediter kvar i din spelplånbok.',
-              cancel: 'Avbryt',
-              confirm: 'Ja, radera',
-              dontSave: 'Spara inte',
-              close: 'Stäng',
-              verifyButton: 'Verifiering av mobilnummer',
-              verificationSent: 'Vi har skickat en verifieringskod till',
-              sendNewCodeButton: 'Skicka ny kod',
-              noCodeText:
-                'Om du inte fått någon kod inom 30 sekunder kan vi skicka ny kod.',
-            },
-            profileInfo: {
-              usernameLabel: 'User name',
-              passwordLabel: 'Password',
-              swapImageButton: 'Byt bild',
-              editNameMessage:
-                'En kombination av bokstäver och siffror samt ett specialtecken, så som ".” “-” “_", är tillåtet. Se till att du inte använder några blanksteg.',
-              save: 'Spara',
-              cancel: 'Avbryt',
-              imageCropInformation: 'Du kan nu zooma eller flytta din bild',
-              imageUpdatedMessage: 'Din profilbild är uppdaterad',
-            },
+          club: {
+            teamInfo: 'Team information',
+            league: 'League',
+            positions: 'Positions',
+            dedicated: 'Dedicated',
+            supportersClub: ' Supporters Club',
+            stadium: 'Stadium',
+            noStadium: ' does not have its own stadium yet.',
+            about: 'About the team',
+            noAbout: ' has not written anything about this team yet.',
+            supporterSize: 'Size',
+            supporterExpectations: 'Expectations',
+            fanFavorite: 'Fan favourite',
+            raceDistribution: 'Race distribution',
+            team: 'Team',
+            history: 'History',
+            player: 'Player',
+            awards: 'Awards',
+            season: 'Season',
+            position: 'Position',
+            points: 'Points',
+            role: 'Role',
+            place: 'Place',
+            noAwardsHistory: `doesn't seem to have won any player awards
+            yet.`,
+            noTeamHistory: `doesn't seem to have any team
+            history yet.`,
           },
           cookieBanner: {
-            heading: 'Acceptera cookies?',
-            text: 'Genom att klicka på “Acceptera” samtycker du till lagring av cookies på din enhet för att förbättra navigeringen på webbplatsen och analysera webbplatsens användning.',
-            accept: 'Acceptera',
-            decline: 'Neka',
-          },
-          inputs: {
-            inputPersonalId: {
-              personalId: 'Personal number (YYMMDDXXXX)',
-              label: 'Personnr. (ÅÅMMDDXXXX)',
-              placeholder: 'Personal number',
-            },
-            inputEmail: {
-              label: 'Email adress',
-              placeholder: 'Email',
-            },
-            inputPhone: {
-              placeholder: 'phone number',
-            },
-          },
-          gameTopBar: {
-            gameBreak: 'Spelpaus',
-            selfTest: 'Självtest',
-            gameLimits: 'Spelgränser',
-          },
-          countDown: {
-            gameStart: 'Vi är live om',
-            prizeValue: 'Storkovan idag:',
+            heading: 'Accept cookies?',
+            text: 'By clicking “Accept”, you consent to the storage of cookies on your device to improve website navigation and analyze website usage. By declining or deleting cookies, your experience may not be optimal.',
+            accept: 'Accept',
+            decline: 'Decline',
           },
         },
       },
