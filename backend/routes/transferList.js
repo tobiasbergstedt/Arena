@@ -32,24 +32,21 @@ router.get('/', async (req, res) => {
   });
 
   const playersListColRef = collection(db, 'players');
-  let playersList = [];
-  // const myQuery = query(playersListColRef, where('race', '==', race));
-  // const playersListSnapshot = await getDocs(myQuery);
+  let matchingPlayers = [];
+
   const playersListSnapshot = await getDocs(playersListColRef);
   playersListSnapshot.docs.forEach((docSnapshot) => {
-    playersList.push({ ...docSnapshot.data(), id: docSnapshot.id });
-  });
+    const matchingTransferObject = transferList.find(
+      (transferObject) => transferObject.playerId === docSnapshot.id
+    );
 
-  const matchingPlayers = [];
-  playersList.forEach((player) => {
-    const id = player.id;
-    const data1 = player;
-    transferList.forEach((transferObject) => {
-      const data2 = transferObject;
-      if (data2.playerId === id) {
-        matchingPlayers.push({ id, ...data1, ...data2 });
-      }
-    });
+    if (matchingTransferObject) {
+      matchingPlayers.push({
+        id: docSnapshot.id,
+        ...docSnapshot.data(),
+        ...matchingTransferObject,
+      });
+    }
   });
 
   let filteredPlayers = matchingPlayers;
@@ -99,7 +96,7 @@ router.get('/', async (req, res) => {
     })
   );
 
-  if (playersList && playersList.length > 0) {
+  if (filteredPlayerswithTeamName && filteredPlayerswithTeamName.length > 0) {
     res.send(filteredPlayerswithTeamName);
     return;
   }
@@ -198,8 +195,8 @@ router.put('/artefacts/:id', async (req, res) => {
   return;
 });
 
-cron.schedule('* * * * *', () => {
-  console.log('running every minute');
+cron.schedule('0 * * * *', () => {
+  console.log('Running every full hour.');
 });
 
 export default router;
