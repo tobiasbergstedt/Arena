@@ -1,4 +1,4 @@
-import { func, string, shape, bool, number } from 'prop-types';
+import { func, string, shape, number } from 'prop-types';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
@@ -12,34 +12,35 @@ const Input = ({
   onChange,
   onFocus,
   onBlur,
-  hasErrors,
+  onKeyDown,
   maxLength,
   placeholder,
 }) => {
   const animVariants = {
     focus: {
-      outline: '2px solid rgba(var(--rgb-blue), 1)',
-      backgroundColor: 'var(--color-grey-6)',
+      outline: 'none',
+      borderBottom: '2px solid var(--color-gold)',
+      backgroundColor: 'var(--color-grey-1)',
     },
     error: {
-      outline: '2px solid rgba(var(--rgb-validation-red), 1)',
+      outline: 'none',
+      borderBottom: '2px solid rgba(var(--rgb-validation-red), 1)',
       backgroundColor: 'var(--color-validation-background-red)',
     },
     default: {
-      outline: '2px solid rgba(var(--rgb-blue), 0)',
-      backgroundColor: 'var(--color-grey-6)',
+      outline: 'none',
+      borderBottom: '2px solid rgba(243, 243, 243, 100%)',
+      backgroundColor: 'var(--color-grey-1)',
     },
-    transition: { duration: 0.35, ease: 'linear' },
+    transition: { duration: 0.05, ease: 'linear' },
   };
 
   const animState = () => {
-    const hasFocus = document.activeElement === inputRef.current;
+    const hasFocus = document.activeElement === inputRef?.current;
     // Focus, no errors
     if (hasFocus) return 'focus';
-    // Errors
-    if (hasErrors) return 'error';
-    // No focus, no errors
-    if (!hasFocus && !hasErrors) return 'default';
+    // No focus
+    if (!hasFocus) return 'default';
   };
 
   return (
@@ -49,6 +50,7 @@ const Input = ({
       initial="default"
       variants={animVariants}
       animate={animState}
+      whileHover={animVariants.focus}
       transition={animVariants.transition}
       type={type}
       value={inputValue}
@@ -57,6 +59,7 @@ const Input = ({
       onBlur={onBlur}
       maxLength={maxLength}
       placeholder={placeholder}
+      onKeyDown={onKeyDown}
     />
   );
 };
@@ -69,7 +72,7 @@ Input.propTypes = {
   onChange: func,
   onFocus: func,
   onBlur: func,
-  hasErrors: bool,
+  onKeyDown: func,
   maxLength: number,
   placeholder: string,
 };
@@ -82,7 +85,7 @@ Input.defaultProps = {
   onChange: () => {},
   onFocus: () => {},
   onBlur: () => {},
-  hasErrors: false,
+  onKeyDown: () => {},
   maxLength: 1000,
   placeholder: '',
 };

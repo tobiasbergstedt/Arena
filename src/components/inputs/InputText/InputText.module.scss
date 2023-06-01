@@ -6,14 +6,15 @@
 
   flex-direction: column;
 
-  width: 335px;
+  width: 100%;
+  max-width: 350px;
   margin-right: auto;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   margin-left: auto;
 
   background-color: transparent;
 
-  color: var(--color-grey-3);
+  color: var(--color-white);
 }
 
 .inputLabelText {

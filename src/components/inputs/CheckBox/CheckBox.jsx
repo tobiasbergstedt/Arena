@@ -1,9 +1,9 @@
-import { string, func, bool, arrayOf } from 'prop-types';
+import { element, func, bool } from 'prop-types';
 import clsx from 'clsx';
 
 import styles from './CheckBox.module.scss';
 
-const CheckBox = ({ isLarge, onChange, onClick, agreement, text }) => {
+const CheckBox = ({ isLarge, onChange, agreement, children }) => {
   return (
     <div className={styles.checked}>
       <label
@@ -25,24 +25,23 @@ const CheckBox = ({ isLarge, onChange, onClick, agreement, text }) => {
           })}
         ></span>
       </label>
-      <p className={styles.checkBoxLabel} onClick={onClick}>
-        {text}
-      </p>
+      {children}
     </div>
   );
 };
 
 CheckBox.propTypes = {
   isLarge: bool,
-  text: string,
+  children: element || null,
   onChange: func,
-  onClick: func,
-  agreement: arrayOf(bool),
+  agreement: bool,
 };
 
 CheckBox.defaultProps = {
   isLarge: false,
-  text: '',
+  children: null,
+  onChange: () => {},
+  agreement: false,
 };
 
 export default CheckBox;
