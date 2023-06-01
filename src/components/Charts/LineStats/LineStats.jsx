@@ -55,6 +55,7 @@ const LineStats = ({ data }) => {
     },
     scales: {
       y: {
+        beginAtZero: true,
         reverse: true,
         ticks: {
           reverse: true,

@@ -1,0 +1,14 @@
+@import 'styles/utils/__utils';
+
+.attributesVisualizer {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  height: 300px;
+
+  background-color: var(--theme-color-secondary);
+
+  box-shadow: var(--box-shadow-primary);
+}

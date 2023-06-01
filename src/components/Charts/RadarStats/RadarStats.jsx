@@ -10,6 +10,8 @@ import {
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 
+import styles from './RadarStats.module.scss';
+
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 const RadarStats = ({ data }) => {
@@ -44,6 +46,14 @@ const RadarStats = ({ data }) => {
   };
 
   const options = {
+    layout: {
+      padding: {
+        left: 15,
+        right: 15,
+        top: 15,
+        bottom: 15,
+      },
+    },
     plugins: {
       tooltip: {
         displayColors: false,
@@ -79,7 +89,11 @@ const RadarStats = ({ data }) => {
     },
   };
 
-  return <Radar data={radarData} options={options} />;
+  return (
+    <div className={styles.attributesVisualizer}>
+      <Radar data={radarData} options={options} />
+    </div>
+  );
 };
 
 RadarStats.propTypes = {
