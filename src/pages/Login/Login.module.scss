@@ -25,7 +25,7 @@
   background-position: center;
   background-size: cover;
 
-  opacity: 0.15;
+  opacity: 0.2;
   inset: 0;
 }
 
@@ -78,7 +78,7 @@
 
     padding: 2px;
 
-    background: var(--theme-gradient-color-hover);
+    background: var(--theme-gradient-color-hover-inverse);
     border-radius: 50px;
     inset: 0;
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
@@ -94,7 +94,7 @@
 
     padding: 2px;
 
-    background: var(--theme-gradient-color-hover-inverse);
+    background: var(--theme-gradient-color-hover-tertiary);
     border-radius: 50px;
 
     opacity: 0;
@@ -168,6 +168,29 @@
   }
 }
 
+.checkBoxLabel {
+  position: relative;
+
+  cursor: pointer;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+
+    width: 100%;
+    height: 1px;
+
+    background-color: var(--color-white);
+
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+}
+
 .optionsWrapper {
   display: flex;
 
@@ -232,10 +255,4 @@
   text-decoration: underline;
 
   cursor: pointer;
-}
-
-.modalContent {
-  p {
-    @include font-14;
-  }
 }

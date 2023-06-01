@@ -1,0 +1,46 @@
+@import 'styles/utils/__utils';
+
+.modalContent {
+  p,
+  ol,
+  ul,
+  li {
+    @include font-14;
+  }
+}
+
+ol,
+ul {
+  padding: 0;
+
+  list-style: none;
+}
+
+ol li,
+ul li {
+  padding: 5px 0 5px 5px;
+  box-sizing: border-box;
+}
+
+.termsAndConditionsList {
+  font-size: 14px;
+  text-align: left;
+
+  > li {
+    color: var(--color-gold);
+
+    &:last-child {
+      padding: 5px 0 0 5px;
+    }
+
+    ol {
+      color: var(--color-white);
+
+      li {
+        &:last-child {
+          padding: 5px 0 0 5px;
+        }
+      }
+    }
+  }
+}
