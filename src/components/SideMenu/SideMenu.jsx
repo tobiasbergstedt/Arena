@@ -21,11 +21,11 @@ import { UserContext } from 'context/UserContext';
 import { useTranslation } from 'react-i18next';
 
 const SideMenu = ({ isSideMenuOpen, setIsSideMenuOpen }) => {
-  const { userTeam } = useContext(UserContext);
+  const { userTeam, logout } = useContext(UserContext);
+
   const location = useLocation();
   const slugs = location.pathname?.split('/') ?? [];
   const navigate = useNavigate();
-  const { logout } = useContext(UserContext);
   const { t } = useTranslation();
 
   const handleLogout = async () => {

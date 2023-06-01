@@ -36,7 +36,6 @@ const Modal = ({ children, className, hasCloseButton, canClose, onClick }) => {
           transition: { duration: 0.2 },
         }}
       />
-
       <motion.div
         className={styles.modal}
         initial={{
