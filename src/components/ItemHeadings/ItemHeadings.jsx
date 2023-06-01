@@ -10,6 +10,7 @@ const ItemHeadings = ({
   hasButton,
   onClick,
   isAllCapsSubHeading,
+  isSmallSubheading,
 }) => {
   return (
     <div className={styles.itemHeadingsWrapper}>
@@ -18,6 +19,7 @@ const ItemHeadings = ({
         <span
           className={clsx(styles.subHeading, {
             [styles.isAllCaps]: isAllCapsSubHeading,
+            [styles.isSmallSubheading]: isSmallSubheading,
           })}
         >
           {subHeading}
@@ -40,6 +42,7 @@ ItemHeadings.propTypes = {
   hasButton: string,
   onClick: func,
   isAllCapsSubHeading: bool,
+  isSmallSubheading: bool,
 };
 
 ItemHeadings.defaultProps = {
@@ -49,6 +52,7 @@ ItemHeadings.defaultProps = {
   hasButton: '',
   onClick: () => {},
   isAllCapsSubHeading: false,
+  isSmallSubheading: false,
 };
 
 export default ItemHeadings;

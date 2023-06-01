@@ -21,6 +21,12 @@
   text-transform: uppercase;
 }
 
+.isSmallSubheading {
+  @include font-20;
+
+  font-weight: 600;
+}
+
 .edit {
   @include font-16;
 
