@@ -10,6 +10,8 @@ import { GA_TRACKING_ID } from 'config/settings';
 import { ReactComponent as CookieIcon } from 'assets/icons/cookies.svg';
 
 import styles from './CookieBanner.module.scss';
+import { COOKIE_NAME } from 'config/constants';
+import clsx from 'clsx';
 
 const CookieBanner = () => {
   const [isCookieBannerVisible, setIsCookieBannerVisible] = useState(true);
@@ -37,10 +39,24 @@ const CookieBanner = () => {
   };
 
   useEffect(() => {
-    if (Cookies.get('CookieConsent')) {
+    if (Cookies.get(COOKIE_NAME)) {
       setIsCookieBannerVisible(false);
     }
   }, []);
+
+  const animVariantsFade = {
+    initial: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.5 },
+    },
+    after: {
+      opacity: 0,
+      transition: { duration: 0.4 },
+    },
+  };
 
   const animVariants = {
     initial: {
@@ -64,33 +80,43 @@ const CookieBanner = () => {
       {isCookieBannerVisible ? (
         <motion.div
           key={'cookieConsentWrapper'}
-          variants={animVariants}
+          className={styles.animBox}
+          variants={animVariantsFade}
           initial="initial"
           animate="visible"
           exit="after"
-          className={styles.animBox}
         >
-          <CookieConsent
-            containerClasses={styles.cookieContainer}
-            contentClasses={styles.cookieContent}
-            buttonWrapperClasses={styles.buttonContainer}
-            buttonClasses={styles.buttonClasses}
-            declineButtonClasses={styles.declineButtonClasses}
-            enableDeclineButton
-            buttonText={t('cookieBanner.accept')}
-            declineButtonText={t('cookieBanner.decline')}
-            onAccept={handleAcceptCookie}
-            onDecline={handleDeclineCookie}
-            disableStyles
-            hideOnAccept={false}
-            hideOnDecline={false}
+          <motion.div
+            className={styles.innerWrapper}
+            key={'cookieConsentInnerWrapper'}
+            variants={animVariants}
+            initial="initial"
+            animate="visible"
+            exit="after"
           >
-            <h5 className={styles.heading}>
-              <CookieIcon className={styles.cookieIcon} />
-              {t('cookieBanner.heading')}
-            </h5>
-            <p className={styles.paragraph}>{t('cookieBanner.text')}</p>
-          </CookieConsent>
+            <CookieConsent
+              cookieName={COOKIE_NAME}
+              containerClasses={styles.cookieContainer}
+              contentClasses={styles.cookieContent}
+              buttonWrapperClasses={styles.buttonContainer}
+              buttonClasses={styles.buttonClasses}
+              declineButtonClasses={styles.declineButtonClasses}
+              enableDeclineButton
+              buttonText={t('cookieBanner.accept')}
+              declineButtonText={t('cookieBanner.decline')}
+              onAccept={handleAcceptCookie}
+              onDecline={handleDeclineCookie}
+              disableStyles
+              hideOnAccept={false}
+              hideOnDecline={false}
+            >
+              <h5 className={clsx('goldenText', styles.heading)}>
+                <CookieIcon className={styles.cookieIcon} />
+                {t('cookieBanner.heading')}
+              </h5>
+              <p className={styles.paragraph}>{t('cookieBanner.text')}</p>
+            </CookieConsent>
+          </motion.div>
         </motion.div>
       ) : (
         <></>
