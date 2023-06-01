@@ -11,7 +11,7 @@ import styles from './PlayerTemplate.module.scss';
 import Button from 'components/Button/Button';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import InputTextNew from 'components/inputs/InputText/InputTextNew';
+import InputText from 'components/inputs/InputText/InputText';
 
 const PlayerTemplate = ({
   id,
@@ -163,7 +163,7 @@ const PlayerTemplate = ({
                   </div>
                 ))}
               </div>
-              <InputTextNew
+              <InputText
                 value={inputData.value}
                 onChange={(data) => {
                   setInputData({ ...inputData, userName: data });

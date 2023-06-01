@@ -2,7 +2,7 @@ import { func, object } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
-import InputTextNew from 'components/inputs/InputText/InputTextNew';
+import InputText from 'components/inputs/InputText/InputText';
 import Button from 'components/Button/Button';
 import Select from 'components/inputs/Select/Select';
 
@@ -165,10 +165,10 @@ const Player = ({
       </div>
       <div className={styles.inputsWrapper}>
         {inputs.map(({ value, onChange, label }) => (
-          <InputTextNew
+          <InputText
             value={value}
             onChange={onChange}
-            onKeyDown={() => handleKeyPress(event)}
+            onKeyDown={(event) => handleKeyPress(event)}
             label={label}
             key={label}
             type="tel"

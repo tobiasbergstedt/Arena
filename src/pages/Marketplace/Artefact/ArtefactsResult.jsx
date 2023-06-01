@@ -9,7 +9,7 @@ import { UserContext } from 'context/UserContext';
 
 import ItemHeadings from 'components/ItemHeadings/ItemHeadings';
 import Button from 'components/Button/Button';
-import InputTextNew from 'components/inputs/InputText/InputTextNew';
+import InputText from 'components/inputs/InputText/InputText';
 
 import { ReactComponent as OpenCloseArrow } from 'assets/icons/caret.svg';
 import Aura from 'assets/icons/artefacts/aura.svg';
@@ -161,7 +161,7 @@ const ArtefactsResult = ({ searchResultArtefact, setSearchResultArtefact }) => {
             })}
           >
             <div>
-              <InputTextNew
+              <InputText
                 value={inputData}
                 onChange={(data) => {
                   setInputData(data);
