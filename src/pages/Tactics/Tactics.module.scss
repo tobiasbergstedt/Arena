@@ -1,0 +1,46 @@
+@import 'styles/utils/__utils';
+
+.isLoading {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: calc(100vh - var(--menu-height));
+}
+
+.stadiumWrapper {
+  padding: var(--standard-padding) var(--standard-padding) 0;
+}
+
+.dark {
+  padding: var(--standard-padding);
+
+  background-color: var(--theme-color-secondary);
+
+  box-shadow: var(--box-shadow-primary);
+}
+
+.stadiumGrid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+
+  margin: 10px 0 40px;
+
+  p {
+    @include font-14;
+
+    margin: 0;
+  }
+}
+
+.gridItem {
+  display: flex;
+
+  justify-content: space-between;
+
+  width: 100%;
+}
