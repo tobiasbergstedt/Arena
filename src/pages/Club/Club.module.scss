@@ -1,0 +1,130 @@
+@import 'styles/utils/__utils';
+
+.isLoading {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: calc(100vh - var(--menu-height));
+}
+
+.leaguePositions,
+.historyAndAwards {
+  padding: var(--standard-padding);
+
+  background-color: var(--theme-color-secondary);
+
+  box-shadow: var(--box-shadow-primary);
+}
+
+.lineStats {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 16px;
+}
+
+.supporters {
+  padding: var(--standard-padding);
+
+  p {
+    @include font-14;
+
+    margin: 0;
+  }
+}
+
+.supportersInfo {
+  margin-top: 6px;
+}
+
+.donut {
+  margin: 16px 40px;
+}
+
+.raceDistribution {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 40px;
+
+  margin-top: 6px;
+}
+
+.raceObject {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  .left {
+    display: flex;
+
+    gap: 8px;
+    align-items: center;
+
+    margin: 0;
+  }
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+
+  border: 1px solid var(--color-gold);
+  border-radius: 50%;
+}
+
+.historyAndAwards {
+  display: flex;
+
+  flex-direction: column;
+  gap: 24px;
+}
+
+.historyGrid,
+.awardsGrid {
+  display: grid;
+
+  grid-template-columns: repeat(4, auto);
+
+  column-gap: 10px;
+
+  p {
+    @include font-14;
+
+    width: fit-content;
+    margin-bottom: 6px;
+  }
+}
+
+.noHistoryGrid {
+  @include font-14;
+
+  margin: 0;
+}
+
+.statsLabel {
+  position: relative;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background-image: var(--theme-gradient-color-hover);
+  }
+}
+
+.capitalize {
+  text-transform: capitalize;
+}

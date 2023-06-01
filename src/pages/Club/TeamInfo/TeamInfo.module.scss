@@ -1,0 +1,54 @@
+@import 'styles/utils/__utils';
+
+.teamInfoWrapper {
+  padding: var(--standard-padding);
+}
+
+.teamInfoInnerWrapper {
+  position: relative;
+  display: flex;
+
+  flex-direction: column;
+}
+
+.teamInfoSection {
+  margin-bottom: 8px;
+}
+
+.left {
+  margin-top: 4px;
+}
+
+.paragraph {
+  @include font-14;
+
+  margin: 0;
+}
+
+.about {
+  margin: 0;
+  padding: 6px 0 4px;
+
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.teamLogo {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  max-width: 85px;
+  max-height: 85px;
+}
+
+.iconInnerWrapper {
+  display: inline-block;
+
+  width: 16px;
+  height: 16px;
+
+  background: var(--theme-gradient-color-hover);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
