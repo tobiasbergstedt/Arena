@@ -1,0 +1,49 @@
+@import 'styles/utils/__utils';
+
+.attributesSelector {
+  padding: var(--standard-padding);
+}
+
+.attributesHeading {
+  margin-bottom: 8px;
+
+  font-weight: 600;
+  font-size: rem(16);
+}
+
+.attributesContent {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  max-width: 400px;
+
+  column-gap: 12px;
+  row-gap: 6px;
+}
+
+.attributeItem {
+  display: flex;
+
+  align-items: center;
+
+  // justify-content: space-between;
+}
+
+.attributeText {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 115px;
+
+  p {
+    @include font-14;
+
+    margin: 0;
+
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+}

@@ -1,0 +1,48 @@
+@import 'styles/utils/__utils';
+
+.transferHistory {
+  padding: var(--standard-padding);
+}
+
+.historyText {
+  @include font-14;
+
+  margin: 8px 0 0;
+
+  font-weight: 600;
+}
+
+.historyItem {
+  position: relative;
+
+  margin-bottom: 24px;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    bottom: -13px;
+    left: 0;
+
+    height: 1px;
+
+    background-color: var(--color-white);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+
+    &::before {
+      height: 0;
+    }
+  }
+
+  p {
+    @include font-14;
+
+    margin: 0 0 2px;
+
+    font-weight: 600;
+  }
+}

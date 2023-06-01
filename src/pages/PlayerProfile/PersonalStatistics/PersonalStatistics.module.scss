@@ -1,0 +1,70 @@
+@import 'styles/utils/__utils';
+
+.personalStats {
+  padding: var(--standard-padding);
+}
+
+.personalStatsContent {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-top: 14px;
+}
+
+.left {
+  margin-top: 8px;
+}
+
+.personalStatsSubHeading {
+  margin-bottom: 6px;
+
+  font-weight: 600;
+  font-size: rem(20);
+}
+
+.attemptsSuccessful {
+  @include font-16;
+
+  margin-bottom: 0;
+
+  font-weight: 600;
+}
+
+.personalStatsNumbers {
+  @include font-16;
+
+  margin-bottom: 8px;
+
+  font-weight: 600;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.right {
+  position: relative;
+
+  max-width: 50%;
+}
+
+.percentage {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+
+  font-weight: 600;
+  font-size: 20px;
+}

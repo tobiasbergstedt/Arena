@@ -1,0 +1,36 @@
+@import 'styles/utils/__utils';
+
+.bestPositions {
+  padding: var(--standard-padding);
+
+  background-color: var(--theme-color-secondary);
+
+  box-shadow: var(--box-shadow-primary);
+}
+
+.positionsList {
+  display: flex;
+
+  flex-direction: column;
+  gap: 12px;
+
+  margin-top: 10px;
+}
+
+.positionItem {
+  display: flex;
+
+  align-items: center;
+
+  p {
+    margin: 0;
+
+    font-weight: 600;
+    font-size: rem(20);
+  }
+}
+
+.donut {
+  width: 36px;
+  margin-right: 14px;
+}

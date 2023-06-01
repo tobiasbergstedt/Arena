@@ -1,0 +1,30 @@
+@import 'styles/utils/__utils';
+
+.modalContent {
+  p {
+    @include font-14;
+
+    font-weight: 600;
+  }
+}
+
+.deadline {
+  margin-bottom: 2px;
+}
+
+.buttonsWrapper {
+  display: flex;
+
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+
+  padding-top: 10px;
+}
+
+.buttonsWrapperSmall {
+  display: flex;
+
+  gap: 30px;
+  justify-content: center;
+}

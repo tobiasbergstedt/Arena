@@ -1,0 +1,34 @@
+@import 'styles/utils/__utils';
+
+.statsRanking {
+  position: relative;
+
+  padding: var(--standard-padding);
+
+  background-color: var(--theme-color-secondary);
+
+  box-shadow: var(--box-shadow-primary);
+}
+
+.selectWrapper {
+  position: absolute;
+  top: calc(var(--standard-padding) + 8px);
+  right: var(--standard-padding);
+}
+
+.lineStats {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 24px;
+}
+
+.round {
+  @include font-14;
+
+  margin: 0;
+
+  font-weight: 600;
+}
