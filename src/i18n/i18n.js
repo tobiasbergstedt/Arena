@@ -242,6 +242,7 @@ i18n
             players: 'Players',
             artefacts: 'Artefacts',
             search: 'Search',
+            searching: 'Searching',
             races: {
               any: 'Any race',
               human: 'Human',

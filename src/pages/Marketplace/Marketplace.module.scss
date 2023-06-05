@@ -1,5 +1,20 @@
 @import 'styles/utils/__utils';
 
+.isLoading {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: calc(100vh - var(--menu-height));
+}
+
+.loadingText {
+  margin-bottom: 16px;
+}
+
 .headings {
   padding: var(--standard-padding) var(--standard-padding) 0;
 }

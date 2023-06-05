@@ -14,6 +14,7 @@ import ArtefactsResult from './Artefact/ArtefactsResult';
 import PlayersResult from './Player/PlayersResult';
 
 import styles from './Marketplace.module.scss';
+import Spinner from 'components/Spinner/Spinner';
 
 const Marketplace = () => {
   const [searchInputPlayer, setSearchInputPlayer] = useState({
@@ -32,12 +33,14 @@ const Marketplace = () => {
     maxBid: '',
   });
   const [isSelected, setIsSelected] = useState(0);
+  const [isLoading, setIsLoading] = useState(0);
   const [searchResultPlayer, setSearchResultPlayer] = useState([]);
   const [searchResultArtefact, setSearchResultArtefact] = useState([]);
 
   const { t } = useTranslation();
 
   async function getSearchResultPlayers() {
+    setIsLoading(true);
     let queryParams = '';
     if (
       searchInputPlayer.race.length !== 0 &&
@@ -73,10 +76,12 @@ const Marketplace = () => {
 
     const response = await fetch(fixUrl(url));
     const apiData = await response.json();
-    setSearchResultPlayer(apiData);
+    await setSearchResultPlayer(apiData);
+    setIsLoading(false);
   }
 
   async function getSearchResultArtefacts() {
+    setIsLoading(true);
     let queryParams = '';
     if (
       searchInputArtefact.artefactType.length !== 0 &&
@@ -94,7 +99,8 @@ const Marketplace = () => {
 
     const response = await fetch(fixUrl(url));
     const apiData = await response.json();
-    setSearchResultArtefact(apiData);
+    await setSearchResultArtefact(apiData);
+    setIsLoading(false);
   }
 
   const handleKeyPress = (e) => {
@@ -110,71 +116,85 @@ const Marketplace = () => {
 
   return (
     <>
-      {searchResultPlayer?.length > 0 || searchResultArtefact?.length > 0 ? (
-        <>
-          {isSelected === 0 ? (
-            <PlayersResult
-              searchResultPlayer={searchResultPlayer}
-              setSearchResultPlayer={setSearchResultPlayer}
-            />
-          ) : (
-            <ArtefactsResult
-              setSearchResultArtefact={setSearchResultArtefact}
-              searchResultArtefact={searchResultArtefact}
-              getSearchResultArtefacts={getSearchResultArtefacts}
-            />
-          )}
-        </>
+      {isLoading ? (
+        <div className={styles.isLoading}>
+          <h4 className={styles.loadingText}>
+            {t('marketplace.searching')}...
+          </h4>
+          <Spinner />
+        </div>
       ) : (
         <>
-          <div className={styles.headings}>
-            <ItemHeadings
-              heading={t('marketplace.heading')}
-              subHeading={t('marketplace.subHeading')}
-            />
-          </div>
-          <p className={styles.description}>{t('marketplace.description')}</p>
-          <div className={styles.marketSelector}>
-            <p
-              className={clsx(styles.selector, {
-                ['goldenText']: isSelected === 0,
-                [styles.isSelected]: isSelected === 0,
-              })}
-              onClick={() => setIsSelected(0)}
-            >
-              {t('marketplace.players')}
-            </p>
-            <p
-              className={clsx(styles.selector, {
-                ['goldenText']: isSelected === 1,
-                [styles.isSelected]: isSelected === 1,
-              })}
-              onClick={() => setIsSelected(1)}
-            >
-              {t('marketplace.artefacts')}
-            </p>
-          </div>
-          <div className={styles.inputsWrapper}>
-            <AnimatePresence initial={false}>
+          {searchResultPlayer?.length > 0 ||
+          searchResultArtefact?.length > 0 ? (
+            <>
               {isSelected === 0 ? (
-                <Player
-                  setSearchInputPlayer={setSearchInputPlayer}
-                  searchInputPlayer={searchInputPlayer}
-                  handleKeyPress={handleKeyPress}
-                  key="playersOptionsWrapper"
-                  getSearchResultPlayers={getSearchResultPlayers}
+                <PlayersResult
+                  searchResultPlayer={searchResultPlayer}
+                  setSearchResultPlayer={setSearchResultPlayer}
                 />
               ) : (
-                <Artefact
-                  setSearchInputArtefact={setSearchInputArtefact}
-                  searchInputArtefact={searchInputArtefact}
-                  handleKeyPress={handleKeyPress}
-                  key="artefactsOptionsWrapper"
+                <ArtefactsResult
+                  setSearchResultArtefact={setSearchResultArtefact}
+                  searchResultArtefact={searchResultArtefact}
                   getSearchResultArtefacts={getSearchResultArtefacts}
                 />
               )}
-            </AnimatePresence>
-          </div>
+            </>
+          ) : (
+            <>
+              <div className={styles.headings}>
+                <ItemHeadings
+                  heading={t('marketplace.heading')}
+                  subHeading={t('marketplace.subHeading')}
+                />
+              </div>
+              <p className={styles.description}>
+                {t('marketplace.description')}
+              </p>
+              <div className={styles.marketSelector}>
+                <p
+                  className={clsx(styles.selector, {
+                    ['goldenText']: isSelected === 0,
+                    [styles.isSelected]: isSelected === 0,
+                  })}
+                  onClick={() => setIsSelected(0)}
+                >
+                  {t('marketplace.players')}
+                </p>
+                <p
+                  className={clsx(styles.selector, {
+                    ['goldenText']: isSelected === 1,
+                    [styles.isSelected]: isSelected === 1,
+                  })}
+                  onClick={() => setIsSelected(1)}
+                >
+                  {t('marketplace.artefacts')}
+                </p>
+              </div>
+              <div className={styles.inputsWrapper}>
+                <AnimatePresence initial={false}>
+                  {isSelected === 0 ? (
+                    <Player
+                      setSearchInputPlayer={setSearchInputPlayer}
+                      searchInputPlayer={searchInputPlayer}
+                      handleKeyPress={handleKeyPress}
+                      key="playersOptionsWrapper"
+                      getSearchResultPlayers={getSearchResultPlayers}
+                    />
+                  ) : (
+                    <Artefact
+                      setSearchInputArtefact={setSearchInputArtefact}
+                      searchInputArtefact={searchInputArtefact}
+                      handleKeyPress={handleKeyPress}
+                      key="artefactsOptionsWrapper"
+                      getSearchResultArtefacts={getSearchResultArtefacts}
+                    />
+                  )}
+                </AnimatePresence>
+              </div>
+            </>
+          )}
         </>
       )}
     </>
