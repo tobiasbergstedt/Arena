@@ -28,7 +28,7 @@ const Select = ({
       backgroundColor: 'var(--color-validation-background-red)',
     },
     default: {
-      borderBottom: '2px solid rgba(243, 243, 243, 100%)',
+      borderBottom: '2px solid var(--input-border)',
       backgroundColor: 'var(--color-grey-1)',
     },
     transition: { duration: 0.05, ease: 'linear' },
