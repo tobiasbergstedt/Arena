@@ -2,8 +2,7 @@ import NextLastGame from 'components/NextLastGame/NextLastGame';
 import LatestNews from 'components/News/LatestNews/LatestNews';
 import LeaguePosition from 'components/LeaguePosition/LeaguePosition';
 
-import { ReactComponent as TeamLogoHome } from 'assets/icons/elf_team.svg';
-import { ReactComponent as TeamLogoAway } from 'assets/icons/orc_team.svg';
+import TeamLogoAway from 'assets/icons/orc_team.svg';
 
 import styles from './Landing.module.scss';
 import { useContext, useState } from 'react';
@@ -13,7 +12,7 @@ import { UserContext } from 'context/UserContext';
 import Spinner from 'components/Spinner/Spinner';
 
 const Landing = () => {
-  const { userTeam } = useContext(UserContext);
+  const { userTeam, getUserTeam } = useContext(UserContext);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const { t } = useTranslation();
@@ -21,6 +20,7 @@ const Landing = () => {
   const date = currentTime.toLocaleDateString(t('global.localeString'));
 
   useEffect(() => {
+    getUserTeam();
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -54,7 +54,7 @@ const Landing = () => {
             </div>
             <NextLastGame
               TeamLogoAway={TeamLogoAway}
-              TeamLogoHome={TeamLogoHome}
+              TeamLogoHome={userTeam.logo}
               isLastGame
               userTeam={userTeam}
             />

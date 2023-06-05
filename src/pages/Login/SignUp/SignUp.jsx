@@ -14,6 +14,7 @@ import Select from 'components/inputs/Select/Select';
 import TermsAndConditionsModal from '../Modals/TermsAndConditionsModal';
 
 import { ReactComponent as ArrowBack } from 'assets/icons/arrow-back.svg';
+import fixUrl from 'utils/fix-url';
 
 const SignUp = ({
   animVariants,
@@ -34,8 +35,6 @@ const SignUp = ({
     confirmEmail: '',
     termsAndConditions: false,
   });
-  const [acceptTermsAndConditions, setAcceptTermsAndConditions] =
-    useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isTermsModalVisible, setIsTermsModalVisible] = useState(false);
 
@@ -122,13 +121,24 @@ const SignUp = ({
       // await sendEmailVerification(auth.currentUser).catch((error) => {
       //   setDisplayError(error.message);
       // });
-      await updateProfile(auth.currentUser, {
-        displayName: signupInputData.userName,
-      }).catch((error) => {
-        setDisplayError(error.message);
-      });
       setLoading(false);
       if (auth.currentUser) {
+        await updateProfile(auth.currentUser, {
+          displayName: signupInputData.userName,
+        }).catch((error) => {
+          setDisplayError(error.message);
+        });
+        await fetch(fixUrl('/teams/random'), {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userUID: auth.currentUser.uid,
+            teamName: signupInputData.teamName,
+            race: signupInputData.race,
+          }),
+        });
         navigate('landing');
       }
     } catch (error) {
@@ -141,6 +151,28 @@ const SignUp = ({
     if (e.key == 'Enter' || e.keyCode === 13) {
       createTeam();
     }
+  };
+
+  const raceValue = (race) => {
+    let raceString;
+    switch (race) {
+      case t('login.races.humans'):
+        raceString = 'human';
+        break;
+      case t('login.races.elves'):
+        raceString = 'elf';
+        break;
+      case t('login.races.dwarves'):
+        raceString = 'dwarf';
+        break;
+      case t('login.races.orcs'):
+        raceString = 'orc';
+        break;
+      default:
+        raceString = '';
+        break;
+    }
+    return raceString;
   };
 
   const checkIsDisabled = () => {
@@ -190,7 +222,7 @@ const SignUp = ({
           value={signupInputData.race}
           options={selectValues.options}
           onChange={(data) => {
-            setSignupInputData({ ...signupInputData, race: data });
+            setSignupInputData({ ...signupInputData, race: raceValue(data) });
           }}
           label={selectValues.label}
         />
@@ -208,13 +240,19 @@ const SignUp = ({
           <CheckBox
             isLarge
             onChange={(event) => {
-              setAcceptTermsAndConditions(event.target.checked);
+              setSignupInputData({
+                ...signupInputData,
+                termsAndConditions: event.target.checked,
+              });
             }}
-            agreement={acceptTermsAndConditions}
+            agreement={signupInputData.termsAndConditions}
           >
             <p
               onClick={() => {
-                setAcceptTermsAndConditions(!acceptTermsAndConditions);
+                setSignupInputData({
+                  ...signupInputData,
+                  termsAndConditions: !signupInputData.termsAndConditions,
+                });
               }}
             >
               {t('login.iAccept')}

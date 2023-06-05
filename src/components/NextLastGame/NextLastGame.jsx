@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { func, bool, object } from 'prop-types';
+import { string, bool, object } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import fixUrl from 'utils/fix-url';
@@ -85,7 +85,7 @@ const NextLastGame = ({ TeamLogoHome, TeamLogoAway, isLastGame, userTeam }) => {
         <div className={styles.imageOuterContainer}>
           <div className={styles.imageContainer}>
             {/* <img src={teamLogoHome} alt="Behemot Bashers Logo" /> */}
-            <TeamLogoHome alt="Behemot Bashers Logo" />
+            <img src={TeamLogoHome} alt="Behemot Bashers Logo" />
           </div>
         </div>
         <div className={styles.imageOuterContainer}>
@@ -95,7 +95,7 @@ const NextLastGame = ({ TeamLogoHome, TeamLogoAway, isLastGame, userTeam }) => {
               alt="Twin Peaks Logo"
               style={{ outline: '2px solid red' }}
             /> */}
-            <TeamLogoAway alt="Twin Peaks Logo" />
+            <img src={TeamLogoAway} alt="Twin Peaks Logo" />
           </div>
         </div>
         <div className={styles.gameInfo}>
@@ -124,8 +124,8 @@ const NextLastGame = ({ TeamLogoHome, TeamLogoAway, isLastGame, userTeam }) => {
 };
 
 NextLastGame.propTypes = {
-  TeamLogoHome: func,
-  TeamLogoAway: func,
+  TeamLogoHome: string,
+  TeamLogoAway: string,
   isLastGame: bool,
   userTeam: object,
 };

@@ -6,8 +6,7 @@ import MenuSection from 'components/SideMenu/MenuSection/MenuSection';
 import Copyright from 'components/Copyright/Copyright';
 
 import CloseCross from 'assets/icons/close-cross.svg';
-import { ReactComponent as TeamLogoAway } from 'assets/icons/elf_team.svg';
-import { ReactComponent as TeamLogoHome } from 'assets/icons/human_team.svg';
+import TeamLogoHome from 'assets/icons/human_team.svg';
 
 import styles from './SideMenu.module.scss';
 
@@ -79,7 +78,7 @@ const SideMenu = ({ isSideMenuOpen, setIsSideMenuOpen }) => {
             <UserMenu slugs={slugs} setIsSideMenuOpen={setIsSideMenuOpen} />
             <NextLastGame
               TeamLogoHome={TeamLogoHome}
-              TeamLogoAway={TeamLogoAway}
+              TeamLogoAway={userTeam.logo}
               userTeam={userTeam}
             />
             <MenuSection

@@ -21,8 +21,7 @@ const History = ({
   const [reversedHistoryArray, setReversedHistoryArray] = useState([]);
 
   useEffect(() => {
-    const reversedHistory = [...historyArray].reverse();
-    setReversedHistoryArray(reversedHistory);
+    setReversedHistoryArray(historyArray.slice().reverse());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

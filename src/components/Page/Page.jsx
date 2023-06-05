@@ -10,7 +10,7 @@ import SideMenu from 'components/SideMenu/SideMenu';
 import Chat from 'components/Chat/Chat';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { ReactComponent as LoggedOutIcon } from 'assets/icons/background-icons/not-logged-in.svg';
+import { ReactComponent as LoggedOutIcon } from 'assets/backgrounds/not-logged-in.svg';
 
 import styles from './Page.module.scss';
 import { ROUTE_CONSTANTS } from 'config/constants';
@@ -94,7 +94,9 @@ const Page = ({ children, className }) => {
             </p>
           </motion.div>
         )}
-        {!user && activeRoute === '' && <>{children && children}</>}
+        {((!user && activeRoute === '') || (user && activeRoute === '')) && (
+          <>{children && children}</>
+        )}
       </AnimatePresence>
     </div>
   );

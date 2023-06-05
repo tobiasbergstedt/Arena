@@ -3,6 +3,7 @@ const router = express.Router();
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../database/firebase.js';
 import addScript from '../database/addScript.js';
+import updateTeam from '../database/updateTeam.js';
 
 router.get('/', async (req, res) => {
   const colRef = collection(db, 'teams');
@@ -300,6 +301,38 @@ router.post('/populate', async (req, res) => {
   }
 
   res.sendStatus(400);
+  return;
+});
+
+router.put('/random', async (req, res) => {
+  let { userUID, race, teamName } = req.body;
+  const colRef = collection(db, 'teams');
+  const q = query(
+    colRef,
+    where('userUID', '==', null),
+    where('race', '==', race)
+  );
+  let teams = [];
+  const snapshot = await getDocs(q);
+  snapshot.docs.forEach((docSnapshot) => {
+    teams.push({ ...docSnapshot.data(), id: docSnapshot.id });
+  });
+
+  const randomIndex = Math.floor(Math.random() * teams.length);
+  const randomTeam = teams[randomIndex];
+
+  if (teams.length > 0) {
+    let newData = {
+      ...randomTeam,
+      userUID: userUID,
+      teamName: teamName,
+    };
+    await updateTeam(newData);
+    res.sendStatus(200);
+    return;
+  }
+
+  res.sendStatus(404);
   return;
 });
 

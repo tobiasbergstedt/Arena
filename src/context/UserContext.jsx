@@ -12,6 +12,7 @@ import { auth } from 'api/firebase';
 import {
   STORAGE_USERTEAM_DATA,
   FIREBASE_USER_TOKEN_KEY,
+  ARENA_SAVED_ATTRIBUTES,
 } from 'config/constants';
 import fixUrl from 'utils/fix-url';
 
@@ -25,17 +26,22 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState(session.read(FIREBASE_USER_TOKEN_KEY));
   const [userTeam, setUserTeam] = useState(session.read(STORAGE_USERTEAM_DATA));
   const [savedAttributes, setSavedAttributes] = useState(() => {
-    const storageItem = localStorage.getItem('arenaSavedAttributes');
+    const storageItem = localStorage.getItem(ARENA_SAVED_ATTRIBUTES);
     return JSON.parse(storageItem);
   });
+
+  const getUserTeam = async () => {
+    const response = await fetch(fixUrl('/teams'));
+    const apiData = await response.json();
+    const matchingUser = apiData.find((team) => team.userUID === user.uid);
+    setUserTeam(matchingUser);
+    session.write(STORAGE_USERTEAM_DATA, matchingUser);
+  };
+
   useEffect(() => {
     async function getData() {
-      const response = await fetch(fixUrl('/teams'));
-      const apiData = await response.json();
       if (user) {
-        const matchingUser = apiData.find((team) => team.userUID === user.uid);
-        setUserTeam(matchingUser);
-        session.write(STORAGE_USERTEAM_DATA, matchingUser);
+        getUserTeam();
       }
     }
     getData();
@@ -47,6 +53,7 @@ const UserProvider = ({ children }) => {
 
   const logout = () => {
     session.destroy(STORAGE_USERTEAM_DATA);
+    session.destroy(FIREBASE_USER_TOKEN_KEY);
     return signOut(auth);
   };
 
@@ -65,6 +72,7 @@ const UserProvider = ({ children }) => {
       value={{
         user,
         userTeam,
+        getUserTeam,
         signin,
         logout,
         savedAttributes,
