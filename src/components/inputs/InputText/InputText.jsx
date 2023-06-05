@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import Input from '../Input/Input';
 
-import { ReactComponent as ClearIcon } from 'assets/icons/input-clear.svg';
+import ClearIcon from 'assets/icons/input-clear.svg';
 
 import styles from './InputText.module.scss';
 
@@ -107,12 +107,10 @@ const InputText = ({
             animate="visible"
             whileHover="hover"
             exit="hidden"
-          >
-            <ClearIcon
-              className={styles.clearButton}
-              onClick={() => resetInput()}
-            />
-          </motion.span>
+            className={styles.clearButton}
+            onClick={() => resetInput()}
+            style={{ backgroundImage: `url(${ClearIcon})` }}
+          />
         )}
         <motion.span
           key="infoMessage"
