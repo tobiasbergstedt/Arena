@@ -6,7 +6,6 @@ import styles from './ItemHeadings.module.scss';
 const ItemHeadings = ({
   heading,
   subHeading,
-  hasDropDown,
   hasButton,
   onClick,
   isAllCapsSubHeading,
@@ -25,7 +24,6 @@ const ItemHeadings = ({
           {subHeading}
         </span>
       </div>
-      {hasDropDown && <select></select>}
       {hasButton && (
         <p className={styles.edit} onClick={onClick}>
           {hasButton}
