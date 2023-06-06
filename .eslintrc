@@ -25,7 +25,10 @@
     "react/display-name": 0,
     "import/no-extraneous-dependencies": 0,
     "prettier/prettier": [
-      "error"
+      "error",
+      {
+        "endOfLine": "auto"
+      }
     ],
     "no-console": 0,
     "react/react-in-jsx-scope": 0,

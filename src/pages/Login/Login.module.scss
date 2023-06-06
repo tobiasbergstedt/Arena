@@ -13,7 +13,7 @@
   @include is-tablet {
     flex-direction: row;
 
-    padding: var(--login-padding-tablet);
+    padding: clamp(20px, auto, 128px) 48px clamp(10px, auto, 32px);
   }
 }
 
@@ -50,6 +50,8 @@
   @include is-tablet {
     flex-grow: 0;
     justify-content: center;
+
+    margin-bottom: 0;
   }
 }
 

@@ -11,8 +11,10 @@ const TermsAndConditionsModal = ({ setIsModalVisible }) => {
   return (
     <Modal canClose onClick={() => setIsModalVisible(false)}>
       <div className={styles.modalContent}>
-        <h3 className="goldenText">{t('termsAndConditions.heading')}</h3>
-        <p>{t('termsAndConditions.text')}</p>
+        <div className={styles.heading}>
+          <h3 className="goldenText">{t('termsAndConditions.heading')}</h3>
+          <p>{t('termsAndConditions.text')}</p>
+        </div>
         <ol className={styles.termsAndConditionsList}>
           <li>
             {t('termsAndConditions.listItem1.subHeading')}
