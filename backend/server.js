@@ -34,7 +34,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(distPath));
-app.use('/img/', express.static(path.join(__dirname, '/hamsterimages/')));
 app.use('/assets/', express.static(path.join(__dirname, '/assets/')));
 //End MiddleWare
 
