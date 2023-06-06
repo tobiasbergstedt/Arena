@@ -7,12 +7,12 @@ i18n
   // init i18next
   .init({
     debug: import.meta.env.DEV,
-    fallbackLng: 'sv',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
     resources: {
-      sv: {
+      en: {
         translation: {
           arena: 'Arena',
           global: {

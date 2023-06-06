@@ -41,38 +41,44 @@ const Marketplace = () => {
 
   async function getSearchResultPlayers() {
     setIsLoading(true);
-    let queryParams = '';
-    if (
-      searchInputPlayer.race.length !== 0 &&
-      searchInputPlayer.race !== t('marketplace.races.any')
-    ) {
-      queryParams += `&race=${searchInputPlayer.race}`;
+    let queryParams = [];
+    const {
+      race,
+      position,
+      minInjury,
+      maxInjury,
+      minSalary,
+      maxSalary,
+      minBid,
+      maxBid,
+    } = searchInputPlayer;
+
+    if (race.length !== 0 && race !== t('marketplace.races.any')) {
+      queryParams.push(`race=${race}`);
     }
-    if (
-      searchInputPlayer.position.length !== 0 &&
-      searchInputPlayer.position !== t('positions.any')
-    ) {
-      queryParams += `&position=${searchInputPlayer.position}`;
+    if (position.length !== 0 && position !== t('positions.any')) {
+      queryParams.push(`position=${position}`);
     }
-    if (searchInputPlayer.minInjury.length !== 0) {
-      queryParams += `&minInjury=${searchInputPlayer.minInjury}`;
+    if (minInjury.length !== 0) {
+      queryParams.push(`minInjury=${minInjury}`);
     }
-    if (searchInputPlayer.maxInjury.length !== 0) {
-      queryParams += `&maxInjury=${searchInputPlayer.maxInjury}`;
+    if (maxInjury.length !== 0) {
+      queryParams.push(`maxInjury=${maxInjury}`);
     }
-    if (searchInputPlayer.minSalary.length !== 0) {
-      queryParams += `&minSalary=${searchInputPlayer.minSalary}`;
+    if (minSalary.length !== 0) {
+      queryParams.push(`minSalary=${minSalary}`);
     }
-    if (searchInputPlayer.maxSalary.length !== 0) {
-      queryParams += `&maxSalary=${searchInputPlayer.maxSalary}`;
+    if (maxSalary.length !== 0) {
+      queryParams.push(`maxSalary=${maxSalary}`);
     }
-    if (searchInputPlayer.minBid.length !== 0) {
-      queryParams += `&minBid=${Number(searchInputPlayer.minBid)}`;
+    if (minBid.length !== 0) {
+      queryParams.push(`minBid=${Number(minBid)}`);
     }
-    if (searchInputPlayer.maxBid.length !== 0) {
-      queryParams += `&maxBid=${Number(searchInputPlayer.maxBid)}`;
+    if (maxBid.length !== 0) {
+      queryParams.push(`maxBid=${Number(maxBid)}`);
     }
-    const url = `/transferlist?${queryParams.slice(1)}`;
+
+    const url = `/transferlist?${queryParams.join('&')}`;
 
     const response = await fetch(fixUrl(url));
     const apiData = await response.json();
@@ -82,20 +88,23 @@ const Marketplace = () => {
 
   async function getSearchResultArtefacts() {
     setIsLoading(true);
-    let queryParams = '';
+    const queryParams = [];
+    const { artefactType, minBid, maxBid } = searchInputArtefact;
+
     if (
-      searchInputArtefact.artefactType.length !== 0 &&
-      searchInputArtefact.artefactType !== t('artefacts.short.any')
+      artefactType.length !== 0 &&
+      artefactType !== t('artefacts.short.any')
     ) {
-      queryParams += `&artefactType=${searchInputArtefact.artefactType}`;
+      queryParams.push(`artefactType=${artefactType}`);
     }
-    if (searchInputArtefact.minBid.length !== 0) {
-      queryParams += `&minBid=${Number(searchInputArtefact.minBid)}`;
+    if (minBid.length !== 0) {
+      queryParams.push(`minBid=${Number(minBid)}`);
     }
-    if (searchInputArtefact.maxBid.length !== 0) {
-      queryParams += `&maxBid=${Number(searchInputArtefact.maxBid)}`;
+    if (maxBid.length !== 0) {
+      queryParams.push(`maxBid=${Number(maxBid)}`);
     }
-    const url = `/transferlist/artefacts?${queryParams.slice(1)}`;
+
+    const url = `/transferlist/artefacts?${queryParams.join('&')}`;
 
     const response = await fetch(fixUrl(url));
     const apiData = await response.json();
