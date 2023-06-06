@@ -7,7 +7,6 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-import hamsters from './routes/hamsters.js';
 import players from './routes/players.js';
 import transferList from './routes/transferList.js';
 import chatMessages from './routes/chatMessages.js';
@@ -40,7 +39,6 @@ app.use('/assets/', express.static(path.join(__dirname, '/assets/')));
 //End MiddleWare
 
 // Endpoints
-app.use('/hamsters', hamsters);
 app.use('/players', players);
 app.use('/transferList', transferList);
 app.use('/chat', chatMessages);
