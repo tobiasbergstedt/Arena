@@ -66,7 +66,7 @@ const SignIn = ({
           setInputData({ ...inputData, userName: data });
         }}
         onKeyDown={(event) => handleKeyPress(event)}
-        label={t('login.inputs.userName')}
+        label={t('login.inputs.email')}
       />
       <InputText
         type="password"
