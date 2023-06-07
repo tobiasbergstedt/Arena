@@ -3,6 +3,7 @@
 .artefactsWrapper {
   position: absolute;
   top: 0;
+  bottom: auto;
   left: 70%;
   display: flex;
 }
@@ -19,4 +20,9 @@
 .artefactImage {
   width: 24px;
   height: 24px;
+}
+
+.singlePlayerView {
+  top: auto;
+  bottom: 0;
 }

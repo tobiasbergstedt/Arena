@@ -1,4 +1,4 @@
-import { arrayOf, string } from 'prop-types';
+import { arrayOf, string, bool } from 'prop-types';
 
 import Amulet from 'assets/icons/artefacts/amulet.svg';
 import Aura from 'assets/icons/artefacts/aura.svg';
@@ -9,8 +9,9 @@ import ShadowBrew from 'assets/icons/artefacts/shadow-brew.svg';
 import SiicusTattoo from 'assets/icons/artefacts/siicus-tattoo.svg';
 
 import styles from './ArtefactsDisplay.module.scss';
+import clsx from 'clsx';
 
-const ArtefactsDisplay = ({ artefacts }) => {
+const ArtefactsDisplay = ({ artefacts, isSinglePlayerView }) => {
   const renderArtefacts = () => {
     const imageMap = {
       amulet: Amulet,
@@ -22,11 +23,11 @@ const ArtefactsDisplay = ({ artefacts }) => {
       siicusTattoo: SiicusTattoo,
     };
 
-    return artefacts.map((artefact) => {
+    return artefacts.map((artefact, index) => {
       const src = imageMap[artefact];
       return (
         <img
-          key={src}
+          key={(src, index)}
           src={src}
           alt={artefact}
           className={styles.artefactImage}
@@ -36,7 +37,11 @@ const ArtefactsDisplay = ({ artefacts }) => {
   };
 
   return (
-    <div className={styles.artefactsWrapper}>
+    <div
+      className={clsx(styles.artefactsWrapper, {
+        [styles.singlePlayerView]: isSinglePlayerView,
+      })}
+    >
       <div className={styles.artefacts}>
         {artefacts?.length > 0 && renderArtefacts()}
       </div>
@@ -46,6 +51,7 @@ const ArtefactsDisplay = ({ artefacts }) => {
 
 ArtefactsDisplay.propTypes = {
   artefacts: arrayOf(string),
+  isSinglePlayerView: bool,
 };
 
 export default ArtefactsDisplay;

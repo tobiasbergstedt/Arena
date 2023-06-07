@@ -58,6 +58,38 @@
   }
 }
 
+.backArrow {
+  position: absolute;
+  top: calc(var(--standard-padding) / 2);
+  right: calc(var(--standard-padding) / 1.5);
+
+  width: 20px;
+  height: 20px;
+
+  background-image: var(--gradient-white);
+
+  cursor: pointer;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-image: var(--theme-gradient-color-hover);
+
+    opacity: 0;
+    transition: opacity var(--standard-transition-quick);
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
 .topWrapper {
   position: relative;
   display: flex;

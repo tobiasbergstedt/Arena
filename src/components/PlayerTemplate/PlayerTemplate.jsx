@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 
 import PlayerNumber from 'assets/icons/player-number.svg';
 import { ReactComponent as OpenCloseArrow } from 'assets/icons/caret.svg';
+import BackArrow from 'assets/icons/arrow-back.svg';
 import ArtefactsDisplay from 'components/PlayerTemplate/Artefacts/ArtefactsDisplay';
 
 import styles from './PlayerTemplate.module.scss';
@@ -47,6 +48,16 @@ const PlayerTemplate = ({
       })}
       onClick={isTransferList ? () => null : () => navigate(`/player/${id}`)}
     >
+      {isSinglePlayerView && (
+        <div
+          className={styles.backArrow}
+          style={{ maskImage: `url(${BackArrow})` }}
+          onClick={(event) => {
+            event.stopPropagation();
+            navigate(-1);
+          }}
+        />
+      )}
       <div
         className={clsx(styles.topWrapper, {
           [styles.topWrapperTransferList]: isTransferList,
@@ -79,7 +90,10 @@ const PlayerTemplate = ({
             {position}
           </p>
         </div>
-        <ArtefactsDisplay artefacts={artefacts} />
+        <ArtefactsDisplay
+          artefacts={artefacts}
+          isSinglePlayerView={isSinglePlayerView}
+        />
       </div>
       <div className={styles.bottomWrapper}>
         <div className={styles.left}>
