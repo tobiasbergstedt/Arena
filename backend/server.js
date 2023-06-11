@@ -13,10 +13,6 @@ import chatMessages from './routes/chatMessages.js';
 import news from './routes/news.js';
 import teams from './routes/teams.js';
 import divisions from './routes/divisions.js';
-import matches from './routes/matches.js';
-import matchWinners from './routes/matchWinners.js';
-import winners from './routes/winners.js';
-import losers from './routes/losers.js';
 
 // Konfiguration
 const PORT = process.env.PORT || 1337;
@@ -44,10 +40,6 @@ app.use('/chat', chatMessages);
 app.use('/news', news);
 app.use('/teams', teams);
 app.use('/divisions', divisions);
-app.use('/matches', matches);
-app.use('/matchWinners', matchWinners);
-app.use('/winners', winners);
-app.use('/losers', losers);
 
 // Övriga endpoints, för att fungera med React Router i frontend
 app.all('*', (req, res) => {
