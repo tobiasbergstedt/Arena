@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../database/firebase.js';
-import addScript from '../database/addChatMessages.js';
+import addScript from '../database/addScript.js';
 
 router.get('/', async (req, res) => {
   const colRef = collection(db, 'chat');
@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
       dateAndTime: req.body.dateAndTime,
     };
 
-    var newMessageId = await addScript(newMessage);
+    var newMessageId = await addScript(newMessage, 'chat');
     res.status(200).send({ id: newMessageId });
     return;
   }

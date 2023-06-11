@@ -11,8 +11,9 @@ import {
 import { db } from '../database/firebase.js';
 import updateScript from '../database/updateScript.js';
 import deleteScript from '../database/deleteScript.js';
-import addPlayerScript from '../database/addPlayerScript.js';
-import addTransferPlayer from '../database/addTransferPlayer.js';
+import addScript from '../database/addScript.js';
+
+const database = 'players';
 
 router.get('/', async (req, res) => {
   const colRef = collection(db, 'players');
@@ -81,7 +82,7 @@ router.post('/', async (req, res) => {
   if (req.body) {
     let newPlayer = req.body;
 
-    var newPlayerId = await addPlayerScript(newPlayer);
+    var newPlayerId = await addScript(newPlayer, 'players');
     res.status(200).send({ id: newPlayerId });
     return;
   }
@@ -103,7 +104,10 @@ router.post('/transferlist', async (req, res) => {
   });
 
   if (transferListedPlayers.length === 0) {
-    var newTransferPlayerId = await addTransferPlayer(newTransferPlayer);
+    var newTransferPlayerId = await addScript(
+      newTransferPlayer,
+      'transferListPlayers'
+    );
     res.status(200).send({ id: newTransferPlayerId });
     return;
   }
@@ -159,12 +163,12 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   const toBeDeleted = req.params.id;
-  const docRef = doc(db, 'players', toBeDeleted);
+  const docRef = doc(db, database, toBeDeleted);
   const snapshot = await getDoc(docRef);
   const player = snapshot.data();
 
   if (player) {
-    await deleteScript(toBeDeleted);
+    await deleteScript(toBeDeleted, database);
     res.sendStatus(200);
     return;
   }

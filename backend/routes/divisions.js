@@ -2,62 +2,62 @@ import express from 'express';
 const router = express.Router();
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../database/firebase.js';
-import updateDivisions from '../database/updateDivisions.js';
+import updateScript from '../database/updateScript.js';
 
-const generateRounds = (teams) => {
-  const teamIds = teams;
+// const generateRounds = (teams) => {
+//   const teamIds = teams;
 
-  const numTeams = teamIds.length;
-  const numRounds = numTeams - 1;
-  const matchesPerRound = numTeams / 2;
+//   const numTeams = teamIds.length;
+//   const numRounds = numTeams - 1;
+//   const matchesPerRound = numTeams / 2;
 
-  const rounds = [];
+//   const rounds = [];
 
-  for (let round = 0; round < numRounds; round++) {
-    const roundMatches = [];
+//   for (let round = 0; round < numRounds; round++) {
+//     const roundMatches = [];
 
-    for (let match = 0; match < matchesPerRound; match++) {
-      const homeTeam = teamIds[match];
-      const awayTeam = teamIds[numTeams - 1 - match];
+//     for (let match = 0; match < matchesPerRound; match++) {
+//       const homeTeam = teamIds[match];
+//       const awayTeam = teamIds[numTeams - 1 - match];
 
-      roundMatches.push({ homeTeam, awayTeam });
-    }
+//       roundMatches.push({ homeTeam, awayTeam });
+//     }
 
-    rounds.push(roundMatches);
+//     rounds.push(roundMatches);
 
-    // Rotate the teams for the next round
-    teamIds.splice(1, 0, teamIds.pop());
-  }
-  return rounds;
-};
+//     // Rotate the teams for the next round
+//     teamIds.splice(1, 0, teamIds.pop());
+//   }
+//   return rounds;
+// };
 
-const appendTeams = (divisions, teams) => {
-  let allAppendedDivisions = [];
-  let appendedDivision = {};
-  divisions.forEach((division) => {
-    const updatedDivision = { ...division, ['teams']: [] };
-    let matchingTeams = [];
-    teams.forEach((team) => {
-      if (division.id === team.divisionID) {
-        matchingTeams = [...matchingTeams, team.id];
-      }
-    });
-    appendedDivision = { ...updatedDivision, ['teams']: matchingTeams };
-    allAppendedDivisions = [...allAppendedDivisions, appendedDivision];
-  });
-  return allAppendedDivisions;
-};
+// const appendTeams = (divisions, teams) => {
+//   let allAppendedDivisions = [];
+//   let appendedDivision = {};
+//   divisions.forEach((division) => {
+//     const updatedDivision = { ...division, ['teams']: [] };
+//     let matchingTeams = [];
+//     teams.forEach((team) => {
+//       if (division.id === team.divisionID) {
+//         matchingTeams = [...matchingTeams, team.id];
+//       }
+//     });
+//     appendedDivision = { ...updatedDivision, ['teams']: matchingTeams };
+//     allAppendedDivisions = [...allAppendedDivisions, appendedDivision];
+//   });
+//   return allAppendedDivisions;
+// };
 
-const appendRounds = (divisions, appendedTeams) => {
-  let appendedRoundsDivision = {};
-  let updatedDivisions = [];
-  appendedTeams.forEach((division, index) => {
-    let rounds = generateRounds(division.teams);
-    appendedRoundsDivision = { ...divisions[index], ['rounds']: rounds };
-    updatedDivisions = [...updatedDivisions, appendedRoundsDivision];
-  });
-  return updatedDivisions;
-};
+// const appendRounds = (divisions, appendedTeams) => {
+//   let appendedRoundsDivision = {};
+//   let updatedDivisions = [];
+//   appendedTeams.forEach((division, index) => {
+//     let rounds = generateRounds(division.teams);
+//     appendedRoundsDivision = { ...divisions[index], ['rounds']: rounds };
+//     updatedDivisions = [...updatedDivisions, appendedRoundsDivision];
+//   });
+//   return updatedDivisions;
+// };
 
 router.get('/', async (req, res) => {
   const colRef = collection(db, 'series');
@@ -96,10 +96,10 @@ router.put('/:id', async (req, res) => {
 
   if (divisions && divisions.length > 0) {
     if (teams && teams.length > 0) {
-      const divisionsWithTeams = appendTeams(divisions, teams);
+      // const divisionsWithTeams = appendTeams(divisions, teams);
       // res.send(appendRounds(divisions, divisionsWithTeams));
       // res.send(divisionsWithTeams);
-      const updated = appendRounds(divisions, divisionsWithTeams);
+      // const updated = appendRounds(divisions, divisionsWithTeams);
       // console.log(updated);
       let newData = {
         division: divisions[0].division,
@@ -2149,7 +2149,7 @@ router.put('/:id', async (req, res) => {
         id: idString,
       };
       // console.log(updated[0].rounds);
-      await updateDivisions(newData);
+      await updateScript(newData, 'series');
       res.sendStatus(200);
     } else {
       res.sendStatus(400);
@@ -2165,7 +2165,7 @@ router.put('/:id', async (req, res) => {
   //   //   res.sendStatus(400);
   //   //   return;
   //   // }
-  //   await updateDivisions(newData);
+  //   await updateScript(newData, 'series');
   //   res.sendStatus(200);
   //   return;
   // }

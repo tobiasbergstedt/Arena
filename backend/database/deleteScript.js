@@ -2,10 +2,10 @@ import { collection, doc, deleteDoc } from 'firebase/firestore';
 
 import { db } from './firebase.js';
 
-async function deleteScript(toBeDeleted) {
+async function deleteScript(toBeDeleted, database) {
   const idToRemove = toBeDeleted;
 
-  const colRef = collection(db, 'players');
+  const colRef = collection(db, database);
 
   const docRef = doc(colRef, idToRemove);
 

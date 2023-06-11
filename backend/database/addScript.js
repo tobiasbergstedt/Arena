@@ -2,11 +2,13 @@ import { collection, addDoc } from 'firebase/firestore';
 
 import { db } from './firebase.js';
 
-async function addScript(newTeam) {
-  const colRef = collection(db, 'teams');
-  const newDocRef = await addDoc(colRef, newTeam);
+async function addScript(newItem, database) {
+  const colRef = collection(db, database);
+  const newDocRef = await addDoc(colRef, newItem);
 
-  console.log('Added a new team with id: ', { id: newDocRef.id });
+  console.log(`Added a new item to collection "${database}" with id: `, {
+    id: newDocRef.id,
+  });
 
   let newId = newDocRef.id;
 

@@ -3,7 +3,7 @@ const router = express.Router();
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../database/firebase.js';
 import addScript from '../database/addScript.js';
-import updateTeam from '../database/updateTeam.js';
+import updateScript from '../database/updateScript.js';
 
 router.get('/', async (req, res) => {
   const colRef = collection(db, 'teams');
@@ -327,7 +327,7 @@ router.put('/random', async (req, res) => {
       userUID: userUID,
       teamName: teamName,
     };
-    await updateTeam(newData);
+    await updateScript(newData, 'teams');
     res.sendStatus(200);
     return;
   }

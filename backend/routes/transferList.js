@@ -3,7 +3,7 @@ import * as cron from 'node-cron';
 const router = express.Router();
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../database/firebase.js';
-import updateTransferArtefact from '../database/updateTransferArtefact.js';
+import updateScript from '../database/updateScript.js';
 
 router.get('/', async (req, res) => {
   const {
@@ -186,7 +186,7 @@ router.put('/artefacts/:id', async (req, res) => {
       res.sendStatus(400);
       return;
     }
-    await updateTransferArtefact(newData);
+    await updateScript(newData, 'transferListArtefacts');
     res.sendStatus(200);
     return;
   }
