@@ -10,7 +10,7 @@ let firebaseConfig;
 if (process.env.PRIVATE_KEY) {
   firebaseConfig = JSON.parse(process.env.PRIVATE_KEY);
 } else {
-  firebaseConfig = require('./firebaseConfig.json');
+  firebaseConfig = require('../../firebaseConfig.json');
 }
 
 // OBS! firebaseConfig.json ska INTE finnas med i ditt git-repot. Lägg till filnamnet i din .gitignore. Se "exampleConfig.json" för exempel.
