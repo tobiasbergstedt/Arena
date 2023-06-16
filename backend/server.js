@@ -16,7 +16,7 @@ import divisions from './routes/divisions.js';
 
 // Konfiguration
 const PORT = process.env.PORT || 1337;
-const distPath = path.join(__dirname, '/../dist/');
+const distPath = path.join(__dirname, '/../build/');
 console.log('distpath: ', distPath);
 
 // Middleware

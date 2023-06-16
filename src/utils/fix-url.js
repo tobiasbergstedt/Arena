@@ -7,7 +7,7 @@ function fixUrl(url) {
     return `http://localhost:1337${url}`;
   } else {
     console.log('PRODUCTION MODE');
-    return url;
+    return `https://arena-ultimatum-api.onrender.com${url}`;
   }
 }
 
