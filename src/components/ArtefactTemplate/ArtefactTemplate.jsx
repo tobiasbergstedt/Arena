@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import clsx from 'clsx';
-import { string, number, array, func } from 'prop-types';
+import { string, number, array, func, arrayOf, object } from 'prop-types';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
@@ -52,8 +52,6 @@ const ArtefactTemplate = ({
 
     return src;
   };
-
-  console.log(user);
 
   const handlePlaceBid = async () => {
     if (!inputData || inputData <= bid[bid.length - 1]) {
@@ -175,9 +173,9 @@ const ArtefactTemplate = ({
 ArtefactTemplate.propTypes = {
   id: string,
   type: string,
-  endDate: string,
-  bid: number,
-  bidder: string,
+  endDate: object,
+  bid: arrayOf(number),
+  bidder: arrayOf(string),
   index: number,
   searchResultArtefact: array,
   setSearchResultArtefact: func,
@@ -186,8 +184,8 @@ ArtefactTemplate.propTypes = {
 ArtefactTemplate.defaultProps = {
   id: '',
   type: '',
-  endDate: '',
-  bid: 0,
+  endDate: {},
+  bid: [0],
   bidder: '',
   index: 0,
   searchResultArtefact: [],
