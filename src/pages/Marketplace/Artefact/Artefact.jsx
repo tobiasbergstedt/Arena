@@ -1,6 +1,5 @@
 import { func, object } from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
 
 import Button from 'components/Button/Button';
 import InputText from 'components/inputs/InputText/InputText';
@@ -39,24 +38,8 @@ const Artefact = ({
     },
   ];
 
-  const animVariants = {
-    initial: { x: '100vw' },
-    visible: {
-      x: '0px',
-      transition: { duration: 1 },
-    },
-    after: { x: '100vw', transition: { duration: 1 } },
-  };
-
   return (
-    <motion.div
-      key="artefactsOptionsWrapper"
-      variants={animVariants}
-      initial="initial"
-      animate="visible"
-      exit="after"
-      className={styles.artefactsOptionsWrapper}
-    >
+    <>
       <Select
         value={searchInputArtefact.race}
         options={[
@@ -107,7 +90,7 @@ const Artefact = ({
       <Button onClick={getSearchResultArtefacts}>
         {t('marketplace.search')}
       </Button>
-    </motion.div>
+    </>
   );
 };
 

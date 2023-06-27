@@ -1,6 +1,5 @@
 import { func, object } from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
 
 import InputText from 'components/inputs/InputText/InputText';
 import Button from 'components/Button/Button';
@@ -90,15 +89,6 @@ const Player = ({
     },
   ];
 
-  const animVariants = {
-    initial: { x: '-100vw' },
-    visible: {
-      x: '0px',
-      transition: { duration: 1 },
-    },
-    after: { x: '-100vw', transition: { duration: 1 } },
-  };
-
   const inputs = [
     {
       value: searchInputPlayer.minSalary,
@@ -143,14 +133,7 @@ const Player = ({
   ];
 
   return (
-    <motion.div
-      key="playersOptionsWrapper"
-      variants={animVariants}
-      initial="initial"
-      animate="visible"
-      exit="after"
-      className={styles.playersOptionsWrapper}
-    >
+    <>
       <div className={styles.dropdownWrapper}>
         {dropdowns.map(({ value, options, onChange, label }) => (
           <Select
@@ -178,7 +161,7 @@ const Player = ({
       <Button onClick={getSearchResultPlayers}>
         {t('marketplace.search')}
       </Button>
-    </motion.div>
+    </>
   );
 };
 

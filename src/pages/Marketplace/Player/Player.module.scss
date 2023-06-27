@@ -1,26 +1,13 @@
 @import 'styles/utils/__utils';
 
-.playersOptionsWrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-
-  padding: var(--standard-padding);
-
-  background-color: var(--theme-color-secondary);
-
-  box-shadow: var(--box-shadow-primary);
-}
-
 .dropdownWrapper {
   position: relative;
   display: grid;
 
   grid-template-columns: 1fr 1fr;
-  gap: 14px 30px;
+  gap: 30px;
 
-  margin-bottom: 14px;
+  margin-bottom: 30px;
 }
 
 .inputsWrapper {

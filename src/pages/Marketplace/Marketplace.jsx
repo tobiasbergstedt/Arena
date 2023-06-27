@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AnimatePresence } from 'framer-motion';
-import clsx from 'clsx';
 
 import fixUrl from 'utils/fix-url';
 
@@ -15,6 +13,7 @@ import PlayersResult from './Player/PlayersResult';
 
 import styles from './Marketplace.module.scss';
 import Spinner from 'components/Spinner/Spinner';
+import Tabs from 'components/Tabs/Tabs';
 
 const Marketplace = () => {
   const [searchInputPlayer, setSearchInputPlayer] = useState({
@@ -161,47 +160,30 @@ const Marketplace = () => {
               <p className={styles.description}>
                 {t('marketplace.description')}
               </p>
-              <div className={styles.marketSelector}>
-                <p
-                  className={clsx(styles.selector, {
-                    ['goldenText']: isSelected === 0,
-                    [styles.isSelected]: isSelected === 0,
-                  })}
-                  onClick={() => setIsSelected(0)}
-                >
-                  {t('marketplace.players')}
-                </p>
-                <p
-                  className={clsx(styles.selector, {
-                    ['goldenText']: isSelected === 1,
-                    [styles.isSelected]: isSelected === 1,
-                  })}
-                  onClick={() => setIsSelected(1)}
-                >
-                  {t('marketplace.artefacts')}
-                </p>
-              </div>
-              <div className={styles.inputsWrapper}>
-                <AnimatePresence initial={false}>
-                  {isSelected === 0 ? (
-                    <Player
-                      setSearchInputPlayer={setSearchInputPlayer}
-                      searchInputPlayer={searchInputPlayer}
-                      handleKeyPress={handleKeyPress}
-                      key="playersOptionsWrapper"
-                      getSearchResultPlayers={getSearchResultPlayers}
-                    />
-                  ) : (
-                    <Artefact
-                      setSearchInputArtefact={setSearchInputArtefact}
-                      searchInputArtefact={searchInputArtefact}
-                      handleKeyPress={handleKeyPress}
-                      key="artefactsOptionsWrapper"
-                      getSearchResultArtefacts={getSearchResultArtefacts}
-                    />
-                  )}
-                </AnimatePresence>
-              </div>
+              <Tabs
+                isSelected={isSelected}
+                setIsSelected={setIsSelected}
+                tab1={
+                  <Player
+                    setSearchInputPlayer={setSearchInputPlayer}
+                    searchInputPlayer={searchInputPlayer}
+                    handleKeyPress={handleKeyPress}
+                    key="playersOptionsWrapper"
+                    getSearchResultPlayers={getSearchResultPlayers}
+                  />
+                }
+                tab2={
+                  <Artefact
+                    setSearchInputArtefact={setSearchInputArtefact}
+                    searchInputArtefact={searchInputArtefact}
+                    handleKeyPress={handleKeyPress}
+                    key="artefactsOptionsWrapper"
+                    getSearchResultArtefacts={getSearchResultArtefacts}
+                  />
+                }
+                tabLabel1={t('marketplace.players')}
+                tabLabel2={t('marketplace.artefacts')}
+              />
             </>
           )}
         </>
