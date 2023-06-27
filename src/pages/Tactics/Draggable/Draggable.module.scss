@@ -1,0 +1,23 @@
+@import 'styles/utils/__utils';
+
+.draggableContainer {
+  position: relative;
+
+  width: 36px;
+  height: 36px;
+
+  cursor: grab;
+}
+
+.jerseyNumber {
+  position: absolute;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--theme-color-secondary);
+  font-weight: 600;
+  font-family: var(--font-family-secondary);
+  inset: 0;
+}
