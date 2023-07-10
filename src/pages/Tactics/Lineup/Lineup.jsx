@@ -148,6 +148,10 @@ const Lineup = ({ isReserves }) => {
     );
   };
 
+  const handleClick = (player) => {
+    alert(player.name);
+  };
+
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className={styles.lineupGrid}>
@@ -162,11 +166,21 @@ const Lineup = ({ isReserves }) => {
               disabled={checkIsDisabled(position)}
             >
               {player && player.id === playerId ? (
-                <Draggable
-                  key={uuidv4()}
-                  id={player.id}
-                  number={player.number}
-                />
+                <div
+                  className={styles.emptyDroppable}
+                  style={
+                    checkIsDisabled(position)
+                      ? {}
+                      : { backgroundImage: `url(${Player})` }
+                  }
+                >
+                  <Draggable
+                    key={uuidv4()}
+                    id={player.id}
+                    number={player.number}
+                    onClick={handleClick(player)}
+                  />
+                </div>
               ) : (
                 <div
                   className={styles.emptyDroppable}
@@ -188,9 +202,17 @@ const Lineup = ({ isReserves }) => {
           const isInDroppable = Object.values(lineup).includes(playerId);
 
           return isInDroppable ? (
-            <div key={uuidv4()} className={styles.emptyPlayer}></div>
+            <div
+              key={uuidv4()}
+              className={styles.emptyPlayer}
+              style={{ backgroundImage: `url(${Player})` }}
+            ></div>
           ) : (
-            <div key={uuidv4()} className={styles.draggableWrapper}>
+            <div
+              key={uuidv4()}
+              className={styles.draggableWrapper}
+              style={{ backgroundImage: `url(${Player})` }}
+            >
               <Draggable id={playerId} number={player.number} />
             </div>
           );
